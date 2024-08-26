@@ -97,8 +97,10 @@ class Functions
 			$data = $stmt->fetch(PDO::FETCH_OBJ);
 			$hashedPassword = $data->password;
 			if(password_verify($password, $hashedPassword)){
-				$_SESSION['username'] =  $data->username;
+				$_SESSION['rhu_id'] =  $data->rhu_id;
+				$_SESSION['username'] = $data->username;
 				$_SESSION['role'] = $data->role;
+				$_SESSION['municipality'] = $data->municipality;
 				$result = 1;
 				return $result;
 			}
@@ -228,7 +230,7 @@ class Functions
 		}
 	}
 
-	//Read All Users
+	//Read All RHU
 	public function GetAllRHU()
 	{
 		$sql = 'SELECT * FROM tbl_rhu ORDER BY rhu_id ASC';
@@ -238,7 +240,7 @@ class Functions
 		return $data;
 	}
 
-	//Read Only User
+	//Read Only RHU
 	public function GetRHUInfo($rhu_id)
 	{
 		$sql = 'SELECT * FROM tbl_rhu WHERE rhu_id=:rhu_id';
@@ -276,7 +278,7 @@ class Functions
 			return 0;
 		}
 	}
-	//Delete User
+	//Delete RHU
 	public function DeleteRHU($rhu_id)
 	{
 		$sql = 'DELETE FROM tbl_rhu WHERE rhu_id=:rhu_id';
@@ -379,58 +381,33 @@ class Functions
 		}
 	}
 
-	//Add child
+	//add child
 	public function addChild($data)
 	{
+		$sql = "INSERT INTO tbl_children ( purok, name_of_caregiver, name_of_child, belong_to_ip, sex, date_of_birth, date_last_measured, weight, height, age_by_months, nutritional_status_WFA, nutritional_status_HFA, nutritional_status_WFH, barangay, municipality, province, region, year, rhu_id ) VALUES (:purok, :name_of_caregiver, :name_of_child, :belong_to_ip, :sex, :date_of_birth, :date_last_measured, :weight, :height, :age_by_months,  :nutritional_status_WFA, :nutritional_status_HFA, :nutritional_status_WFH, :barangay, :municipality, :province, :region, :year, :rhu_id)";
 
-		$sql = "INSERT INTO tbl_children (
-			purok, 
-			name_of_caregiver, 
-			name_of_child, 
-			belong_to_ip, 
-			sex, 
-			date_of_birth, 
-			date_last_measured, 
-			date_measured, 
-			age_in_months, 
-			barangay, 
-			municipality, 
-			province, 
-			region, 
-			year,
-			longitute,
-			latitude,
-			user_id   
-			VALUES (
-				:purok, 
-				:name_of_caregiver, 
-				:name_of_child, 
-				:belong_to_ip, 
-				:sex, 
-				:date_of_birth, 
-				:date_last_measured, 
-				:age_in_months, 
-				:barangay, 
-				:municipality, 
-				:province, 
-				:region, 
-				:year, 
-				:longitute, 
-				:latitude, 
-				:user_id)";
+
 		$stmt = $this->db->conn->prepare($sql);
 		$r = $stmt->execute([
 			':purok' => $data['purok'],
-			':name_of_cargiver' => $data['name_of_caregiver'],
+			':name_of_caregiver' => $data['name_of_caregiver'],
 			':name_of_child' => $data['name_of_child'],
 			':belong_to_ip' => $data['belong_to_ip'],
 			':sex' => $data['sex'],
 			':date_of_birth' => $data['date_of_birth'],
 			':date_last_measured' => $data['date_last_measured'],
-			':age_in_months' => $data['age_in_months'],
+			':weight' => $data['weight'],
+			':height' => $data['height'],
+			':age_by_months' => $data['age_by_months'],
+			':nutritional_status_WFA' => $data['nutritional_status_WFA'],
+			':nutritional_status_HFA' => $data['nutritional_status_HFA'],
+			':nutritional_status_WFH' => $data['nutritional_status_WFH'],
+			':barangay' => $data['barangay'],
+			':municipality' => $data['municipality'],
+			':province' => $data['province'],
+			':region' => $data['region'],
 			':year' => $data['year'],
-			':longtitude' => $data['latitude'],
-			':user_id' => $data['user_id'],
+			':rhu_id' => $data['rhu_id'],
 		]);
 
 		if ($r) {
@@ -442,7 +419,16 @@ class Functions
 		}
 	}
 
-	//Read All Beneficiary
+	//Read All Children by Municipality
+	public function GetAllChildrenByMunicipality($municipality)
+	{
+		$sql = 'SELECT * FROM tbl_children WHERE municipality = :municipality ORDER BY child_id ASC';
+		$stmt = $this->db->conn->prepare($sql);
+		$stmt->execute([':municipality' => $municipality]);
+		$data = $stmt->fetchAll();
+		return $data;		
+	}
+	//Read All Children
 	public function GetAllChildren()
 	{
 		$sql = 'SELECT * FROM tbl_children ORDER BY child_id ASC';
@@ -463,88 +449,59 @@ class Functions
 	}
 	
 	//Read Only Beneficiary
-	public function GetChildRecords($child_id)
+	public function GetChildHistory($child_id)
 	{
-		$sql = 'SELECT * FROM tbl_children_records WHERE child_id=:child_id';
+		$sql = 'SELECT * FROM tbl_child_history WHERE child_id=:child_id';
 		$stmt = $this->db->conn->prepare($sql);
 		$stmt->execute([':child_id' => $child_id]);
 		$data = $stmt->fetch(PDO::FETCH_OBJ);
 		return $data;
 	}
 
-
 	//Update Child
-	public function UpdateChild($data, $beneficiary_id)
+	public function UpdateChild($data, $child_id)
 	{
-		$sql = 'UPDATE tbl_beneficiaries SET 
-		b_firstname=:b_firstname, 
-		b_middlename=:b_middlename, 
-		b_lastname=:b_lastname, 
-		suffix=:suffix, 
-		age_by_months=:age_by_months, 
-		gender=:gender, 
-		birthdate=:birthdate, 
-		weight=:weight, 
-		height=:height, 
-		date_measured=:date_measured, 
-		bmi=:bmi, 
-		nutritional_status=:nutritional_status, 
-		province=:province, 
-		municipality=:municipality, 
-		barangay=:barangay, 
-		p_firstname=:p_firstname, 
-		p_middlename=:p_middlename, 
-		p_lastname=:p_lastname, 
-		p_suffix=:p_suffix, 
-		p_age=:p_age, 
-		p_gender=:p_gender, 
-		p_occupation=:p_occupation 
-		WHERE beneficiary_id = :beneficiary_id';
-
+		$sql = 'UPDATE tbl_children SET purok=:purok, name_of_caregiver=:name_of_caregiver, name_of_child=:name_of_child, belong_to_ip=:belong_to_ip, sex=:sex, date_of_birth=:date_of_birth, date_last_measured=:date_last_measured, weight=:weight, height=:height, age_by_months=:age_by_months, nutritional_status_WFA=:nutritional_status_WFA, nutritional_status_HFA=:nutritional_status_HFA, nutritional_status_WFH=:nutritional_status_WFH, barangay=:barangay, municipality=:municipality, province=:province, region=:region, year=:year, rhu_id=:rhu_id WHERE child_id=:child_id';
 
 		$stmt = $this->db->conn->prepare($sql);
 		$r = $stmt->execute([
-			':b_firstname' => $data['b_firstname'],
-			':b_middlename' => $data['b_middlename'],
-			':b_lastname' => $data['b_lastname'],
-			':suffix' => $data['suffix'],
-
-			':age_by_months' => $data['age_by_months'],
-			':gender' => $data['gender'],
-			':birthdate' => $data['birthdate'],
-
+			':purok' => $data['purok'],
+			':name_of_caregiver' => $data['name_of_caregiver'],
+			':name_of_child' => $data['name_of_child'],
+			':belong_to_ip' => $data['belong_to_ip'],
+			':sex' => $data['sex'],
+			':date_of_birth' => $data['date_of_birth'],
+			':date_last_measured' => $data['date_last_measured'],
 			':weight' => $data['weight'],
 			':height' => $data['height'],
-			':date_measured' => $data['date_measured'],
-			':bmi' => $data['bmi'],
-			':nutritional_status' => $data['nutritional_status'],
-
-			':province' => $data['province'],
-			':municipality' => $data['municipality'],
+			':age_by_months' => $data['age_by_months'],
+			':nutritional_status_WFA' => $data['nutritional_status_WFA'],
+			':nutritional_status_HFA' => $data['nutritional_status_HFA'],
+			':nutritional_status_WFH' => $data['nutritional_status_WFH'],
 			':barangay' => $data['barangay'],
-
-			':p_firstname' => $data['p_firstname'],
-			':p_middlename' => $data['p_middlename'],
-			':p_lastname' => $data['p_lastname'],
-			':p_suffix' => $data['p_suffix'],
-			':p_age' => $data['p_age'],
-			':p_gender' => $data['p_gender'],
-			':p_occupation' => $data['p_occupation'],
-			':beneficiary_id' => $beneficiary_id
+			':municipality' => $data['municipality'],
+			':province' => $data['province'],
+			':region' => $data['region'],
+			':year' => $data['year'],
+			':rhu_id' => $data['rhu_id'],
+			':child_id' => $child_id,
 		]);
+
 		if ($r) {
+			// success!!!
 			return 1;
 		} else {
+			// somthing wrong with queries
 			return 0;
 		}
 	}
 
-	//Delete Beneficiary
-	public function DeleteChild($beneficiary_id)
+	//Delete Child
+	public function DeleteChild($child_id)
 	{
-		$sql = 'DELETE FROM tbl_beneficiaries WHERE beneficiary_id=:beneficiary_id';
+		$sql = 'DELETE FROM tbl_children WHERE child_id=:child_id';
 		$stmt = $this->db->conn->prepare($sql);
-		$r = $stmt->execute([':beneficiary_id' => $beneficiary_id]);
+		$r = $stmt->execute([':child_id' => $child_id]);
 		if ($r) {
 			return 1;
 		} else {

@@ -1,10 +1,16 @@
 <?php
 include 'header.php';
 ?>
-
-<body class="bg-light-gray">
+<?php
+		$msg = Session::get("msg");
+		if (isset($msg)) {
+			echo $msg;
+			Session::set("msg", NULL);
+		}
+		?>
+<main>
   <!--  Row 1 -->
-  <container class="row mt-4">
+  <container class="row">
     <div class="col-lg-6">
       <!-- Municipality Card -->
       <div class="card overflow-hidden">
@@ -291,7 +297,7 @@ include 'header.php';
     </div>-->
   </div>
   <!-- End Ranking per Municipal by the number of cases-->
-</body>
+</main>
 
 
 <?php

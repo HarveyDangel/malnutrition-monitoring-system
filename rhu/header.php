@@ -4,7 +4,7 @@ Session::init();
 include '../function.php';
 $function = new Functions();
 
-if (!isset($_SESSION['username']) ){
+if (!isset($_SESSION['rhu_id']) ){
     header("Location: login.php");
 }
 if ($_SESSION['role'] === 'pho'){
@@ -39,7 +39,7 @@ if ($_SESSION['role'] === 'admin'){
     </style>
 </head>
 
-<body>
+<body class="bg-light-gray">
   <!--  Body Wrapper -->
   <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
     data-sidebar-position="fixed" data-header-position="fixed">
@@ -66,7 +66,7 @@ if ($_SESSION['role'] === 'admin'){
           <ul id="sidebarnav">
             <hr>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="index.php?username=<?= $_SESSION['username'];?>" aria-expanded="false">
+              <a class="sidebar-link" href="index.php?id=<?= $_SESSION['rhu_id'];?>" aria-expanded="false">
                 <span>
                   <i class="ti ti-layout-dashboard"></i>
                 </span>
@@ -75,7 +75,7 @@ if ($_SESSION['role'] === 'admin'){
             </li>
 
             <li class="sidebar-item">
-              <a class="sidebar-link" href="report.php?username=<?= $_SESSION['username'];?>" aria-expanded="false">
+              <a class="sidebar-link" href="report.php?id=<?= $_SESSION['rhu_id'];?>" aria-expanded="false">
                 <span>
                   <i class="ti ti-book"></i>
                 </span>
@@ -83,7 +83,7 @@ if ($_SESSION['role'] === 'admin'){
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="summary.php?username=<?= $_SESSION['username'];?>" aria-expanded="false">
+              <a class="sidebar-link" href="summary.php?id=<?= $_SESSION['rhu_id'];?>" aria-expanded="false">
                 <span>
                   <i class="ti ti-book"></i>
                 </span>
@@ -93,7 +93,7 @@ if ($_SESSION['role'] === 'admin'){
 
             
             <li class="sidebar-item">
-              <a class="sidebar-link" href="children.php?username=<?= $_SESSION['username'];?>" aria-expanded="false">
+              <a class="sidebar-link" href="children.php?id=<?= $_SESSION['rhu_id'];?>" aria-expanded="false">
                 <span>
                   <i class="ti ti-list"></i>
                 </span>
@@ -119,7 +119,7 @@ if ($_SESSION['role'] === 'admin'){
     <!--  Main wrapper -->
     <div class="body-wrapper">
       <!--  Header Start -->
-      <header class="app-header">
+      <header class="app-header bg-secondary">
         <nav class="navbar navbar-expand-lg navbar-light">
           <ul class="navbar-nav">
             <li class="nav-item d-block d-xl-none">
@@ -134,7 +134,7 @@ if ($_SESSION['role'] === 'admin'){
           <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
             <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">             
               
-                <!--<div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
+                <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                   <div class="message-body">
                     <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
                       <i class="ti ti-user fs-6"></i>
@@ -150,7 +150,7 @@ if ($_SESSION['role'] === 'admin'){
                     </a>
                     <a href="./authentication-login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
                   </div>
-                </div>-->
+                </div> -->
               </li>
             </ul>
           </div>

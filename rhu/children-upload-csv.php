@@ -2,13 +2,9 @@
 include 'header.php';
 ?>
 
-<body>
-  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
-    <div class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex justify-content-center">
-      <div class="d-flex align-items-cente justify-content-center w-100">
-        <div class="row justify-content-center w-100">
-          <div class="col-md-11 col-lg-11 col-xxl-11">
-            <div class="card my-5">
+<main>
+  
+            <div class="card">
               <div class="card-body">
                 <div class="row">
                   <div class="col-lg-1 col-md-1">
@@ -28,6 +24,44 @@ include 'header.php';
                   }
                 ?> 
                 <form action="include/children-upload-csv.inc.php" method="post" enctype="multipart/form-data">
+                  <div class="row">
+                    <div class="mb-2">
+                      <label class="form-label">Year</label>
+                      <input type="number" class="form-control" name="year" aria-describedby="textHelp" required>
+                    </div>
+                  </div>                  
+                  <div class="row">
+                    <div class="mb-3 col-lg-4 col-md-6">
+                      <label  class="form-label">Region</label>
+                      <input type="number" class="form-control" name="region" aria-describedby="textHelp" value="8" readonly>
+                    </div>
+                    <div class="mb-3 col-lg-4 col-md-6">
+                      <label  class="form-label">Province</label>
+                      <input type="text" class="form-control" name="province" aria-describedby="textHelp" value="Biliran" readonly>
+                    </div>
+                    <div class="mb-3 col-lg-4 col-md-6">
+                      <label  class="form-label">Municipality</label>
+                      <select class="form-select" aria-label="Default select example" name="municipality" required>
+                        <option value="Almeria">Almeria</option>
+                        <option value="Biliran">Biliran</option>
+                        <option value="Cabucgayan">Cabucgayan</option>
+                        <option value="Caibiran">Caibiran</option>
+                        <option value="Culaba">Culaba</option>
+                        <option value="Kawayan">Kawayan</option>
+                        <option value="Maripipi">Maripipi</option>
+                        <option value="Naval">Naval</option>
+                      </select>
+                    </div>
+                    <div class="mb-3 col-lg-6 col-md-6">
+                      <label  class="form-label">Barangay</label>
+                      <input type="text" class="form-control" name="barangay" aria-describedby="textHelp" required>
+                    </div>
+                    <div class="mb-3 col-lg-6 col-md-6">
+                      <label  class="form-label">Barangay PSGC</label>
+                      <input type="number" class="form-control" name="psgc" aria-describedby="textHelp" required>
+                    </div>
+                    
+                  </div>
                   <h5 class="fw-semibold">Supported File <span class="fw-normal">(.csv, .xlsx)</span></h5>
                   <hr>
                   <div class="row">
@@ -44,15 +78,9 @@ include 'header.php';
               </div>
               </form>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
-  <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-  <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+          
+
+</main>
 
 <?php
 include 'footer.php';

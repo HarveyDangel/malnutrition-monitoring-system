@@ -2,7 +2,7 @@
 include 'header.php';
 $child_id = $_GET['child_id'];
 $child = $function->GetChildInfo($child_id);
-$child = $function->GetChildRecords($child_id);
+// $child = $function->GetChildRecords($child_id);
 ?>
 
 <body class="bg-light-gray">
@@ -26,7 +26,12 @@ $child = $function->GetChildRecords($child_id);
                     $sex = $child->sex;
                     $date_of_birth = $child->date_of_birth;
                     $date_last_measured = $child->date_last_measured;
-                    $age_in_months = $child->age_by_months;
+                    $age_by_months = $child->age_by_months;
+                    $weight = $child->weight;
+                    $height = $child->height;
+                    $wfa = $child->nutritional_status_WFA;
+                    $hfa = $child->nutritional_status_HFA;
+                    $wfh = $child->nutritional_status_WFH;
                     $barangay = $child->barangay;
                     $municipality = $child->municipality;
                     $province = $child->province;
@@ -36,6 +41,14 @@ $child = $function->GetChildRecords($child_id);
                     
                 ?>
                     <h1><?= $name_of_child; ?></h1>
+                    <div class="row ">
+                        <div class="flex d-flex flex-row justify-content-between">
+                            <h5>Nutritional Status</h5>
+                            <h5>WFA: <?= $wfa; ?></h5>
+                            <h5>HFA: <?= $hfa; ?></h5>
+                            <h5>WFL/H: <?= $wfh; ?></h5>
+                        </div>
+                    </div>
                     <div class="col-lg-12 d-flex align-items-stretch">
                         <div class="table-responsive w-100">
                             <table class="table text-nowrap mb-0 align-middle">
@@ -48,13 +61,13 @@ $child = $function->GetChildRecords($child_id);
                                             <h6 class="fw-semibold mb-0">Height</h6>
                                         </th>
                                         <th class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-0">BMI</h6>
+                                            <h6 class="fw-semibold mb-0">Weight</h6>
                                         </th>
                                         <th class="border-bottom-0">
                                             <h6 class="fw-semibold mb-0">Age by months</h6>
                                         </th>
                                         <th class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-0">Nutritional Status</h6>
+                                            <h6 class="fw-semibold mb-0">Province</h6>
                                         </th>
                                         <th class="border-bottom-0">
                                             <h6 class="fw-semibold mb-0">Date Measured</h6>
@@ -74,25 +87,25 @@ $child = $function->GetChildRecords($child_id);
                                             <h6 class="fw-semibold mb-0"><?= $child_id; ?></h6>
                                         </td>
                                         <td class="border-bottom-0">
-                                            <span class="fw-normal"><?= $beneficiary_height; ?> cm </span>
+                                            <span class="fw-normal"><?= $height; ?> cm </span>
                                         </td>
                                         <td class="border-bottom-0">
-                                            <p class="mb-0 fw-normal"><?= $beneficiary_bmi; ?></p>
+                                            <p class="mb-0 fw-normal"><?= $weight; ?></p>
                                         </td>
                                         <td class="border-bottom-0">
-                                            <p class="mb-0 fw-normal"><?= $beneficiary_age_by_months; ?></p>
+                                            <p class="mb-0 fw-normal"><?= $age_by_months; ?></p>
                                         </td>
                                         <td class="border-bottom-0">
-                                            <p class="mb-0 fw-normal"><?= $beneficiary_nutritional_status; ?></p>
+                                            <p class="mb-0 fw-normal"><?= $province; ?></p>
                                         </td>
                                         <td class="border-bottom-0">
-                                            <p class="mb-0 fw-normal"><?= $beneficiary_date_measured; ?></p>
+                                            <p class="mb-0 fw-normal"><?= $date_last_measured; ?></p>
                                         </td>
                                         <td class="border-bottom-0">
-                                            <p class="mb-0 fw-normal"><?= $beneficiary_p_firstname; ?> <?= $beneficiary_p_lastname; ?></p>
+                                            <p class="mb-0 fw-normal"><?= $name_of_caregiver; ?></p>
                                         </td>
                                         <td class="border-bottom-0">
-                                            <p class="mb-0 fw-normal"><?= $beneficiary_municipality; ?>, <?= $beneficiary_barangay; ?></p>
+                                            <p class="mb-0 fw-normal"><?= $municipality; ?>, <?= $barangay; ?></p>
                                         </td>
                                     </tr>
                                     <div class="card">
@@ -100,7 +113,7 @@ $child = $function->GetChildRecords($child_id);
                                             <div class="row alig n-items-start">
                                                 <div class="col-8">
                                                     <h5 class="card-title mb-9 fw-semibold"> Weight </h5>
-                                                    <h4 class="fw-semibold mb-3"> <?= $beneficiary_weight; ?> kg.</h4>
+                                                    <h4 class="fw-semibold mb-3"> <?= $weight; ?> kg.</h4>
                                                     <!--<div class="d-flex align-items-center pb-1">
                                                     <span class="me-2 rounded-circle bg-light-danger round-20 d-flex align-items-center justify-content-center">
                                                         <i class="ti ti-arrow-up-right text-danger"></i>
@@ -129,16 +142,16 @@ $child = $function->GetChildRecords($child_id);
                     </div>
             </div>
             <form method="post" action="navigate.php" class="p-4">
-                <a href="beneficiary.php" class="badge btn bg-primary rounded-3 fw-semibold">
+                <a href="children.php" class="badge btn bg-primary rounded-3 fw-semibold">
                     <span>
                         <i class="ti ti-arrow-left"></i>
                     </span>
                     <span class="hide-menu">Back</span>
                 </a> &nbsp;
 
-                <a class=" badge btn btn-primary rounded-3 fw-semibold" href="edit-beneficiary.php?beneficiary_id=<?= $child_id; ?>">Edit</a> &nbsp;
+                <a class=" badge btn btn-primary rounded-3 fw-semibold" href="child-edit.php?child_id=<?= $child_id; ?>">Edit</a> &nbsp;
 
-                <input type="hidden" name="beneficiary_id" value="<?= $child_id; ?>">
+                <input type="hidden" name="child_id" value="<?= $child_id; ?>">
                 <button class="badge btn btn-danger rounded-3 fw-semibold float-end" type="submit" name="btn-delete-user">Delete</button>
                 </form>
         </div>

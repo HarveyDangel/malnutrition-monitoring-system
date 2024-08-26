@@ -29,7 +29,7 @@ include 'header.php';
           <div class="card w-100 mt-4">
             <div class="card-body">
               <div class="table-responsive">
-                <table id="myTable" class="table text-nowrap mb-0 align-middle">
+                <table id="myTable" class="table text-nowrap mb-0 align-middle display">
                   <thead class="text-dark">
                     <tr>
                       <th class="border-bottom-0">
