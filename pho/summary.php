@@ -8,14 +8,14 @@ include 'header.php';
         <div class="w-100 px-4">
             <div class="flex d-flex flex-row w-100 text-center">
                 <div class="mt-4 ms-5">
-                    <img src="../assets/images/logos/NNC-logo.svg.png" alt="NNC Logo" width="60px" height="60px">
+                    <img src="../assets/images/logos/PHO logo.png" alt="PHO Logo" width="60px" height="60px">
                 </div>
                 <div class="w-100">
                     <div class="pe-4">
                         <div class="flex d-flex flex-column text-center w-100 pt-3 pe-5">
                             <h7 class="fw-semibold">Municipality: NAVAL</h7>
                             <h7 class="fs-2">PROVINCE: BILIRAN</h7>
-                            <h7 class="fw-semibold">OPERATION TIMBANG PLUS year</h7>
+                            <!-- <h7 class="fw-semibold">OPERATION TIMBANG PLUS year</h7> -->
                             <h7 class="fw-semibold fs-1">NUTRITIONAL STATUS OF CHILDREN 0-59 MONTHS AND 0-23 MONTHS OLD</h7>
                             <h class="fs-1">SUMMARY TABLES FOR PRESENTATION</h>
                         </div>

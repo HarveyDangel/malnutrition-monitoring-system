@@ -1,11 +1,11 @@
 <?php
-  include_once '../session.php';
-  Session::init();
-  if(isset($_SESSION['username'])){
-    if($_SESSION['role'] === 'doh'){
-      header("Location: index.php?username=" . $_SESSION['username']);
-    }
+include_once '../session.php';
+Session::init();
+if (isset($_SESSION['username'])) {
+  if ($_SESSION['role'] === 'doh') {
+    header("Location: index.php?username=" . $_SESSION['username']);
   }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,21 +38,21 @@
                 <?php
                 $msg = Session::get("msg");
                 if (isset($msg)) {
-                  echo $msg;
+                  echo '<div id="flash-message">' . $msg . '</div>';
                   Session::set("msg", NULL);
                 }
                 ?>
                 <form method="post" action="navigate.php">
                   <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username"  name="username" placeholder="username..." required>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Username..." required>
                   </div>
                   <div class="mb-4">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="password..." required>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password..." required>
                   </div>
                   <div class="text-center">
-                    <button type="submit" name="btn-doh-login" class="btn btn-primary w-50 py-8 fs-4 mb-4 rounded-2">LOG IN</button>
+                    <button type="submit" name="btn-doh-login" class="btn btn-primary w-50 py-8 fs-4 mb-4 rounded-2">Log in</button>
                     <a href="../index.php" class="btn btn-primary w-50 py-8 fs-4 rounded-2">Cancel</a>
                   </div>
                 </form>
@@ -65,6 +65,7 @@
   </div>
   <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/main.js"></script>
 </body>
 
 </html>

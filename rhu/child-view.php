@@ -9,7 +9,7 @@ $child = $function->GetChildInfo($child_id);
     <?php
     $msg = Session::get("msg");
     if (isset($msg)) {
-        echo $msg;
+        echo '<div id="flash-message">' . $msg . '</div>';
         Session::set("msg", NULL);
     }
     ?>
@@ -37,8 +37,8 @@ $child = $function->GetChildInfo($child_id);
                     $province = $child->province;
                     $region = $child->region;
                     $year = $child->year;
-                
-                    
+
+
                 ?>
                     <h1><?= $name_of_child; ?></h1>
                     <div class="row ">
@@ -108,8 +108,8 @@ $child = $function->GetChildInfo($child_id);
                                             <p class="mb-0 fw-normal"><?= $municipality; ?>, <?= $barangay; ?></p>
                                         </td>
                                     </tr>
-                                    <div class="card">
-                                        <div class="card-body">
+                                    <div class="pt-4">
+                                        <div class="">
                                             <div class="row alig n-items-start">
                                                 <div class="col-8">
                                                     <h5 class="card-title mb-9 fw-semibold"> Weight </h5>
@@ -124,7 +124,7 @@ $child = $function->GetChildInfo($child_id);
                                                 </div>
                                                 <div class="col-4">
                                                     <div class="d-flex justify-content-end">
-                                                        <div class="text-white rounded-circle p-6 d-flex       align-items-center justify-content-center mx-2" style="background-color: #5DFF6B;">
+                                                        <div class="text-white rounded-circle p-6 d-flex align-items-center justify-content-center mx-2" style="background-color: #5DFF6B;">
                                                             <i class="ti ti-ruler-measure fs-6"></i>
                                                         </div>
                                                         <div class="text-white bg-primary rounded-circle p-6 d-flex align-items-center justify-content-center">
@@ -142,18 +142,16 @@ $child = $function->GetChildInfo($child_id);
                     </div>
             </div>
             <form method="post" action="navigate.php" class="p-4">
-                <a href="children.php" class="badge btn bg-primary rounded-3 fw-semibold">
+                <a href="children.php?id=<?= $_SESSION['rhu_id'];?>" class="badge btn btn-primary rounded-3 fw-semibold">
                     <span>
                         <i class="ti ti-arrow-left"></i>
                     </span>
                     <span class="hide-menu">Back</span>
                 </a> &nbsp;
-
                 <a class=" badge btn btn-primary rounded-3 fw-semibold" href="child-edit.php?child_id=<?= $child_id; ?>">Edit</a> &nbsp;
-
                 <input type="hidden" name="child_id" value="<?= $child_id; ?>">
                 <button class="badge btn btn-danger rounded-3 fw-semibold float-end" type="submit" name="btn-delete-user">Delete</button>
-                </form>
+            </form>
         </div>
     <?php
                 }

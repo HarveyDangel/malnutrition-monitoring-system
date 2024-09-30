@@ -39,7 +39,7 @@ $pho = $function->GetPHOInfo($pho_id);
                                     <?php
                                     $msg = Session::get("msg");
                                     if (isset($msg)) {
-                                        echo $msg;
+                                        echo '<div id="flash-message">' . $msg . '</div>';
                                         Session::set("msg", NULL);
                                     }
                                     ?>
@@ -70,7 +70,7 @@ $pho = $function->GetPHOInfo($pho_id);
                                             <div class="mb-3 col-lg-4 col-md-4">
                                                 <label for="sex" class="form-label fw-light">Sex</label>
                                                 <select class="form-select" name="sex" aria-label="Default select example" required>
-                                                    <option value="<?=($sex) ? $sex:'';?>"><?=($sex) ? $sex:'';?></option>
+                                                    <option value="<?= ($sex) ? $sex : ''; ?>"><?= ($sex) ? $sex : ''; ?></option>
                                                     <option value="Male">Male</option>
                                                     <option value="Female">Female</option>
                                                 </select>
@@ -123,7 +123,7 @@ $pho = $function->GetPHOInfo($pho_id);
                                                 <input type="password" name="rptpassword" class="form-control" id="rptpassword" aria-describedby="textHelp" required>
                                             </div>
                                         </div>
-                                    
+
                                         <hr>
                                         <div class="row">
                                             <div class="text-center p-2">

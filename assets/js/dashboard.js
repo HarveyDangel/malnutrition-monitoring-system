@@ -188,7 +188,7 @@ $(function () {
     yaxis: {
       show: true,
       min: 0,
-      max: 200,
+      max: 100,
       tickAmount: 4,
       labels: {
         style: {
@@ -231,10 +231,10 @@ $(function () {
   // =====================================
   var breakup = {
     color: "#adb5bd",
-    series: [200, 448, 305, 145, 190, 130, 80, 20, 30],
-    labels: ["Normal", "Underweight", "Severely Underweight", "Stunted", "Severely Stunted", "Wasted", "Severely Wasted","Overweight", "Obesity"],
+    series: [40, 20, 25, 10],
+    labels: ["Normal", "Underweight", "Severely Underweight", "Overweight"],
     chart: {
-      width: 180,
+      width: 400,
       type: "donut",
       fontFamily: "Plus Jakarta Sans', sans-serif",
       foreColor: "#adb0bb",
@@ -244,22 +244,22 @@ $(function () {
         startAngle: 0,
         endAngle: 360,
         donut: {
-          size: '75%',
+          size: '50%',
         },
       },
     },
     stroke: {
-      show: false,
+      show: true,
     },
 
     dataLabels: {
-      enabled: false,
+      enabled: true,
     },
 
     legend: {
-      show: false,
+      show: true,
     },
-    colors: ["#9FC2A1", "#5DFF6B", "#229C2D", "#49F3FF", "#5589FF", "#ECE91D", "#DAA514", "#C43434", "#CA34A1"],
+    colors: ["#9FC2A1", "#5DFF6B", "#229C2D", "#49F3FF",],
 
     responsive: [
       {
@@ -299,14 +299,14 @@ $(function () {
     },
     series: [
       {
-        name: ["case"],
+        name: ["Prevalence %"],
         color: "#5D87FF",
-        data: [200, 560, 440, 248],
+        data: [70, 90, 60, 74],
 
       },
     ],
     stroke: {
-      curve: "straight",
+      curve: "smooth",
       width: 2,
     },
     fill: {
@@ -357,7 +357,7 @@ $(function () {
       },
     ],
     stroke: {
-      curve: "straight",
+      curve: "smooth",
       width: 2,
     },
     fill: {

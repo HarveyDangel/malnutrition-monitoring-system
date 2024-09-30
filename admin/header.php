@@ -65,8 +65,9 @@ if ($_SESSION['role'] === 'doh'){
         <nav class="sidebar-nav scroll-sidebar">
           <ul id="sidebarnav">
             <hr>
+            <p class="text-center">Home</p>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="index.php?username=<?= $_SESSION['username'];?>" aria-expanded="false">
+              <a class="sidebar-link" href="index.php?id=<?= $_SESSION['admin_id'];?>" aria-expanded="false">
                 <span>
                   <i class="ti ti-layout-dashboard"></i>
                 </span>
@@ -74,18 +75,18 @@ if ($_SESSION['role'] === 'doh'){
               </a>
             </li>
 
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="report.php?username=<?= $_SESSION['username'];?>" aria-expanded="false">
+            <!-- <li class="sidebar-item">
+              <a class="sidebar-link" href="report.php?id=<?= $_SESSION['admin_id'];?>" aria-expanded="false">
                 <span>
                   <i class="ti ti-book"></i>
                 </span>
                 <span class="hide-menu">Report</span>
               </a>
-            </li>
+            </li> -->
             <hr>
             <p class="text-center">Users</p>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="rhu.php?username=<?= $_SESSION['username'];?>" aria-expanded="false">
+              <a class="sidebar-link" href="rhu.php?id=<?= $_SESSION['admin_id'];?>" aria-expanded="false">
                 <span>
                   <i class="ti ti-user"></i>
                 </span>
@@ -93,7 +94,7 @@ if ($_SESSION['role'] === 'doh'){
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="pho.php?username=<?= $_SESSION['username'];?>" aria-expanded="false">
+              <a class="sidebar-link" href="pho.php?id=<?= $_SESSION['admin_id'];?>" aria-expanded="false">
                 <span>
                   <i class="ti ti-user"></i>
                 </span>
@@ -101,7 +102,7 @@ if ($_SESSION['role'] === 'doh'){
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="doh.php?username=<?= $_SESSION['username'];?>" aria-expanded="false">
+              <a class="sidebar-link" href="doh.php?id=<?= $_SESSION['admin_id'];?>" aria-expanded="false">
                 <span>
                   <i class="ti ti-user"></i>
                 </span>
@@ -127,7 +128,7 @@ if ($_SESSION['role'] === 'doh'){
     <!--  Main wrapper -->
     <div class="body-wrapper">
       <!--  Header Start -->
-      <header class="app-header bg-secondary">
+      <header class="app-header bg-primary">
         <nav class="navbar navbar-expand-lg navbar-light">
           <ul class="navbar-nav">
             <li class="nav-item d-block d-xl-none">
@@ -150,19 +151,11 @@ if ($_SESSION['role'] === 'doh'){
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                   <div class="message-body">
-                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-user fs-6"></i>
-                      <p class="mb-0 fs-3">My Profile</p>
+                    <a href="changePassword.php?id=<?= $_SESSION['admin_id'];?>" class="d-flex align-items-center gap-2 dropdown-item">
+                      <i class="ti ti-lock fs-6"></i>
+                      <p class="mb-0 fs-3">Change Password</p>
                     </a>
-                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-mail fs-6"></i>
-                      <p class="mb-0 fs-3">My Account</p>
-                    </a>
-                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-list-check fs-6"></i>
-                      <p class="mb-0 fs-3">My Task</p>
-                    </a>
-                    <a href="../" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                    <a href="../logout.php" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
                   </div>
                 </div>
               </li>

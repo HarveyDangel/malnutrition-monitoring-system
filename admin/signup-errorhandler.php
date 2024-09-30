@@ -65,7 +65,7 @@ class ErrorHandler extends Functions
 
     public function usernameTaken($username, $email)
     {
-        $sql = "SELECT * FROM tbl_doh WHERE doh_username = :username OR doh_email = :email;";
+        $sql = "SELECT * FROM tbl_doh WHERE username = :username OR email = :email;";
 		$stmt = $this->db->conn->prepare($sql);
 		$stmt->execute([
 			':username' => $username,

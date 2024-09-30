@@ -25,14 +25,14 @@ include 'header.php';
                     </div>
                   </div>
                   <div>
-                    <h6 class="fw-semibold">Municipalty: </h6>
+                    <h6 class="fw-semibold">Municipalty: <span class="fw-normal"> <?= $_SESSION['municipality'];?> </span> </h6>
                     <h6 class="">Total Popn. Municipality/City: <span></span></h6>
                     <h6 class="">Estimated Popn. of Children 0-59 mos. in Municipality/City: <span></span></h6>
                   </div>
                 </div>
             </div>
             <div class="mt-4 me-5">
-                <img src="../assets/images/logos/NNC-logo.svg.png" alt="NNC Logo" width="60px" height="60px">
+                <img src="../assets/images/logos/PHO logo.png" alt="PHO Logo" width="60px" height="60px">
             </div>
         </div>
     </div>

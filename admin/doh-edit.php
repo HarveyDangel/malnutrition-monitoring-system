@@ -15,14 +15,19 @@ $doh = $function->GetDOHInfo($doh_id);
                 <?php
                 if ($doh) {
                   $doh_id = $doh->doh_id;
-                  $fname = $doh->doh_fname;
-                  $lname = $doh->doh_lname;
-                  $email = $doh->doh_email;
-                  $username = $doh->doh_username;
+                  $fname = $doh->fname;
+                  $mname = $doh->mname;
+                  $lname = $doh->lname;
+                  $suffix = $doh->suffix;
+                  $sex = $doh->sex;
+                  $province = $doh->province;
+                  $region = $doh->region;
+                  $email = $doh->email;
+                  $username = $doh->username;
                 ?>
                   <div class="row">
                     <div class="col-lg-1 col-md-1">
-                      <a href="doh.php?username=<?= $_SESSION['username'];?>.php" class="btn btn-danger rounded-2"><i class="ti ti-arrow-left"></i>
+                      <a href="doh.php?username=<?= $_SESSION['username']; ?>.php" class="btn btn-danger rounded-2"><i class="ti ti-arrow-left"></i>
                       </a>
                     </div>
                     <div class="col-lg-11 col-md-11">
@@ -32,7 +37,7 @@ $doh = $function->GetDOHInfo($doh_id);
                   <?php
                   $msg = Session::get("msg");
                   if (isset($msg)) {
-                    echo $msg;
+                    echo '<div id="flash-message">' . $msg . '</div>';
                     Session::set("msg", NULL);
                   }
                   ?>
@@ -41,13 +46,51 @@ $doh = $function->GetDOHInfo($doh_id);
                     <h5 class="fw-semibold">Personal Information</h5>
                     <hr>
                     <div class="row">
-                      <div class="mb-3 col-lg-6 col-md-6">
-                        <label for="fname" class="form-label fw-light">Firstname</label>
-                        <input type="text" name="fname" class="form-control" id="fname" aria-describedby="textHelp" required value="<?= ($fname) ? $fname : ''; ?>">
+                      <div class="mb-3 col-lg-3 col-md-6">
+                        <label class="form-label fw-light">Firstname</label>
+                        <input type="text" name="fname" class="form-control" aria-describedby="textHelp" required value="<?= ($fname) ? $fname : ''; ?>">
                       </div>
-                      <div class="mb-3 col-lg-6 col-md-6">
-                        <label for="lname" class="form-label fw-light">Lastname</label>
-                        <input type="text" name="lname" class="form-control" id="lname" aria-describedby="textHelp" required value="<?= ($lname) ? $lname : ''; ?>">
+                      <div class="mb-3 col-lg-3 col-md-6">
+                        <label class="form-label fw-light">Middlename</label>
+                        <input type="text" name="mname" class="form-control" aria-describedby="textHelp" required value="<?= ($mname) ? $mname : ''; ?>">
+                      </div>
+                      <div class="mb-3 col-lg-3 col-md-6">
+                        <label class="form-label fw-light">Lastname</label>
+                        <input type="text" name="lname" class="form-control" aria-describedby="textHelp" required value="<?= ($lname) ? $lname : ''; ?>">
+                      </div>
+                      <div class="mb-3 col-lg-3 col-md-6">
+                        <label for="suffix" class="form-label fw-light">Suffix</label>
+                        <select class="form-select" name="suffix" aria-label="Default select example">
+                          <option value="<?= ($suffix) ? $suffix : ''; ?>"><?= ($suffix) ? $suffix : ''; ?></option>
+                          <option value="Sr.">Sr.</option>
+                          <option value="Jr.">Jr.</option>
+                          <option value="I.">I</option>
+                          <option value="II">II</option>
+                          <option value="III">III</option>
+                          <option value="IV">IV</option>
+                          <option value="V">V</option>
+                          <option value="VI">VI</option>
+                          <option value="VII">VII</option>
+                          <option value="VIII">VIII</option>
+                          <option value="IX">IX</option>
+                          <option value="X">X</option>
+                        </select>
+                      </div>
+                      <div class="mb-3 col-lg-4 col-md-4">
+                        <label for="sex" class="form-label fw-light">Sex</label>
+                        <select class="form-select" name="sex" aria-label="Default select example" required>
+                          <option value="<?= ($sex) ? $sex : ''; ?>"><?= ($sex) ? $sex : ''; ?></option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                        </select>
+                      </div>
+                      <div class="mb-3 col-lg-4 col-md-4">
+                        <label class="form-label fw-light">Province</label>
+                        <input type="text" name="province" class="form-control" aria-describedby="textHelp" value="<?= ($province) ? $province : ''; ?>" required readonly>
+                      </div>
+                      <div class="mb-3 col-lg-4 col-md-4">
+                        <label class="form-label fw-light">Region</label>
+                        <input type="text" name="region" class="form-control" aria-describedby="textHelp" value="<?= ($region) ? $region : ''; ?>" required readonly>
                       </div>
 
                     </div>
@@ -89,11 +132,6 @@ $doh = $function->GetDOHInfo($doh_id);
       </div>
     </div>
   </div>
-  </div>
-  </div>
-  </div>
-  <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-  <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 <?php

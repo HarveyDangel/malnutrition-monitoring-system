@@ -8,7 +8,7 @@ $pho = $function->GetPHOInfo($pho_id);
     <?php
     $msg = Session::get("msg");
     if (isset($msg)) {
-        echo $msg;
+        echo '<div id="flash-message">' . $msg . '</div>';
         Session::set("msg", NULL);
     }
     ?>
@@ -33,7 +33,7 @@ $pho = $function->GetPHOInfo($pho_id);
                                 $email = $pho->email;
                                 $username = $pho->username;
                             ?>
-                                <h3 class="fw-semibold"><?= $fname;?> <?= $mname;?> <?= $lname;?> <?= $suffix;?></h3>
+                                <h3 class="fw-semibold"><?= $fname; ?> <?= $mname; ?> <?= $lname; ?> <?= $suffix; ?></h3>
                         </div>
                     </div>
                 </div>
@@ -56,7 +56,7 @@ $pho = $function->GetPHOInfo($pho_id);
                             </ul>
                             <div>
                                 <form method="post" action="navigate.php" class="p-4">
-                                    <a href="pho.php" class="badge btn bg-primary rounded-3 fw-semibold">
+                                    <a href="pho.php?id=<?= $_SESSION['admin_id']; ?>" class="badge btn btn-primary rounded-3 fw-semibold">
                                         <span>
                                             <i class="ti ti-arrow-left"></i>
                                         </span>

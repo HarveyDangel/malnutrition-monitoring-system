@@ -9,19 +9,19 @@ include 'header.php';
         <h3 class="fw-semibold mb-4">PHO's</h3>
         <hr>
         <a href="pho-add.php" aria-expanded="false">
-          <button class="badge btn bg-primary rounded-1 fw-semibold p-2 mb-3">
+          <button class="badge btn btn-primary rounded-1 fw-semibold p-2 mb-3">
             <span>
               <i class="ti ti-plus"></i>
             </span>
             <span class="hide-menu">Add</span>
           </button>
         </a>
-  
-  
+
+
         <?php
         $msg = Session::get("msg");
         if (isset($msg)) {
-          echo $msg;
+          echo '<div id="flash-message">' . $msg . '</div>';
           Session::set("msg", NULL);
         }
         ?>
@@ -86,9 +86,9 @@ include 'header.php';
                             <p class="mb-0 fw-normal"><?= $email; ?></p>
                           </td>
                           <td class="border-bottom-0">
-  
+
                             <form method="post" action="navigate.php">
-                              <a href="pho-view.php?pho_id=<?= $pho_id; ?>" class="badge btn bg-primary rounded-3 fw-semibold">
+                              <a href="pho-view.php?pho_id=<?= $pho_id; ?>" class="badge btn btn-primary rounded-3 fw-semibold">
                                 <span>
                                   <i class="ti ti-eye"></i>
                                 </span>
@@ -100,12 +100,12 @@ include 'header.php';
                             </form>
                           </td>
                         </tr>
-  
+
                     <?php
-  
+
                       endforeach;
                     }
-  
+
                     ?>
                   </tbody>
                 </table>
@@ -113,7 +113,7 @@ include 'header.php';
                   $(document).ready
                 </script>
               </div>
-  
+
             </div>
           </div>
         </div>

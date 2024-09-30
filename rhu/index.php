@@ -1,71 +1,103 @@
 <?php
 include 'header.php';
+$address = $function->GetAllBarangay();
+$children = $function->GetAllChildrenByMunicipality($_SESSION['municipality']);
+$population = count($children);
+
+if ($address) {
+  $i=0;
+  foreach ($address as $addr) :
+    $muni = $addr['municipality'];
+    if ($_SESSION['municipality'] === $muni) {
+      $brgy = $addr['barangay'];
+      $psgc = $addr['brgy_psgc'];
+      $i++;
+    }
+  endforeach;
+}
+
 ?>
-<?php
-		$msg = Session::get("msg");
-		if (isset($msg)) {
-			echo $msg;
-			Session::set("msg", NULL);
-		}
-		?>
 <main>
+  <?php
+  $msg = Session::get("msg");
+  if (isset($msg)) {
+    echo '<div id="flash-message">' . $msg . '</div>';
+    Session::set("msg", NULL);
+  }
+  ?>
   <!--  Row 1 -->
   <container class="row">
-    <div class="col-lg-6">
-      <!-- Municipality Card -->
+    <!-- Municipality Card -->
+    <div class="col-md-4">
       <div class="card overflow-hidden">
         <div class="card-body p-3">
-          <div>
-            <span>
-              <i class="ti ti-building-community pe-2 mb-2" style="font-size: 40px;"></i>
-            </span>
-            <span class="card-title mb-9 fw-semibold" style="font-size: 25px;">
-              Municipality</span>
-            </span>
+        <div class="row">
+            <div class="col-3 ps-2 pt-3 align-items-center justify-content-center me-3">
+              <i class="ti ti-building bg-primary text-white rounded-circle p-3" style="font-size: 40px;"></i>
+            </div>
+            <div class="col p-1 ms-2">
+              <div>
+                <h3 class="card-title fw-semibold " style="font-size: 22px;">
+                  Municipality</h3>
+              </div>
+              <div>
+                <h3 class="fw-normal"><?= $_SESSION['municipality']; ?></h3>
+              </div>
+            </div>
           </div>
-          <h3 class="fw-normal mb-3">Almeria</h3>
         </div>
       </div>
     </div>
 
     <!-- End Municipality Card -->
 
-    <div class="col-lg-6">
-      <!--Barangay card-->
+    <!--Barangay card-->
+    <div class="col-md-4">
       <div class="card overflow-hidden">
         <div class="card-body p-3">
-          <div>
-            <span>
-              <i class="ti ti-home pe-2 mb-2" style="font-size: 40px;"></i>
-            </span>
-            <span class="card-title mb-9 fw-semibold" style="font-size: 25px;">
-              Barangay</span>
-            </span>
+        <div class="row">
+            <div class="col-3 ps-2 pt-3 align-items-center justify-content-center me-3">
+              <i class="ti ti-home bg-primary text-white rounded-circle p-3" style="font-size: 40px;"></i>
+            </div>
+            <div class="col p-1 ms-2">
+              <div>
+                <h3 class="card-title fw-semibold " style="font-size: 22px;">
+                  Barangay</h3>
+              </div>
+              <div>
+                <h3 class="fw-normal"><?= $i; ?></h3>
+              </div>
+            </div>
           </div>
-          <h3 class="fw-normal mb-3">13</h3>
         </div>
       </div>
     </div>
     <!-- End Barangay card-->
-    <div class="col-lg-6">
-      <!--Projected Population card-->
+    <div class="col-md-4">
+      <!-- Population Card -->
       <div class="card overflow-hidden">
         <div class="card-body p-3">
-          <div>
-            <span>
-              <i class="ti ti-user pe-2 mb-2" style="font-size: 40px;"></i>
-            </span>
-            <span class="card-title mb-9 fw-semibold" style="font-size: 25px;">
-              Estimated Population</span>
-            </span>
+          <div class="row">
+            <div class="col-3 ps-2 pt-3 align-items-center justify-content-center me-3">
+              <i class="ti ti-users bg-primary text-white rounded-circle p-3" style="font-size: 40px;"></i>
+            </div>
+            <div class="col p-1 ms-2">
+              <div>
+                <h3 class="card-title fw-semibold " style="font-size: 22px;">
+                  Population</h3>
+              </div>
+              <div>
+                <h3 class="fw-normal"><?= $population; ?></h3>
+              </div>
+            </div>
           </div>
-          <h3 class="fw-normal mb-3">237</h3>
         </div>
       </div>
     </div>
     <!--End Projected Population  -->
+
+    <!-- Coverage Population card
     <div class="col-lg-6">
-      <!--Coverage Population card-->
       <div class="card overflow-hidden">
         <div class="card-body p-3">
           <div>
@@ -73,31 +105,31 @@ include 'header.php';
               <i class="ti ti-user pe-2 mb-2" style="font-size: 40px;"></i>
             </span>
             <span class="card-title mb-9 fw-semibold" style="font-size: 25px;">
-              Total Coverage</span>
+              </span>
             </span>
           </div>
           <h3 class="fw-normal mb-3">81%</h3>
         </div>
       </div>
-    </div>
+    </div> -->
     <!--End Projected Population  -->
   </container>
 
 
   <!--Yearly total number of cases Chart-->
-  <div class="card">
+  <!-- <div class="card">
     <div class="card-body">
       <div class="row alig n-items-start">
         <div class="col-8">
-          <h5 class="card-title mb-9 fw-semibold">Quarterly Case</h5>
-          <h4 class="fw-semibold mb-3"> 248 </h4>
+          <h4 class="mb-9 fw-semibold">Trends</h4>
+          <h5 class="fw-normal mb-3">Total Popn.: 2222 </h5>
           <!--<div class="d-flex align-items-center pb-1">
             <span class="me-2 rounded-circle bg-light-danger round-20 d-flex align-items-center justify-content-center">
               <i class="ti ti-arrow-down-right text-danger"></i>
             </span>
             <p class="text-dark me-1 fs-3 mb-0">-3%</p>
             <p class="fs-3 mb-0">from last year </p>
-          </div>-->
+          </div>
         </div>
         <div class="col-4">
           <div class="d-flex justify-content-end">
@@ -108,12 +140,12 @@ include 'header.php';
         </div>
       </div>
     </div>
-    <div id="malnourish"></div>
-  </div>
+    <!-- <div id="malnourish"></div> 
+  </div> -->
   <!-- End Yearly total number of cases Chart-->
 
   <!-- Bar graph -->
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-lg-8 d-flex align-items-strech">
       <div class="card w-100 rounded-2 shadow">
         <div class="card-body rounded-2">
@@ -151,11 +183,11 @@ include 'header.php';
         </div>
       </div>
     </div>
-    <!-- End Bar graph -->
+    <!-- End Bar graph 
     <div class="col-lg-4">
       <div class="row">
         <div class="col-lg-12">
-          <!-- Total Case Donut Chart -->
+          <!-- Total Case Donut Chart 
           <div class="card overflow-hidden">
             <div class="card-body p-4">
               <h5 class="card-title mb-9 fw-semibold">Total Case</h5>
@@ -169,7 +201,7 @@ include 'header.php';
                           </span>
                           <p class="text-dark me-1 fs-3 mb-0">+9%</p>
                           <p class="fs-3 mb-0">last year</p>
-                        </div>-->
+                        </div>
                   <div class="align-items-center">
 
                     <div class="me-4">
@@ -224,12 +256,12 @@ include 'header.php';
           </div>
         </div>
         <div class="col-lg-12">
-          <!-- Monthly Earnings -->
+          <!-- Monthly Earnings
         </div>
       </div>
     </div>
     <!-- Ranking per Municipal by the number of cases-->
-    <!--<div class="col-lg-5 d-flex align-items-right">
+  <!--<div class="col-lg-5 d-flex align-items-right">
       <div class="card w-100">
         <div class="card-body">
           <div>
@@ -294,8 +326,8 @@ include 'header.php';
           </div>
         </div>
       </div>
-    </div>-->
-  </div>
+    </div>
+  </div> -->
   <!-- End Ranking per Municipal by the number of cases-->
 </main>
 

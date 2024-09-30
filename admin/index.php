@@ -5,12 +5,12 @@ include 'header.php';
 <body class="bg-light-gray">
   <!--  Row 1 -->
   <?php
-        $msg = Session::get("msg");
-        if (isset($msg)) {
-          echo $msg;
-          Session::set("msg", NULL);
-        }
-        ?>
+  $msg = Session::get("msg");
+  if (isset($msg)) {
+    echo '<div id="flash-message">' . $msg . '</div>';
+    Session::set("msg", NULL);
+  }
+  ?>
   <container class="row mt-3">
 
     <div class="col-lg-4 col-md-4">
@@ -19,11 +19,11 @@ include 'header.php';
       $i = 0;
       $dohs = $function->GetAllDOH();
       if ($dohs) {
-          foreach ($dohs as $doh) :
+        foreach ($dohs as $doh) :
           $doh_id = $doh['doh_id'];
           $i++;
-          endforeach;
-        }
+        endforeach;
+      }
       ?>
 
       <div class="card overflow-hidden">
@@ -35,7 +35,7 @@ include 'header.php';
             <div class="col p-1 ms-2">
               <div>
                 <h3 class="card-title fw-semibold " style="font-size: 23px;">
-                DHOs</h3>
+                  DHOs</h3>
               </div>
               <div>
                 <h3 class="fw-normal"><?= $i; ?></h3>
@@ -52,11 +52,11 @@ include 'header.php';
       $i = 0;
       $phos = $function->GetAllPHO();
       if ($phos) {
-          foreach ($phos as $pho) :
+        foreach ($phos as $pho) :
           $pho_id = $pho['pho_id'];
           $i++;
-          endforeach;
-        }
+        endforeach;
+      }
       ?>
 
       <div class="card overflow-hidden">
@@ -68,7 +68,7 @@ include 'header.php';
             <div class="col p-1 ms-2">
               <div>
                 <h3 class="card-title fw-semibold " style="font-size: 23px;">
-                PHOs</h3>
+                  PHOs</h3>
               </div>
               <div>
                 <h3 class="fw-normal"><?= $i; ?></h3>
@@ -85,11 +85,11 @@ include 'header.php';
       $i = 0;
       $rhus = $function->GetAllRHU();
       if ($rhus) {
-          foreach ($rhus as $rhu) :
+        foreach ($rhus as $rhu) :
           $rhu_id = $rhu['rhu_id'];
           $i++;
-          endforeach;
-        }
+        endforeach;
+      }
       ?>
 
       <div class="card overflow-hidden">
@@ -101,7 +101,7 @@ include 'header.php';
             <div class="col p-1 ms-2">
               <div>
                 <h3 class="card-title fw-semibold " style="font-size: 23px;">
-                RHUs</h3>
+                  RHUs</h3>
               </div>
               <div>
                 <h3 class="fw-normal"><?= $i; ?></h3>
@@ -194,7 +194,7 @@ include 'header.php';
                   <span class="timeline-badge-border d-block flex-shrink-0"></span>
                 </div>
                 <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">User</div>
-                <div class="timeline-desc fs-3 text-dark mt-n1 fw-normal">Action</div>  
+                <div class="timeline-desc fs-3 text-dark mt-n1 fw-normal">Action</div>
               </li>
             </ul>
           </div>

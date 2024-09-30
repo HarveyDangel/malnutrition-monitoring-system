@@ -8,19 +8,19 @@ include 'header.php';
       <div class="card-body">
         <h3 class="fw-semibold mb-4">RHU's</h3>
         <hr>
-          <a href="rhu-add.php" aria-expanded="false">
-            <button class="badge btn bg-primary rounded-1 fw-semibold p-2 mb-3">
-              <span>
-                <i class="ti ti-plus"></i>
-              </span>
-              <span class="hide-menu">Add</span>
-            </button>
-          </a>
-        
+        <a href="rhu-add.php" aria-expanded="false">
+          <button class="badge btn btn-primary rounded-1 fw-semibold p-2 mb-3">
+            <span>
+              <i class="ti ti-plus"></i>
+            </span>
+            <span class="hide-menu">Add</span>
+          </button>
+        </a>
+
         <?php
         $msg = Session::get("msg");
         if (isset($msg)) {
-          echo $msg;
+          echo '<div id="flash-message">' . $msg . '</div>';
           Session::set("msg", NULL);
         }
         ?>
@@ -74,7 +74,7 @@ include 'header.php';
                             <h6 class="fw-semibold mb-0"><?= $i; ?></h6>
                           </td>
                           <td class="border-bottom-0">
-                            <span class="fw-normal"><?= $lname; ?>, <?= $fname; ?> <?= $suffix;?> </span>
+                            <span class="fw-normal"><?= $lname; ?>, <?= $fname; ?> <?= $suffix; ?> </span>
                           </td>
                           <td class="border-bottom-0">
                             <p class="mb-0 fw-normal"><?= $municipality; ?>, <?= $province; ?> </p>
@@ -88,7 +88,7 @@ include 'header.php';
                           <td class="border-bottom-0">
 
                             <form method="post" action="navigate.php">
-                              <a href="rhu-view.php?rhu_id=<?= $rhu_id; ?>" class="badge btn bg-primary rounded-3 fw-semibold">
+                              <a href="rhu-view.php?rhu_id=<?= $rhu_id; ?>" class="badge btn btn-primary rounded-3 fw-semibold">
                                 <span>
                                   <i class="ti ti-eye"></i>
                                 </span>

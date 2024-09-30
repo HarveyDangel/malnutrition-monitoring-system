@@ -240,8 +240,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btn-delete-pho'])) {
 //Add DOH
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btn-add-doh'])) {
 	//Grab data
-	$fname = $_POST["fname"];
-	$lname = $_POST["lname"];
 	$email = $_POST["email"];
 	$username = $_POST["username"];
 	$password = $_POST["password"];
@@ -287,8 +285,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btn-add-doh'])) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btn-edit-doh'])) {
 	$doh_id = $_GET['doh_id'];
 
-	$fname = $_POST["fname"];
-	$lname = $_POST["lname"];
 	$email = $_POST["email"];
 	$username = $_POST["username"];
 	$password = $_POST["password"];
@@ -338,6 +334,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btn-delete-doh'])) {
 	exit();
 }
 
+//change password
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btn-edit-admin'])) {
+	$admin_id = $_GET['admin_id'];
+	$password = $_POST["password"];
+	$rptpassword = $_POST["rptpassword"];
+
+	if($ErrorHandler->passwordMatch($password, $rptpassword) !== true) {
+		Session::set("msg", "<div style='background-color: #ED4337; color:white; border: solid #ED4337  color:white;1px; border-radius: 5px; padding: 10px;'><center><i class='fa fa-warning'></i>Password not matched! </center> </div><br>");
+		header("Location: changePassword.php?id=" . $admin_id);
+		exit();
+	}
+
+	$flag = $function->ChangePassword($_POST, $admin_id);
+	if ($flag == 1) {
+		Session::set("msg", "<div style='background-color: #9fdf9f; color:black; border: solid #9fdf9f 1px; border-radius: 5px; padding: 10px;'><center><i class='fa fa-check'></i>Password Updated! </center> </div><br>");
+	} else {
+		Session::set("msg", "<div style='background-color: #ED4337; color:white; border: solid #ED4337  color:white;1px; border-radius: 5px; padding: 10px;'><center><i class='fa fa-warning'></i>Something went wrong! </center> </div><br>");
+	}
+	header("Location: index.php?id=" . $admin_id);
+	exit();
+}
 
 //log in admin
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btn-admin-login'])) {
@@ -349,12 +366,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btn-admin-login'])) {
     if ($flag == 1) {
         // Set success message
         Session::set("msg", "<div style='background-color: #9fdf9f; color:black; border: solid #9fdf9f 1px; border-radius: 5px; padding: 10px;'><center><i class='fa fa-check'></i>Log in Successfully! </center> </div><br>");
-		header("Location: index.php?username=" . $_SESSION['username']);
+		header("Location: index.php?id=" . $_SESSION['admin_id']);
+		exit();
+	}
+	if ($flag == 2) {
+        // Set success message
+        Session::set("msg", "<div style='background-color: #ED4337; color:white; border: solid #ED4337  color:white;1px; border-radius: 5px; padding: 10px;'><center><i class='fa fa-warning'></i>Password is Incorrect! </center> </div><br>");
+		header("Location: login.php?error=incorrect-password");
 		exit();
     } else {
         // Set error message
-        Session::set("msg", "<div style='background-color: #ED4337; color:white; border: solid #ED4337  color:white;1px; border-radius: 5px; padding: 10px;'><center><i class='fa fa-warning'></i>Username or Password is Incorrect! </center> </div><br>");
-		header("Location: login.php?error=incorrect-username-or-password");
+        Session::set("msg", "<div style='background-color: #ED4337; color:white; border: solid #ED4337  color:white;1px; border-radius: 5px; padding: 10px;'><center><i class='fa fa-warning'></i>Username does not Exist!</center> </div><br>");
+		header("Location: login.php?error=incorrect-username");
 		exit();
 
     }
@@ -364,4 +387,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btn-admin-login'])) {
 else{
 	header("Location: ../index.php");
 	exit();
-}	
+}

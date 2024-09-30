@@ -8,7 +8,7 @@ $doh = $function->GetDOHInfo($doh_id);
     <?php
     $msg = Session::get("msg");
     if (isset($msg)) {
-        echo $msg;
+        echo '<div id="flash-message">' . $msg . '</div>';
         Session::set("msg", NULL);
     }
     ?>
@@ -22,12 +22,17 @@ $doh = $function->GetDOHInfo($doh_id);
                             <?php
                             if ($doh) {
                                 $id = $doh->doh_id;
-                                $fname = $doh->doh_fname;
-                                $lname = $doh->doh_lname;
-                                $email = $doh->doh_email;
-                                $username = $doh->doh_username;
+                                $fname = $doh->fname;
+                                $mname = $doh->mname;
+                                $lname = $doh->lname;
+                                $suffix = $doh->suffix;
+                                $sex = $doh->sex;
+                                $province = $doh->province;
+                                $region = $doh->region;
+                                $email = $doh->email;
+                                $username = $doh->username;
                             ?>
-                                <h3 class="fw-semibold"><?= $fname; ?> <?= $lname; ?></h3>
+                                <h3 class="fw-semibold"><?= $lname; ?>, <?= $fname; ?> <?= $mname; ?> <?= $suffix; ?></h3>
                         </div>
                     </div>
                 </div>
@@ -37,14 +42,18 @@ $doh = $function->GetDOHInfo($doh_id);
                             <h5 class="card-title">Information</h5>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item"><strong>First Name:</strong> <?= $fname; ?></li>
+                                <li class="list-group-item"><strong>Middle Name:</strong> <?= $mname; ?></li>
                                 <li class="list-group-item"><strong>Last Name:</strong> <?= $lname; ?></li>
-                                <li class="list-group-item"><strong>Username:</strong> <?= $username; ?></li>
+                                <li class="list-group-item"><strong>Suffix:</strong> <?= $suffix; ?></li>
+                                <li class="list-group-item"><strong>Sex:</strong> <?= $sex; ?></li>
+                                <li class="list-group-item"><strong>Province:</strong> <?= $province; ?></li>
+                                <li class="list-group-item"><strong>Region:</strong> <?= $region; ?></li>
                                 <li class="list-group-item"><strong>Email:</strong> <?= $email; ?></li>
 
                             </ul>
                             <div>
                                 <form method="post" action="navigate.php" class="p-4">
-                                    <a href="doh.php?username=<?= $_SESSION['username'];?>" class="badge btn bg-primary rounded-3 fw-semibold">
+                                    <a href="doh.php?id=<?= $_SESSION['admin_id']; ?>" class="badge btn btn-primary rounded-3 fw-semibold">
                                         <span>
                                             <i class="ti ti-arrow-left"></i>
                                         </span>

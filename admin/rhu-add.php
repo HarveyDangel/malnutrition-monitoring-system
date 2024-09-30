@@ -22,7 +22,7 @@ include 'header.php';
                 <?php
                 $msg = Session::get("msg");
                 if (isset($msg)) {
-                  echo $msg;
+                  echo '<div id="flash-message">' . $msg . '</div>';
                   Session::set("msg", NULL);
                 }
                 ?>
@@ -125,7 +125,7 @@ include 'header.php';
                   <div class="row">
                     <div class="text-center p-2">
                       <button type="submit" name="btn-add-rhu" class="btn btn-primary rounded-2 w-25">
-                      Save</button>
+                        Save</button>
                     </div>
                   </div>
                 </form>

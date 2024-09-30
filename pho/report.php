@@ -2,131 +2,262 @@
 include 'header.php';
 ?>
 
-<body class="bg-light-gray">
-  <div>
-    <div class="mb-4">
-      <button class="btn btn-primary">
-        Import File
-      </button>
-    </div>
-  </div>
-  <div class="row">
-    <div class=" d-flex align-items-strech">
-      <div class="card w-100 rounded-2 shadow">
-        <div class="card-body rounded-2">
-          <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
-            <div class="mb-2 mb-sm-0">
-              <!-- <div>
-                <select class="form-select card-title fw-semibold">
-                  <option value="Almeria">Almeria</option>
-                  <option value="Biliran">Biliran</option>
-                  <option value="Cabucgayan">Cabucgayan</option>
-                  <option value="Caibiran">Caibiran</option>
-                  <option value="Culaba">Culaba</option>
-                  <option value="Kawayan">Kawayan</option>
-                  <option value="Mariripi">Maripipi</option>
-                  <option value="Naval">Naval</option>
-                </select>
-              </div> -->
-              <div>
-                <select class="form-select card-title fw-semibold">
-                  <option value="1">Barangay 1</option>
-                  <option value="2">Barangay 2</option>
-                  <option value="3">Barangay 3</option>
-                  <option value="4">Barangay 4</option>
-                  <option value="5">Barangay 5</option>
-                  <option value="6">Barangay 6</option>
-                  <option value="7">Barangay 7</option>
-                  <option value="8">Barangay 8</option>
-                </select>
-              </div>
-            </div>
-            <div>
-              <select class="form-select">
-                <option value="2024">2024</option>
-                <option value="2023">2023</option>
-                <option value="2022">2022</option>
-                <option value="2021">2021</option>
-                <option value="2021">2020</option>
-              </select>
-            </div>
-          </div>
-          <div id="municipalChart"></div>
-        </div>
-      </div>
-    </div>
-    <!-- End Bar graph -->
+<?php
 
-    <!-- Ranking per Municipal by the number of cases-->
-    <!-- <div class="col-lg-4 d-flex align-items-right">
-      <div class="card w-100">
-        <div class="card-body">
-          <div>
-            <div class="d-sm-flex d-block align-items-center justify-content-between mb-8">
-              <div class="mb-2 mb-sm-0">
-                <h5 class="card-title fw-semibold">Ranking</h5>
-              </div>
-              <div>
-                <select class="form-select">
-                  <option value="2024">2024</option>
-                  <option value="2023">2023</option>
-                  <option value="2022">2022</option>
-                  <option value="2021">2021</option>
-                  <option value="2020">2020</option>
-                </select>
-              </div>
+$children = $function->GetAllChildren();
+// if ($children) {
+//     foreach ($children as $child) :
+//         $child_id = $child['child_id'];
+//         $purok = $child['purok'];
+//         $name_of_caregiver = $child['name_of_caregiver'];
+//         $name_of_child = $child['name_of_child'];
+//         $belong_to_ip = $child['belong_to_ip'];
+//         $sex = $child['sex'];
+//         $date_of_birth = $child['date_of_birth'];
+//         $date_last_measured = $child['date_last_measured'];
+//         $age_by_months = $child['age_by_months'];
+//         $wfa = $child['nutritional_status_WFA'];
+//         $hfa = $child['nutritional_status_HFA'];
+//         $wfh = $child['nutritional_status_WFH'];
+//         $barangay = $child['barangay'];
+//         $municipality = $child['municipality'];
+//         $province = $child['province'];
+//         $region = $child['region'];
+//         $year = $child['year'];
+//     endforeach;
+// }
+?>
+
+<?php
+
+$filteredData = $children;
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $weightForAge = $_POST['nutritional_status_WFA'] ?? '';
+    $heightForAge = $_POST['nutritional_status_HFA'] ?? '';
+    $weightForHeight = $_POST['nutritional_status_WFH'] ?? '';
+    $sex = $_POST['sex'] ?? '';
+    $ageGroup = $_POST['age_group'] ?? '';
+    $barangay = $_POST['barangay'] ?? '';
+    $indigenous = $_POST['belong_to_ip'] ?? '';
+
+    $filteredData = array_filter($children, function ($row) use ($weightForAge, $heightForAge, $weightForHeight, $sex, $ageGroup, $barangay, $indigenous) {
+        return ($weightForAge == '' || $row['nutritional_status_WFA'] == $weightForAge) &&
+            ($heightForAge == '' || $row['nutritional_status_HFA'] == $heightForAge) &&
+            ($weightForHeight == '' || $row['nutritional_status_WFH'] == $weightForHeight) &&
+            ($sex == '' || $row['sex'] == $sex) &&
+            ($ageGroup == '' || ($ageGroup == '0-2' && $row['age_by_months'] <= 24) || ($ageGroup == '3-5' && $row['age_by_months'] > 24)) &&
+            ($barangay == '' || $row['barangay'] == $barangay) &&
+            ($indigenous == '' || $row['belong_to_ip'] == $indigenous);
+    });
+}
+?>
+
+<main class="">
+    <div class="card">
+        <div class="card-body mb-0 pb-0">
+            <h5 class="card-title fw-semibold mb-4">Biliran Province Child Health Report</h5>
+            <div class=" float-end mb-2">
+                <form action="download-children-list.php" method="post">
+                    <button class="badge btn btn-primary rounded-1 fw-semibold p-2" name="btn-download-children-list">
+                        <span>
+                            <i class="ti ti-download"></i>
+                        </span>
+                        <span class="hide-menu">Download</span>
+                    </button>
+                </form>
             </div>
-            <ul class="timeline-widget mb-0 position-relative mb-n5">
-              <li class="timeline-item d-flex position-relative overflow-hidden">
-                <div class="timeline-time text-dark flex-shrink-0 text-end">1</div>
-                <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                  <span class="timeline-badge border-2 border border-danger flex-shrink-0 my-8"></span>
-                  <span class="timeline-badge-border d-block flex-shrink-0"></span>
-                </div>
-                <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">Barangay 6</div>
-              </li>
-              <li class="timeline-item d-flex position-relative overflow-hidden">
-                <div class="timeline-time text-dark flex-shrink-0 text-end">2</div>
-                <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                  <span class="timeline-badge border-2 border border-danger flex-shrink-0 my-8"></span>
-                  <span class="timeline-badge-border d-block flex-shrink-0"></span>
-                </div>
-                <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">Barangay 1<a href="javascript:void(0)" class="text-primary d-block fw-normal"></a>
-                </div>
-              </li>
-              <li class="timeline-item d-flex position-relative overflow-hidden">
-                <div class="timeline-time text-dark flex-shrink-0 text-end">3</div>
-                <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                  <span class="timeline-badge border-2 border border-warning flex-shrink-0 my-8"></span>
-                  <span class="timeline-badge-border d-block flex-shrink-0"></span>
-                </div>
-                <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">Barangay 10</div>
-              </li>
-              <li class="timeline-item d-flex position-relative overflow-hidden">
-                <div class="timeline-time text-dark flex-shrink-0 text-end">4</div>
-                <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                  <span class="timeline-badge border-2 border border-warning flex-shrink-0 my-8"></span>
-                  <span class="timeline-badge-border d-block flex-shrink-0"></span>
-                </div>
-                <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">Barangay 3<a href="javascript:void(0)" class="text-primary d-block fw-normal"></a>
-                </div>
-              </li>
-              <li class="timeline-item d-flex position-relative overflow-hidden">
-                <div class="timeline-time text-dark flex-shrink-0 text-end">5</div>
-                <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                  <span class="timeline-badge border-2 border border-success flex-shrink-0 my-8"></span>
-                  <span class="timeline-badge-border d-block flex-shrink-0"></span>
-                </div>
-                <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">Barangay 8</div>
-              </li>
-            </ul>
-          </div>
+            <div class="flex d-flex flex-row justify-content-between w-100">
+                <form method="POST" class="w-100">
+                    <div class="row mb-2">
+                        <div class="col-md-4">
+                            <label for="weight_for_age" class="form-label">Weight for Age:</label>
+                            <select name="nutritional_status_WFA" class="form-select">
+                                <option value="">All</option>
+                                <option value="Normal">Normal</option>
+                                <option value="Underweight">Underweight</option>
+                                <option value="Overweight">Overweight</option>
+                                <option value="Severely Underweight">Severely Underweight</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="height_for_age" class="form-label">Height for Age:</label>
+                            <select name="nutritional_status_HFA" class="form-select">
+                                <option value="">All</option>
+                                <option value="Normal">Normal</option>
+                                <option value="Stunted">Stunted</option>
+                                <option value="Severely Stunted">Severely Stunted</option>
+                                <option value="Tall">Tall</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="weight_for_height" class="form-label">Weight for Height:</label>
+                            <select name="nutritional_status_WFH" class="form-select">
+                                <option value="">All</option>
+                                <option value="Normal">Normal</option>
+                                <option value="Obese">Obese</option>
+                                <option value="Overweight">Overweight</option>
+                                <option value="Moderately Wasted">Moderately Wasted</option>
+                                <option value="Severely Wasted">Severely Wasted</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="sex" class="form-label">Sex:</label>
+                            <select name="sex" class="form-select">
+                                <option value="">All</option>
+                                <option value="M">Male</option>
+                                <option value="F">Female</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="age_group" class="form-label">Age Group:</label>
+                            <select name="age_group" class="form-select">
+                                <option value="">All</option>
+                                <option value="0-2">0-2 Years</option>
+                                <option value="3-5">3-5 Years</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="barangay" class="form-label">Barangay:</label>
+                            <select name="barangay" class="form-select">
+                                <option value="">All</option>
+                                <?php
+                                $brgys = $function->GetAllBarangay();
+                                if ($brgys) {
+                                    foreach ($brgys as $brgy):
+                                        $addr = $brgy['barangay'];
+                                ?>
+                                        <option value="<?= $addr; ?>"><?= $addr; ?></option>
+                                <?php endforeach;
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="Indigenous People" class="form-label">Indigenous People:</label>
+                            <select name="belong_to_ip" class="form-select">
+                                <option value="">All</option>
+                                <option value="Y">Yes</option>
+                                <option value="N">No</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 text-center align-content-center ">
+                            <button type="submit" class="badge btn btn-primary mt-4 p-2 fw-semibold">Filter</button>
+
+                        </div>
+                        
+                    </div>
+                </form>
+            </div>
         </div>
-      </div>
+        <div class="col-lg-12 d-flex align-items-stretch pt-0 mt-0">
+            <div class="card w-100">
+                <div class="card-body">
+                    <?php
+                    $msg = Session::get("msg");
+                    if (isset($msg)) {
+                        echo '<div id="flash-message">' . $msg . '</div>';
+                        Session::set("msg", NULL);
+                    }
+                    ?>
+                    <hr>
+                    <div class="table-responsive">
+                        <div>
+                            <table id="myTable" class="table text-nowrap align-middle">
+                                <thead class="text-dark">
+                                    <tr>
+                                        <th class="border-bottom border-primary-subtle">
+                                            <h6 class="fw-semibold mb-0">Child<br> Seq.</h6>
+                                        </th>
+                                        <th class="border-bottom border-primary-subtle">
+                                            <h6 class="fw-semibold mb-0">Purok</h6>
+                                        </th>
+                                        <th class="border-bottom border-primary-subtle">
+                                            <h6 class="fw-semibold mb-0">Name Of <br>Mother/<br>Caregiver</h6>
+                                        </th>
+                                        <th class="border-bottom border-primary-subtle">
+                                            <h6 class="fw-semibold mb-0">Name of <br> Child</h6>
+                                        </th>
+                                        <th class="border-bottom border-primary-subtle">
+                                            <h6 class="fw-semibold mb-0">Sex</h6>
+                                        </th>
+                                        <th class="border-bottom border-primary-subtle">
+                                            <h6 class="fw-semibold mb-0">Age in <br> months</h6>
+                                        </th>
+                                        <th class="border-bottom border-primary-subtle">
+                                            <h6 class="fw-semibold mb-0">Barangay</h6>
+                                        </th>
+                                        <th class="border-bottom border-primary-subtle">
+                                            <h6 class="fw-semibold mb-0">Nutritional<br> Status WFA</h6>
+                                        </th>
+                                        <th class="border-bottom border-primary-subtle">
+                                            <h6 class="fw-semibold mb-0">Nutritional<br> Status HFA</h6>
+                                        </th>
+                                        <th class="border-bottom border-primary-subtle">
+                                            <h6 class="fw-semibold mb-0">Nutritional<br> Status WFL/H</h6>
+                                        </th>
+                                        <th class="border-bottom border-primary-subtle">
+                                            <h6 class="fw-semibold mb-0">Belong to<br> Indigenous<br> People (Y/N)</h6>
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    foreach ($filteredData as $row):
+                                    ?>
+                                        <tr>
+                                            <td class="border-bottom border-primary-subtle">
+                                                <h6 class="fw-semibold mb-0"><?= $row['child_id']; ?></h6>
+                                            </td>
+                                            <td class="border-bottom border-primary-subtle">
+                                                <span class="fw-normal"><?= $row['purok']; ?></span>
+                                            </td>
+                                            <td class="border-bottom border-primary-subtle">
+                                                <p class="mb-0 fw-normal"><?= $row['name_of_caregiver']; ?></p>
+                                            </td>
+                                            <td class="border-bottom border-primary-subtle">
+                                                <p class="mb-0 fw-normal"><?= $row['name_of_child']; ?></p>
+                                            </td>
+                                            <td class="border-bottom border-primary-subtle">
+                                                <p class="mb-0 fw-normal"><?= $row['sex']; ?></p>
+                                            </td>
+                                            <td class="border-bottom border-primary-subtle">
+                                                <p class="mb-0 fw-normal"><?= $row['age_by_months']; ?></p>
+                                            </td>
+                                            <td class="border-bottom border-primary-subtle">
+                                                <p class="mb-0 fw-normal"><?= $row['barangay']; ?></p>
+                                            </td>
+                                            <td class="border-bottom border-primary-subtle">
+                                                <p class="mb-0 fw-normal"><?= $row['nutritional_status_WFA']; ?></p>
+                                            </td>
+                                            <td class="border-bottom border-primary-subtle">
+                                                <p class="mb-0 fw-normal"><?= $row['nutritional_status_HFA']; ?></p>
+                                            </td>
+                                            <td class="border-bottom border-primary-subtle">
+                                                <p class="mb-0 fw-normal"><?= $row['nutritional_status_WFH']; ?></p>
+                                            </td>
+                                            <td class="border-bottom border-primary-subtle">
+                                                <p class="mb-0 fw-normal"><?= $row['belong_to_ip']; ?></p>
+                                            </td>
+                                        </tr>
+                                    <?php
+                                    endforeach;
+                                    ?>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div> -->
-  <!-- End Ranking per Municipal by the number of cases-->
-</body>
+</main>
+
+
 
 
 <?php

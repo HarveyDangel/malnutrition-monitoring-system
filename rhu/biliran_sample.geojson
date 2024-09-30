@@ -1,0 +1,62 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Biliran",
+                "value": 300 
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [124.424, 11.444],
+                        [124.435, 11.448],
+                        [124.440, 11.455],
+                        [124.430, 11.460],
+                        [124.424, 11.444]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Maripipi",
+                "value": 150
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [124.360, 11.490],
+                        [124.370, 11.495],
+                        [124.380, 11.490],
+                        [124.370, 11.485],
+                        [124.360, 11.490]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Cabucgayan",
+                "value": 500
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [124.460, 11.500],
+                        [124.470, 11.505],
+                        [124.475, 11.500],
+                        [124.470, 11.495],
+                        [124.460, 11.500]
+                    ]
+                ]
+            }
+        }
+    ]
+}
