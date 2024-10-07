@@ -40,7 +40,10 @@ $child = $function->GetChildInfo($child_id);
 
 
                 ?>
-                    <h1><?= $name_of_child; ?></h1>
+                    <div>
+                        <h1><?= $name_of_child; ?></h1>
+                    </div>
+                    <hr>
                     <div class="row ">
                         <div class="flex d-flex flex-row justify-content-between">
                             <h5>Nutritional Status</h5>
@@ -49,6 +52,7 @@ $child = $function->GetChildInfo($child_id);
                             <h5>WFL/H: <?= $wfh; ?></h5>
                         </div>
                     </div>
+                    <hr>
                     <div class="col-lg-12 d-flex align-items-stretch">
                         <div class="table-responsive w-100">
                             <table class="table text-nowrap mb-0 align-middle">
@@ -109,40 +113,43 @@ $child = $function->GetChildInfo($child_id);
                                         </td>
                                     </tr>
                                     <div class="pt-4">
-                                        <div class="">
-                                            <div class="row alig n-items-start">
-                                                <div class="col-8">
-                                                    <h5 class="card-title mb-9 fw-semibold"> Weight </h5>
-                                                    <h4 class="fw-semibold mb-3"> <?= $weight; ?> kg.</h4>
-                                                    <!--<div class="d-flex align-items-center pb-1">
+                                        <div class="card w-100">
+                                            <div class="card-body">
+                                                <div class="row alig n-items-start">
+                                                    <div class="col-8">
+                                                        <h5 class="card-title mb-9 fw-semibold"> Weight: <?= $weight; ?> kg.</h5>
+                                                        <!--<div class="d-flex align-items-center pb-1">
                                                     <span class="me-2 rounded-circle bg-light-danger round-20 d-flex align-items-center justify-content-center">
                                                         <i class="ti ti-arrow-up-right text-danger"></i>
                                                     </span>
                                                     <p class="text-dark me-1 fs-3 mb-0">+3%</p>
                                                     <p class="fs-3 mb-0">last 3 months</p>
                                                 </div>-->
-                                                </div>
-                                                <div class="col-4">
-                                                    <div class="d-flex justify-content-end">
-                                                        <div class="text-white rounded-circle p-6 d-flex align-items-center justify-content-center mx-2" style="background-color: #5DFF6B;">
-                                                            <i class="ti ti-ruler-measure fs-6"></i>
-                                                        </div>
-                                                        <div class="text-white bg-primary rounded-circle p-6 d-flex align-items-center justify-content-center">
-                                                            <i class="ti ti-scale fs-6"></i>
+
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <div class="d-flex justify-content-end">
+                                                            <div class="text-white rounded-circle p-6 d-flex align-items-center justify-content-center mx-2" style="background-color: #5DFF6B;">
+                                                                <i class="ti ti-ruler-measure fs-6"></i>
+                                                            </div>
+                                                            <div class="text-white bg-primary rounded-circle p-6 d-flex align-items-center justify-content-center">
+                                                                <i class="ti ti-scale fs-6"></i>
+                                                            </div>
                                                         </div>
                                                     </div>
+                                                    <div id="healthInfo"></div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="healthInfo"></div>
                                     </div>
+                                    <hr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
             </div>
             <form method="post" action="navigate.php" class="p-4">
-                <a href="children.php?id=<?= $_SESSION['rhu_id'];?>" class="badge btn btn-primary rounded-3 fw-semibold">
+                <a href="children.php?id=<?= $_SESSION['rhu_id']; ?>" class="badge btn btn-primary rounded-3 fw-semibold">
                     <span>
                         <i class="ti ti-arrow-left"></i>
                     </span>

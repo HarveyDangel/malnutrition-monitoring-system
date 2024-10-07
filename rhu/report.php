@@ -5,27 +5,27 @@ include 'header.php';
 <?php
 
 $children = $function->GetAllChildrenByMunicipality($_SESSION['municipality']);
-if ($children) {
-    foreach ($children as $child) :
-        $child_id = $child['child_id'];
-        $purok = $child['purok'];
-        $name_of_caregiver = $child['name_of_caregiver'];
-        $name_of_child = $child['name_of_child'];
-        $belong_to_ip = $child['belong_to_ip'];
-        $sex = $child['sex'];
-        $date_of_birth = $child['date_of_birth'];
-        $date_last_measured = $child['date_last_measured'];
-        $age_by_months = $child['age_by_months'];
-        $wfa = $child['nutritional_status_WFA'];
-        $hfa = $child['nutritional_status_HFA'];
-        $wfh = $child['nutritional_status_WFH'];
-        $barangay = $child['barangay'];
-        $municipality = $child['municipality'];
-        $province = $child['province'];
-        $region = $child['region'];
-        $year = $child['year'];
-    endforeach;
-}
+// if ($children) {
+//     foreach ($children as $child) :
+//         $child_id = $child['child_id'];
+//         $purok = $child['purok'];
+//         $name_of_caregiver = $child['name_of_caregiver'];
+//         $name_of_child = $child['name_of_child'];
+//         $belong_to_ip = $child['belong_to_ip'];
+//         $sex = $child['sex'];
+//         $date_of_birth = $child['date_of_birth'];
+//         $date_last_measured = $child['date_last_measured'];
+//         $age_by_months = $child['age_by_months'];
+//         $wfa = $child['nutritional_status_WFA'];
+//         $hfa = $child['nutritional_status_HFA'];
+//         $wfh = $child['nutritional_status_WFH'];
+//         $barangay = $child['barangay'];
+//         $municipality = $child['municipality'];
+//         $province = $child['province'];
+//         $region = $child['region'];
+//         $year = $child['year'];
+//     endforeach;
+// }
 ?>
 
 <?php
@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <main class="">
     <div class="card">
-        <div class="card-body mb-0 pb-0">
+        <div class="card-body pb-0">
             <h5 class="card-title fw-semibold mb-4"><?= $_SESSION['municipality']; ?> Child Health Report</h5>
             <div class=" float-end mb-2">
                 <form action="download-children-list.php" method="post">
@@ -152,6 +152,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </form>
             </div>
         </div>
+        <h5 class="fw-semibold bg-dark-light p-1 text-white px-4 mt-3">Table</h5>
         <div class="col-lg-12 d-flex align-items-stretch pt-0 mt-0">
             <div class="card w-100">
                 <div class="card-body">
@@ -162,7 +163,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         Session::set("msg", NULL);
                     }
                     ?>
-                    <hr class="fw-semibold">
                     <div class="table-responsive">
                         <div>
                             <table id="myTable" class="table text-nowrap align-middle">

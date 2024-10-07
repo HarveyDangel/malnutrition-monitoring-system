@@ -3,19 +3,8 @@ include 'header.php';
 $address = $function->GetAllBarangay();
 $children = $function->GetAllChildrenByMunicipality($_SESSION['municipality']);
 $population = count($children);
-
-if ($address) {
-  $i=0;
-  foreach ($address as $addr) :
-    $muni = $addr['municipality'];
-    if ($_SESSION['municipality'] === $muni) {
-      $brgy = $addr['barangay'];
-      $psgc = $addr['brgy_psgc'];
-      $i++;
-    }
-  endforeach;
-}
-
+$barangay = $function->getBarangayByMunicipality($_SESSION['municipality']);
+$numBarangay = $function->CountBarangayByMunicipal($_SESSION['municipality']);
 ?>
 <main>
   <?php
@@ -65,7 +54,7 @@ if ($address) {
                   Barangay</h3>
               </div>
               <div>
-                <h3 class="fw-normal"><?= $i; ?></h3>
+                <h3 class="fw-normal"><?= $numBarangay; ?></h3>
               </div>
             </div>
           </div>
@@ -94,36 +83,18 @@ if ($address) {
         </div>
       </div>
     </div>
-    <!--End Projected Population  -->
-
-    <!-- Coverage Population card
-    <div class="col-lg-6">
-      <div class="card overflow-hidden">
-        <div class="card-body p-3">
-          <div>
-            <span>
-              <i class="ti ti-user pe-2 mb-2" style="font-size: 40px;"></i>
-            </span>
-            <span class="card-title mb-9 fw-semibold" style="font-size: 25px;">
-              </span>
-            </span>
-          </div>
-          <h3 class="fw-normal mb-3">81%</h3>
-        </div>
-      </div>
-    </div> -->
-    <!--End Projected Population  -->
+    <!--End Population  -->
   </container>
 
 
-  <!--Yearly total number of cases Chart-->
-  <!-- <div class="card">
+  <!-- Yearly total number of cases Chart-->
+  <div class="card">
     <div class="card-body">
       <div class="row alig n-items-start">
         <div class="col-8">
           <h4 class="mb-9 fw-semibold">Trends</h4>
           <h5 class="fw-normal mb-3">Total Popn.: 2222 </h5>
-          <!--<div class="d-flex align-items-center pb-1">
+          <div class="d-flex align-items-center pb-1">
             <span class="me-2 rounded-circle bg-light-danger round-20 d-flex align-items-center justify-content-center">
               <i class="ti ti-arrow-down-right text-danger"></i>
             </span>
@@ -140,12 +111,12 @@ if ($address) {
         </div>
       </div>
     </div>
-    <!-- <div id="malnourish"></div> 
-  </div> -->
-  <!-- End Yearly total number of cases Chart-->
+    <div id="malnourish"></div> 
+  </div>
+  <!-- End Yearly total number of cases Chart -->
 
   <!-- Bar graph -->
-  <!-- <div class="row">
+  <div class="row">
     <div class="col-lg-8 d-flex align-items-strech">
       <div class="card w-100 rounded-2 shadow">
         <div class="card-body rounded-2">
@@ -153,6 +124,7 @@ if ($address) {
             <div class="mb-2 mb-sm-0">
               <div>
                 <select class="form-select card-title fw-semibold">
+
                   <option value="Caucab">Caucab</option>
                   <option value="Iyosan">Iyosan</option>
                   <option value="Jamorawon">Jamorawon</option>

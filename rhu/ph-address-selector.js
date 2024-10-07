@@ -242,7 +242,7 @@ var my_handlers = {
                 dropdown.append($('<option></option>').attr('value', entry.province_code).text(entry.province_name));
             });
 
-            // Set default province to Biliran (assuming its province_code is known, e.g., 'PH-BIL')
+            // Set default province to Biliran)
             dropdown.val('0878').trigger('change');
         });
     },
@@ -255,6 +255,7 @@ var my_handlers = {
         var province_text = $(this).find("option:selected").text();
         let province_input = $('#province-text');
         province_input.val(province_text);
+
         //clear city & barangay input
         $('#city-text').val('');
         $('#barangay-text').val('');
@@ -287,6 +288,7 @@ var my_handlers = {
             });
         });
     },
+    
     // fill barangay
     fill_barangays: function() {
         // selected barangay

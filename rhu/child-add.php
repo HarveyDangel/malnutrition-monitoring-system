@@ -7,7 +7,7 @@ include 'header.php';
         <div class="card-body">
             <div class="row">
                 <div class="col-lg-1 col-md-1">
-                    <a href="children.php" class="btn btn-danger rounded-2"><i class="ti ti-arrow-left"></i>
+                    <a href="children" class="btn btn-primary rounded-2"><i class="ti ti-arrow-left"></i>
                     </a>
                 </div>
                 <div class="col-lg-11 col-md-11">
@@ -71,7 +71,7 @@ include 'header.php';
                     </div>
                     <div class="mb-3 col-md-6">
                         <label class="form-label">Height (cm.)*</label>
-                        <input type="number" class="form-control" name="height" step="0.01" aria-describedby="textHelp" required>
+                        <input type="number" class="form-control" name="height" step="0.5" aria-describedby="textHelp" required>
                     </div>
                 </div>
                 <hr>

@@ -23,8 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btn-add-child'])) {
 	$hfa = heightForAge($AgeByMonths, $sex, $height);
 	$wfh = weightForHeight($weight, $sex, $height);
 
-	echo var_dump($_POST);
-
 	$flag = $function->addChild($_POST, $wfa, $hfa, $wfh);
 	if ($flag == 1) {
 		Session::set("msg", "<div style='background-color: #9fdf9f; color:black; border: solid #ED4337  color:white;1px; border-radius: 5px; padding: 10px;'><center><i class='fa-solid fa-circle-check'></i> &nbsp A new Child has been Added! </center> </div><br>");
@@ -34,19 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btn-add-child'])) {
 	header("Location: children.php?id=" . $_SESSION['rhu_id']);
 	exit();
 }
-//Add Child GEO LOCATION
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btn-set-geolocation'])) {
-	$child_id = $_GET['child_id'];
-	
-	$flag = $function->SetChildGeolocation($_POST);
-	if ($flag == 1) {
-		Session::set("msg", "<div style='background-color: #9fdf9f; color:black; border: solid #ED4337  color:white;1px; border-radius: 5px; padding: 10px;'><center><i class='fa-solid fa-circle-check'></i> &nbsp A child cooridates has been set! </center> </div><br>");
-	} else {
-		Session::set("msg", "<div style='background-color: #ED4337; color:white; border: solid #ED4337  color:white;1px; border-radius: 5px; padding: 10px;'><center><i class='fa-solid fa-circle-exclamation'></i> &nbsp Something went wrong! </center> </div><br>");
-	}
-	header("Location: child-view.php?id=" . $child_id);
-	exit();
-}
+
 
 //Edit child
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btn-edit-child'])) {
@@ -68,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btn-edit-child'])) {
 	} else {
 		Session::set("msg", "<div style='background-color: #ED4337; color:white; border: solid #ED4337  color:white;1px; border-radius: 5px; padding: 10px;'><center><i class='fa-solid fa-circle-exclamation'></i> &nbsp Something went wrong! </center> </div><br>");
 	}
-	header("Location: children.php?id=" . $_SESSION['rhu_id']);
+	header("Location: children?id=" . $_SESSION['rhu_id']);
 	exit();
 }
 
@@ -86,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btn-delete-child'])) {
 	} else {
 		Session::set("msg", "<div style='background-color: #ED4337; color:white; border: solid #ED4337  color:white;1px; border-radius: 5px; padding: 10px;'><center><i class='fa-solid fa-circle-exclamation'></i> &nbsp Invalid Request! </center> </div><br>");
 	}
-	header("Location: children.php?id=" . $_SESSION['rhu_id']);
+	header("Location: children?id=" . $_SESSION['rhu_id']);
 	exit();
 }
 
@@ -104,18 +90,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btn-upload-file-childr
 
 	if ($fileMimeType !== 'text/plain' && $fileMimeType !== 'text/csv') {
 		Session::set("msg", "<div style='background-color: #ED4337; color:white; border: solid #ED4337  color:white;1px; border-radius: 5px; padding: 10px;'><center><i class='fa-solid fa-circle-exclamation'></i> &nbsp Invalid file type! </center> </div><br>");
-		header("Location: children-upload-file.php?id=" . $_SESSION['rhu_id']);
+		header("Location: children-upload-file?id=" . $_SESSION['rhu_id']);
 		exit();
 	}
 
 	$flag = $function->importCSVFile($CSVfile, $barangay, $municipality, $province, $region, $year);
 	if ($flag == 1) {
 		Session::set("msg", "<div style='background-color: #9fdf9f; color:black; border: solid #ED4337  color:white;1px; border-radius: 5px; padding: 10px;'><center><i class='fa-solid fa-circle-check'></i> &nbsp Upload file successfully! </center> </div><br>");
-		header("Location: children.php?id=" . $_SESSION['rhu_id']);
+		header("Location: children?id=" . $_SESSION['rhu_id']);
 		exit();
 	} else {
 		Session::set("msg", "<div style='background-color: #ED4337; color:white; border: solid #ED4337  color:white;1px; border-radius: 5px; padding: 10px;'><center><i class='fa-solid fa-circle-exclamation'></i> &nbsp Something went wrong! </center> </div><br>");
-		header("Location: children-upload-file.php?id=" . $_SESSION['rhu_id']);
+		header("Location: children-upload-file?id=" . $_SESSION['rhu_id']);
 		exit();
 	}
 }
@@ -130,22 +116,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btn-rhu-login'])) {
 	if ($flag == 1) {
 		// Set success message
 		Session::set("msg", "<div style='background-color: #9fdf9f; color:black; border: solid #ED4337  color:white;1px; border-radius: 5px; padding: 10px;'><center><i class='fa-solid fa-circle-check'></i> &nbsp Log in Successfully! </center> </div><br>");
-		header("Location: index.php?id=" . $_SESSION['rhu_id']);
+		header("Location: index?id=" . $_SESSION['rhu_id']);
 
 		exit();
 	} else if ($flag == 2) {
 		// Set success message
 		Session::set("msg", "<div style='background-color: #ED4337; color:white; border: solid #ED4337  color:white;1px; border-radius: 5px; padding: 10px;'><center><i class='fa-solid fa-circle-exclamation'></i> &nbsp Incorrect Password! </center> </div><br>");
-		header("Location: login.php?error=incorrect-password");
+		header("Location: login?error=incorrect-password");
 		exit();
 	} else {
 		// Set error message
 		Session::set("msg", "<div style='background-color: #ED4337; color:white; border: solid #ED4337  color:white;1px; border-radius: 5px; padding: 10px;'><center><i class='fa-solid fa-circle-exclamation'></i> &nbsp Username does not Exist! </center> </div><br>");
-		header("Location: login.php?error=incorrect-username");
+		header("Location: login?error=incorrect-username");
 		exit();
 	}
 	// Redirect user
 } else {
-	header("Location: ../index.php");
+	header("Location: ../index");
 	exit();
 }

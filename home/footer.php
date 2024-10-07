@@ -12,12 +12,12 @@
          }
        </style>
          <div class="row pt-4">
-           <div class="col-lg-3 col-md-4">
-             <img src="../assets/images/logos/govph.png" height="300px">
-           </div>
            <!-- <div class="col-lg-3 col-md-4">
-             <img src="//gwhs.i.gov.ph/gwt-footer/govph-seal-mono-footer.jpg">
+             <img src="../assets/images/logos/govph.png" height="300px">
            </div> -->
+           <div class="col-lg-3 col-md-4">
+             <img src="//gwhs.i.gov.ph/gwt-footer/govph-seal-mono-footer.jpg">
+           </div>
            <div class="col-lg-7 col-md-6">
             <div class="row">
               <div class="col-lg-6">

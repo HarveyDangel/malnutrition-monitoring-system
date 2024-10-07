@@ -118,14 +118,12 @@ $child = $function->GetChildInfo($child_id);
                         <div class="mb-3 col-md-4">
                             <label class="form-label">City/Municipality *</label>
                             <select name="municipality" class="form-control form-control-md" id="city">
-                                <option value="<?= ($municipality) ? $municipality : ''; ?>"><?= ($municipality) ? $municipality : ''; ?></option>
                             </select>
                             <input type="hidden" class="form-control form-control-md" name="city_text" id="city-text" value="<?= ($municipality) ? $municipality : ''; ?>" required>
                         </div>
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Barangay *</label>
                             <select name="barangay" class="form-control form-control-md" id="barangay">
-                                <option value="<?= ($barangay) ? $barangay : ''; ?>"><?= ($barangay) ? $barangay : ''; ?></option>
                             </select>
                             <input type="hidden" class="form-control form-control-md" name="barangay_text" id="barangay-text" value="<?= ($barangay) ? $barangay : ''; ?>" required>
                         </div>

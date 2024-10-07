@@ -3,7 +3,7 @@ include_once '../session.php';
 Session::init();
 if (isset($_SESSION['username'])) {
   if ($_SESSION['role'] === 'rhu') {
-    header("Location: index.php?id=" . $_SESSION['rhu_id']);
+    header("Location: index?id=" . $_SESSION['rhu_id']);
   }
 }
 ?>
@@ -47,15 +47,15 @@ if (isset($_SESSION['username'])) {
                 <form method="post" action="navigate.php">
                   <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" required>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="username....." required>
                   </div>
                   <div class="mb-4">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="password....." required>
                   </div>
                   <div class="text-center">
                     <button type="submit" name="btn-rhu-login" class="btn btn-primary w-50 py-8 fs-4 mb-4 rounded-2">Log in</button>
-                    <a href="../index.php" class="btn btn-primary w-50 py-8 fs-4 rounded-2">Cancel</a>
+                    <a href="../index" class="btn btn-primary w-50 py-8 fs-4 rounded-2">Cancel</a>
                   </div>
                 </form>
               </div>

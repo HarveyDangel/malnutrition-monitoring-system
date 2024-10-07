@@ -453,7 +453,7 @@ class Functions
 			':barangay' => $data['barangay_text'],
 			':municipality' => $data['city_text'],
 			':province' => $data['province_text'],
-			':region' => $data['region'],
+			':region' => $data['region_text'],
 			':year' => $data['year'],
 			':latitude' => $data['latitude'],
 			':longitude' => $data['longitude'],
@@ -465,25 +465,6 @@ class Functions
 			return 1;
 		} else {
 			// somthing wrong with queries
-			return 0;
-		}
-	}
-
-	//Add child Geolocation
-	public function SetChildGeolocation($data)
-	{
-		$sql = 'INSERT INTO tbl_child_geo_location (child_id, latitude, longitude) VALUES (:child_id, :latitude, :longitute )';
-
-		$stmt = $this->db->conn->prepare($sql);
-		$r = $stmt->execute([
-			':child_id' => $data['child_id'],
-			':latitute' => $data['latitude'],
-			':longitutde' => $data['longitude']
-		]);
-
-		if($r){
-			return 1;
-		} else {
 			return 0;
 		}
 	}
@@ -550,7 +531,7 @@ class Functions
 			':barangay' => $data['barangay_text'],
 			':municipality' => $data['city_text'],
 			':province' => $data['province_text'],
-			':region' => $data['region'],
+			':region' => $data['region_text'],
 			':year' => $data['year'],
 			':latitude' => $data['latitude'],
 			':longitude' => $data['longitude'],
@@ -675,6 +656,33 @@ class Functions
 		$data = $stmt->fetchAll();
 		return $data;
 	}
+
+	public function CountBarangayByMunicipal($municipality){
+		$sql = 'SELECT COUNT("barangay") AS total FROM tbl_address WHERE municipality = :municipality';
+		$stmt = $this->db->conn->prepare($sql);
+		$stmt->execute([':municipality' => $municipality]);
+		$data = $stmt->fetch(PDO::FETCH_OBJ);
+		$r = $data->total;
+		return $r;
+	}
+
+	public function totalCount($table){
+		$sql = 'SELECT COUNT('.$table.'_id) AS total FROM tbl_'.$table;
+		$stmt = $this->db->conn->prepare($sql);
+		$stmt->execute();
+		$data = $stmt->fetch(PDO::FETCH_OBJ);
+		$t = $data->total;
+		return $t;
+	}
+	public function totalCountWithCondition($table, $condition, $value){
+		$sql = 'SELECT COUNT('.$table.'_id) AS total FROM tbl_'.$table.'WHERE'.$condition.'='.$value;
+		$stmt = $this->db->conn->prepare($sql);
+		$stmt->execute();
+		$data = $stmt->fetch(PDO::FETCH_OBJ);
+		$t = $data->total;
+		return $t;
+	}
+
 	public function AddAddress()
 	{
 		$sql = 'SELECT barangay FROM tbl_address GROUP BY psgc';

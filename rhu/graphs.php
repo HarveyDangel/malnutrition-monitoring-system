@@ -1,9 +1,13 @@
 <?php
 include 'header.php';
+$children = $function->GetAllChildrenByMunicipality($_SESSION['municipality']);
 ?>
 
 <body class="bg-light-gray">
   <!-- Bar graph -->
+  <script>
+
+  </script>
   <div class="row">
     <div class="d-flex align-items-strech col-md-6">
       <div class="card w-100 rounded-2 shadow">
@@ -83,14 +87,14 @@ include 'header.php';
           </div> -->
           </div>
           <hr>
-          <div id="municipalChart"></div>
+          <div id="municipalBarGraph"></div>
         </div>
       </div>
     </div>
   </div>
-    
-      <!-- Ranking per Municipal by the number of cases-->
-      <!-- <div class="col-lg-5 d-flex align-items-right">
+
+  <!-- Ranking per Municipal by the number of cases-->
+  <!-- <div class="col-lg-5 d-flex align-items-right">
       <div class="card w-100">
         <div class="card-body">
           <div>
@@ -166,8 +170,155 @@ include 'header.php';
         </div>
       </div>
     </div> -->
-    <!-- End Ranking per Municipal by the number of cases-->
+  <!-- End Ranking per Municipal by the number of cases-->
 </body>
+
+<script>
+  $(function() {
+    var municipalBarGraph = {
+      series: [{
+          name: "Normal",
+          data: [30, 45, 40, 20]
+        },
+        {
+          name: "Underweight",
+          data: [30, 45, 40, 20]
+        },
+        {
+          name: "Severely Underweight",
+          data: [30, 45, 40, 20]
+        },
+        {
+          name: "Stunted",
+          data: [40, 35, 20, 10]
+        },
+        {
+          name: "Severely Stunted",
+          data: [13, 15, 9, 10]
+        },
+        {
+          name: "Wasted",
+          data: [17, 12, 7, 5]
+        },
+        {
+          name: "Severely Wasted",
+          data: [12, 15, 12, 10]
+        },
+        {
+          name: "Overweight",
+          data: [15, 5, 7, 5]
+        },
+        {
+          name: "Obesity",
+          data: [12, 15, 12, 10]
+        },
+
+      ],
+
+      chart: {
+        type: "bar",
+        height: 345,
+        offsetX: -15,
+        toolbar: {
+          show: true
+        },
+        foreColor: "#adb0bb",
+        fontFamily: 'inherit',
+        sparkline: {
+          enabled: false
+        },
+      },
+
+
+      colors: ["#9FC2A1", "#5DFF6B", "#229C2D", "#49F3FF", "#5589FF", "#ECE91D", "#DAA514", "#C43434", "#CA34A1"],
+
+
+      plotOptions: {
+        bar: {
+          horizontal: false,
+          columnWidth: "75%",
+          borderRadius: [6],
+          borderRadiusApplication: 'end',
+          borderRadiusWhenStacked: 'all'
+        },
+      },
+      markers: {
+        size: 0
+      },
+
+      dataLabels: {
+        enabled: false,
+      },
+
+
+      legend: {
+        show: true,
+      },
+
+
+      grid: {
+        borderColor: "rgba(0,0,0,0.1)",
+        strokeDashArray: 3,
+        xaxis: {
+          lines: {
+            show: false,
+          },
+        },
+      },
+
+      xaxis: {
+        type: "category",
+        categories: ["1st Quarter", "2nd Quarter", "3rd Quarter", "4th Quarter", ],
+        labels: {
+          style: {
+            cssClass: "grey--text lighten-2--text fill-color"
+          },
+        },
+      },
+
+
+      yaxis: {
+        title: "Overall Report",
+        suffix:"%",
+        show: true,
+        min: 0,
+        max: 100,
+        tickAmount: 4,
+        labels: {
+          style: {
+            cssClass: "grey--text lighten-2--text fill-color",
+          },
+        },
+      },
+      stroke: {
+        show: true,
+        width: 3,
+        lineCap: "butt",
+        colors: ["transparent"],
+      },
+
+
+      tooltip: {
+        theme: "light"
+      },
+
+      responsive: [{
+        breakpoint: 600,
+        options: {
+          plotOptions: {
+            bar: {
+              borderRadius: 3,
+            }
+          },
+        }
+      }]
+
+
+    };
+    var chart = new ApexCharts(document.querySelector("#municipalBarGraph"), municipalBarGraph);
+    chart.render();
+  })
+</script>
 
 
 <?php
