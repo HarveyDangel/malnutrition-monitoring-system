@@ -286,6 +286,7 @@ var my_handlers = {
             $.each(result, function(key, entry) {
                 dropdown.append($('<option></option>').attr('value', entry.city_code).text(entry.city_name));
             });
+            
         });
     },
     

@@ -8,13 +8,11 @@ include 'header.php';
       <div class="card-body">
         <h3 class="fw-semibold mb-4">PHO's</h3>
         <hr>
-        <a href="pho-add.php" aria-expanded="false">
-          <button class="badge btn btn-primary rounded-1 fw-semibold p-2 mb-3">
+        <a href="pho-add?id=<?= $_SESSION['admin_id']; ?>" class="badge btn btn-primary rounded-1 fw-semibold p-2" aria-expanded="false">
             <span>
-              <i class="ti ti-plus"></i>
+              <i class="fa fa-plus"></i>
             </span>
             <span class="hide-menu">Add</span>
-          </button>
         </a>
 
 
@@ -42,7 +40,7 @@ include 'header.php';
                         <h6 class="fw-semibold mb-0">Address</h6>
                       </th>
                       <th class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0">Birthdate</h6>
+                        <h6 class="fw-semibold mb-0">Username</h6>
                       </th>
                       <th class="border-bottom-0">
                         <h6 class="fw-semibold mb-0">Email</h6>
@@ -64,6 +62,7 @@ include 'header.php';
                         $lname = $pho['lname'];
                         $suffix = $pho['suffix'];
                         $birthdate = $pho['birthdate'];
+                        $username = $pho['username'];
                         $province = $pho['province'];
                         $municipality = $pho['municipality'];
                         $email = $pho['email'];
@@ -80,7 +79,7 @@ include 'header.php';
                             <p class="mb-0 fw-normal"><?= $municipality; ?>, <?= $province; ?></p>
                           </td>
                           <td class="border-bottom-0">
-                            <p class="mb-0 fw-normal"><?= $birthdate; ?></p>
+                            <p class="mb-0 fw-normal"><?= $username; ?></p>
                           </td>
                           <td class="border-bottom-0">
                             <p class="mb-0 fw-normal"><?= $email; ?></p>
@@ -88,15 +87,15 @@ include 'header.php';
                           <td class="border-bottom-0">
 
                             <form method="post" action="navigate.php">
-                              <a href="pho-view.php?pho_id=<?= $pho_id; ?>" class="badge btn btn-primary rounded-3 fw-semibold">
+                              <a href="pho-view?pho_id=<?= $pho_id; ?>" class="badge btn btn-primary rounded-3 fw-semibold">
                                 <span>
-                                  <i class="ti ti-eye"></i>
+                                  <i class="fa fa-eye"></i>
                                 </span>
                                 <span class="hide-menu">View</span>
                               </a> &nbsp;
-                              <a class=" badge btn btn-primary rounded-3 fw-semibold" href="pho-edit.php?pho_id=<?= $pho_id; ?>">Edit</a> &nbsp;
+                              <a class=" badge btn btn-primary rounded-3 fw-semibold" href="pho-edit?pho_id=<?= $pho_id; ?>"><i class="fa fa-edit"></i> Edit</a> &nbsp;
                               <input type="hidden" name="pho_id" value="<?= $pho_id; ?>">
-                              <button class="badge btn btn-danger rounded-3 fw-semibold" type="submit" name="btn-delete-pho">Delete</button>
+                              <button class="badge btn btn-primary rounded-3 fw-semibold" type="submit" name="btn-delete-pho"><i class="ti ti-user-off"></i> Deactivate</button>
                             </form>
                           </td>
                         </tr>

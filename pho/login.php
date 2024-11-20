@@ -42,17 +42,36 @@
                 }
                 ?>
                 <form method="post" action="navigate.php">
-                  <div class="mb-3">
+                <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username"  name="username" placeholder="Username..." required>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Username..." value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>" required>
                   </div>
-                  <div class="mb-4">
+                  <div class="mb-2">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Password..." required>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password..." value="<?php echo isset($_POST['password']) ? htmlspecialchars($_POST['password']) : ''; ?>" required>
                   </div>
-                  <div class="text-center">
-                    <button type="submit" name="btn-pho-login" class="btn btn-primary w-50 py-8 fs-4 mb-4 rounded-2">Log in</button>
-                    <a href="../index.php" class="btn btn-primary w-50 py-8 fs-4 rounded-2">Cancel</a>
+                  <div class="mb-3 col-lg-6 col-md-6">
+                      <input type="checkbox" id="showPassword" onclick="togglePassword()"> Show Password
+                    </div>
+
+                    <script>
+                      function togglePassword() {
+                        var x = document.getElementById("password");
+                        
+                        if (x.type === "password") {
+                          x.type = "text";
+                        } else {
+                          x.type = "password";
+                        }
+                      }
+                    </script>
+                  <div class="text-center flex d-flex flex-row justify-content-between mb-3">
+                    <div class="w-50 pe-2">
+                      <button type="submit" name="btn-pho-login" class="btn btn-primary w-100 py-8 fs-4 rounded-5">Log in</button>
+                    </div>
+                    <div class="w-50 ps-2">
+                      <a href="../index" class="btn btn-outline-primary w-100 py-8 fs-4 rounded-5">Cancel</a>
+                    </div>
                   </div>
                 </form>
               </div>

@@ -1,19 +1,19 @@
 <?php
 include_once '../session.php';
 Session::init();
-include '../function.php';
+include_once '../function.php';
 $function = new Functions();
 
-if (!isset($_SESSION['username']) && !isset($_SESSION['role'])){
+if (!isset($_SESSION['username']) && !isset($_SESSION['role'])) {
   header("Location: login.php");
 }
-if ($_SESSION['role'] === 'rhu'){
+if ($_SESSION['role'] === 'rhu') {
   header("Location: ../rhu/index.php");
 }
-if ($_SESSION['role'] === 'pho'){
+if ($_SESSION['role'] === 'pho') {
   header("Location: ../pho/index.php");
 }
-if ($_SESSION['role'] === 'doh'){
+if ($_SESSION['role'] === 'doh') {
   header("Location: ../doh/index.php");
 }
 ?>
@@ -27,12 +27,14 @@ if ($_SESSION['role'] === 'doh'){
   <title>Malnutrition Monitoring System</title>
   <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
   <link rel="stylesheet" href="../assets/css/styles.min.css" />
-  
+
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 
+  <script src="https://kit.fontawesome.com/e625b8f2b8.js" crossorigin="anonymous"></script>
+  
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <script src="../assests/js/chloropleth.js"></script>
+  <script src="../assets/js/main.js"></script>
   <style>
     #map {
       height: 570px;
@@ -51,7 +53,7 @@ if ($_SESSION['role'] === 'doh'){
         <div class="brand-logo flex d-flex align-items-center justify-content-between text-center">
           <div href="index.php" class="text-nowrap logo-img">
             <img src="../assets/images/logos/PHO logo.png" width="75" alt="" />
-            <span class="fw-semibold ps-3 fs-8" style="color:#252525;"><?= $_SESSION['username'];?></span>
+            <span class="fw-semibold ps-3 fs-8" style="color:#252525;"><?= $_SESSION['username']; ?></span>
           </div>
           <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
             <i class="ti ti-x fs-8"></i>
@@ -67,7 +69,7 @@ if ($_SESSION['role'] === 'doh'){
             <hr>
             <p class="text-center">Home</p>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="index.php?id=<?= $_SESSION['admin_id'];?>" aria-expanded="false">
+              <a class="sidebar-link" href="index?id=<?= $_SESSION['admin_id']; ?>" aria-expanded="false">
                 <span>
                   <i class="ti ti-layout-dashboard"></i>
                 </span>
@@ -76,7 +78,7 @@ if ($_SESSION['role'] === 'doh'){
             </li>
 
             <!-- <li class="sidebar-item">
-              <a class="sidebar-link" href="report.php?id=<?= $_SESSION['admin_id'];?>" aria-expanded="false">
+              <a class="sidebar-link" href="report.php?id=<?= $_SESSION['admin_id']; ?>" aria-expanded="false">
                 <span>
                   <i class="ti ti-book"></i>
                 </span>
@@ -86,7 +88,7 @@ if ($_SESSION['role'] === 'doh'){
             <hr>
             <p class="text-center">Users</p>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="rhu.php?id=<?= $_SESSION['admin_id'];?>" aria-expanded="false">
+              <a class="sidebar-link" href="rhu?id=<?= $_SESSION['admin_id']; ?>" aria-expanded="false">
                 <span>
                   <i class="ti ti-user"></i>
                 </span>
@@ -94,7 +96,7 @@ if ($_SESSION['role'] === 'doh'){
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="pho.php?id=<?= $_SESSION['admin_id'];?>" aria-expanded="false">
+              <a class="sidebar-link" href="pho?id=<?= $_SESSION['admin_id']; ?>" aria-expanded="false">
                 <span>
                   <i class="ti ti-user"></i>
                 </span>
@@ -102,7 +104,7 @@ if ($_SESSION['role'] === 'doh'){
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="doh.php?id=<?= $_SESSION['admin_id'];?>" aria-expanded="false">
+              <a class="sidebar-link" href="doh?id=<?= $_SESSION['admin_id']; ?>" aria-expanded="false">
                 <span>
                   <i class="ti ti-user"></i>
                 </span>
@@ -111,12 +113,19 @@ if ($_SESSION['role'] === 'doh'){
             </li>
             <hr>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="../logout.php" aria-expanded="false">
+              <form action="navigate.php" method="POST">
+                <button class="sidebar-link btn w-100" name="btn-log-out" aria-expanded="false"><span>
+                    <i class="ti ti-logout"></i>
+                  </span> Logout
+                </button>
+              </form>
+              <!-- <a class="sidebar-link" href="../logout.php" aria-expanded="false">
+                
                 <span>
                   <i class="ti ti-logout"></i>
                 </span>
                 <span class="hide-menu">Logout</span>
-              </a>
+              </a> -->
             </li>
           </ul>
         </nav>
@@ -143,24 +152,31 @@ if ($_SESSION['role'] === 'doh'){
           <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
             <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
               <li>
-              <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
-            <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
-              <li class="nav-item dropdown">
-                <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img src="../assets/images/profile/user-1.jpg" alt="" width="35" height="35" class="rounded-circle">
-                </a>
-                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
-                  <div class="message-body">
-                    <a href="changePassword.php?id=<?= $_SESSION['admin_id'];?>" class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-lock fs-6"></i>
-                      <p class="mb-0 fs-3">Change Password</p>
-                    </a>
-                    <a href="../logout.php" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
-                  </div>
+                <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+                  <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
+                    <li class="nav-item dropdown">
+                      <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="../assets/images/profile/user-1.jpg" alt="" width="35" height="35" class="rounded-circle">
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
+                        <div class="message-body">
+                          <a href="changePassword?id=<?= $_SESSION['admin_id']; ?>" class="d-flex align-items-center gap-2 dropdown-item">
+                            <i class="ti ti-lock fs-6"></i>
+                            <p class="mb-0 fs-3">Change Password</p>
+                          </a>
+                          <!-- <form action="navigate.php" method="POST">
+                            <a><button class="btn btn-outline-primary mx-3 mt-2 d-block" name="btn-log-out"   aria-expanded="false"><span>
+                                <i class="ti ti-logout"></i>
+                              </span> Logout
+                            </button>
+                          </a>
+                          </form>
+                          <a href="../logout.php" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a> -->
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
                 </div>
-              </li>
-            </ul>
-          </div>
               </li>
             </ul>
           </div>

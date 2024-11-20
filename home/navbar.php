@@ -42,10 +42,10 @@
       <li class="hideOnMobile nav-item dropdown">
         <a href="#" id="servicesDropdown" data-bs-toggle="dropdown" class="fs-4">Log in<i class="ti ti-chevron-down ps-2"></i></a>
         <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
-          <li><a class="dropdown-item" href="../admin/login"><i class="ti ti-user pe-2"></i>Admin</a></li>
-          <li><a class="dropdown-item" href="../doh/login"><i class="ti ti-user pe-2"></i>DOH</a></li>
-          <li><a class="dropdown-item" href="../pho/login"><i class="ti ti-user pe-2"></i>PHO</a></li>
-          <li><a class="dropdown-item" href="../rhu/login"><i class="ti ti-user pe-2"></i>RHU</a></li>
+          <li><a class="dropdown-item" href="../admin/login"><i class="ti ti-lock-access fs-6 pe-2"></i>Admin</a></li>
+          <li><a class="dropdown-item" href="../doh/login"><i class="ti ti-user-plus fs-6 pe-2"></i>DOH</a></li>
+          <li><a class="dropdown-item" href="../pho/login"><i class="ti ti-user-check fs-6 pe-2"></i>PHO</a></li>
+          <li><a class="dropdown-item" href="../rhu/login"><i class="ti ti-user fs-6 pe-2"></i>RHU</a></li>
         </ul>
       </li>
       <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960" width="26">
@@ -66,7 +66,7 @@
     }
   </script>
 <!-- style="background-image: url(../assets/images/backgrounds/gradient.jpg);" -->
-  <header class="pt-5 px-4 pb-3" style="background-color:#0F5132;" >
+  <header class="pt-5 px-4 pb-3" style="background-color:#26734d;" >
     <div class="flex d-flex flex-row ps-4 pt-4">
       <img src="../assets/images/logos/Biliran-Provincial-Seal.png" alt="Biliran Official Seal" class="me-2 logo">
       <img src="../assets/images/logos/PHO logo.png" alt="Biliran PHO Logo" class="logo">

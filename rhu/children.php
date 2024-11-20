@@ -1,5 +1,6 @@
 <?php
 include 'header.php';
+$active = 2;
 ?>
 
 <main class="">
@@ -9,35 +10,25 @@ include 'header.php';
 			<div class="flex d-flex flex-row justify-content-between">
 				<div class="flex d-flex flex-row">
 					<div class="me-2">
-						<a href="child-add.php?id=<?= $_SESSION['rhu_id']; ?>" aria-expanded="false">
-							<button class="badge btn btn-primary rounded-1 fw-semibold p-2">
+						<a href="child-add?id=<?= $_SESSION['rhu_id']; ?>" aria-expanded="false">
+							<button class="btn btn-primary rounded-2 fw-semibold p-2">
 								<span>
-									<i class="ti ti-plus"></i>
+									<i class="fa fa-plus"></i>
 								</span>
 								<span class="hide-menu">Add</span>
 							</button>
 						</a>
 					</div>
 					<div class="">
-						<a href="children-upload-file.php" aria-expanded="false">
-							<button class="badge btn btn-primary rounded-1 fw-semibold p-2">
+						<a href="children-upload-file" aria-expanded="false">
+							<button class="btn btn-primary rounded-2 fw-semibold p-2">
 								<span>
-									<i class="ti ti-upload"></i>
+									<i class="fa fa-upload"></i>
 								</span>
 								<span class="hide-menu">Upload File</span>
 							</button>
 						</a>
 					</div>
-				</div>
-				<div class="">
-					<form action="download-children-list.php" method="post">
-						<button class="badge btn btn-primary rounded-1 fw-semibold p-2" name="btn-download-children-list">
-							<span>
-								<i class="ti ti-download"></i>
-							</span>
-							<span class="hide-menu">Download</span>
-						</button>
-					</form>
 				</div>
 			</div>
 			<hr>
@@ -103,16 +94,16 @@ include 'header.php';
 												<h6 class="fw-semibold mb-0"><?= $child_id; ?></h6>
 											</td>
 											<td class="border-bottom border-primary-subtle">
-												<span class="fw-normal"><?= $purok; ?></span>
+												<span class="fw-normal text-black"><?= $purok; ?></span>
 											</td>
 											<td class="border-bottom border-primary-subtle">
-												<p class="mb-0 fw-normal"><?= $name_of_caregiver; ?></p>
+												<p class="mb-0 fw-normal text-black"><?= $name_of_caregiver; ?></p>
 											</td>
 											<td class="border-bottom border-primary-subtle">
-												<p class="mb-0 fw-normal"><?= $name_of_child; ?></p>
+												<p class="mb-0 fw-normal text-dark"><?= $name_of_child; ?></p>
 											</td>
 											<td class="border-bottom border-primary-subtle">
-												<p class="mb-0 fw-normal"><?= $barangay; ?></p>
+												<p class="mb-0 fw-normal text-dark"><?= $barangay; ?></p>
 											</td>
 
 											<td class="border-bottom border-primary-subtle">
@@ -120,15 +111,15 @@ include 'header.php';
 												<form method="post" action="navigate.php">
 													<a href="child-view.php?child_id=<?= $child_id; ?>" class="badge btn btn-primary rounded-3 fw-semibold">
 														<span>
-															<i class="ti ti-eye fs-5"></i>
+															<i class="fa fa-eye"></i>
 														</span>
-														<span class="hide-menu"></span>
+														<span class="hide-menu">View</span>
 													</a> &nbsp;
 
-													<a class=" badge btn btn-primary rounded-3 fw-semibold" href="child-edit.php?child_id=<?= $child_id; ?>"><i class="ti ti-edit fs-5"></i></a> &nbsp;
+													<a class=" badge btn btn-primary rounded-3 fw-semibold" href="child-edit.php?child_id=<?= $child_id; ?>"><i class="fa fa-edit"></i> Edit</a> &nbsp;
 
 													<input type="hidden" name="child_id" value="<?= $child_id; ?>">
-													<button class="badge btn btn-danger rounded-3 fw-semibold" type="submit" name="btn-delete-child"><i class="ti ti-trash fs-5"></i></button>
+													<button class="badge btn btn-primary rounded-3 fw-semibold" type="submit" name="btn-delete-child"><i class="fa fa-trash "></i> Delete</button>
 												</form>
 											</td>
 										</tr>

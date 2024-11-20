@@ -8,14 +8,13 @@ include 'header.php';
       <div class="card-body">
         <h3 class="fw-semibold mb-4">DOH's</h3>
         <hr>
-        <a href="doh-add.php?username=<?= $_SESSION['username']; ?>" aria-expanded="false">
-          <button class="badge btn btn-primary rounded-1 fw-semibold p-2 mb-3">
+        <a href="doh-add.php?username=<?= $_SESSION['username']; ?>" class="badge btn btn-primary rounded-1 fw-semibold p-2" aria-expanded="false">
             <span>
-              <i class="ti ti-plus"></i>
+              <i class="fa fa-plus"></i>
             </span>
             <span class="hide-menu">Add</span>
-          </button>
         </a>
+        <br>
         <?php
         $msg = Session::get("msg");
         if (isset($msg)) {
@@ -84,13 +83,13 @@ include 'header.php';
                             <form method="post" action="navigate.php">
                               <a href="doh-view.php?doh_id=<?= $doh_id; ?>" class="badge btn btn-primary rounded-3 fw-semibold">
                                 <span>
-                                  <i class="ti ti-eye"></i>
+                                  <i class="fa fa-eye"></i>
                                 </span>
                                 <span class="hide-menu">View</span>
                               </a> &nbsp;
-                              <a class=" badge btn btn-primary rounded-3 fw-semibold" href="doh-edit.php?doh_id=<?= $doh_id; ?>">Edit</a> &nbsp;
+                              <a class=" badge btn btn-primary rounded-3 fw-semibold" href="doh-edit.php?doh_id=<?= $doh_id; ?>"><i class="fa fa-edit"></i> Edit</a> &nbsp;
                               <input type="hidden" name="doh_id" value="<?= $doh_id; ?>">
-                              <button class="badge btn btn-danger rounded-3 fw-semibold" type="submit" name="btn-delete-doh">Delete</button>
+                              <button class="badge btn btn-primary rounded-3 fw-semibold" type="submit" name="btn-delete-doh"><i class="fa fa-user-off"></i> Deactivated</button>
                             </form>
                           </td>
                         </tr>

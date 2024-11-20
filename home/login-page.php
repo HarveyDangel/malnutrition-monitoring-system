@@ -19,7 +19,7 @@
                         <div class="card m-1">
                             <div class="card-body">
                                 <div class="col-lg-1 col-md-1">
-                                    <a href="../index.php" class="btn btn-danger rounded-2"><i class="ti ti-arrow-left"></i>
+                                    <a href="../index.php" class="btn btn-primary rounded-2"><i class="ti ti-arrow-left"></i>
                                     </a>
                                 </div>
                                 <a href="#" class="text-nowrap logo-img text-center d-block pt-3 w-100">

@@ -21,7 +21,7 @@ $admin = $function->GetAdminInfo($admin_id);
                                 ?>
                                     <div class="row mb-1">
                                         <div class="col-lg-1 col-md-1">
-                                            <a href="rhu.php" class="btn btn-danger rounded-2"><i class="ti ti-arrow-left"></i>
+                                            <a href="rhu.php" class="btn btn-primary rounded-2"><i class="ti ti-arrow-left"></i>
                                             </a>
                                         </div>
                                         <div class="col-lg-11 col-md-11">
@@ -44,17 +44,33 @@ $admin = $function->GetAdminInfo($admin_id);
                                         <div class="row">
                                             <div class="mb-3">
                                                 <label for="email" class="form-label fw-normal">Email</label>
-                                                <input type="email" name="email" class="form-control" id="email" aria-describedby="textHelp" required value="<?= ($email) ? $email : ''; ?>" readonly>
+                                                <input type="email" name="email" class="form-control bg-light-primary" id="email" aria-describedby="textHelp" required value="<?= ($email) ? $email : ''; ?>" readonly>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="password" class="form-label fw-normal">New Password</label>
-                                                <input type="password" name="password" class="form-control" id="password" aria-describedby="textHelp" required>
+                                                <input type="password" name="password" class="form-control" id="myInput" aria-describedby="textHelp" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="rptpassword" class="form-label fw-normal">Confirm Password</label>
                                                 <input type="password" name="rptpassword" class="form-control" id="rptpassword" aria-describedby="textHelp" required>
                                             </div>
+                                            <div class="mb-3 col-lg-6 col-md-6">
+                                                <input type="checkbox" id="showPassword" onclick="togglePassword()"> Show Password
+                                            </div>
                                         </div>
+                                        <script>
+                                            function togglePassword() {
+                                                var x = document.getElementById("myInput");
+                                                var y = document.getElementById("rptpassword");
+                                                if (x.type === "password") {
+                                                    x.type = "text";
+                                                    y.type = "text";
+                                                } else {
+                                                    x.type = "password";
+                                                    y.type = "password";
+                                                }
+                                            }
+                                        </script>
 
                                         <hr>
                                         <div class="row">

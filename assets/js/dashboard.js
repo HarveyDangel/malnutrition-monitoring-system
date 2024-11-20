@@ -229,56 +229,56 @@ $(function () {
   // =====================================
   // Donut 
   // =====================================
-  var breakup = {
-    color: "#adb5bd",
-    series: [40, 20, 25, 10],
-    labels: ["Normal", "Underweight", "Severely Underweight", "Overweight"],
-    chart: {
-      width: 400,
-      type: "donut",
-      fontFamily: "Plus Jakarta Sans', sans-serif",
-      foreColor: "#adb0bb",
-    },
-    plotOptions: {
-      pie: {
-        startAngle: 0,
-        endAngle: 360,
-        donut: {
-          size: '50%',
-        },
-      },
-    },
-    stroke: {
-      show: true,
-    },
+  // var breakup = {
+  //   color: "#adb5bd",
+  //   series: [6, 20, 25, 10, 10, 10],
+  //   labels: ["Underweight", "Severely Underweight", "Stunted", "Severely Stunted", "Wasted", "Severely Wasted"],
+  //   chart: {
+  //     width: 400,
+  //     type: "donut",
+  //     fontFamily: "Plus Jakarta Sans', sans-serif",
+  //     foreColor: "#1a1a00",
+  //   },
+  //   plotOptions: {
+  //     pie: {
+  //       startAngle: 0,
+  //       endAngle: 360,
+  //       donut: {
+  //         size: '50%',
+  //       },
+  //     },
+  //   },
+  //   stroke: {
+  //     show: true,
+  //   },
 
-    dataLabels: {
-      enabled: true,
-    },
+  //   dataLabels: {
+  //     enabled: true,
+  //   },
 
-    legend: {
-      show: true,
-    },
-    colors: ["#9FC2A1", "#5DFF6B", "#229C2D", "#49F3FF",],
+  //   legend: {
+  //     show: true,
+  //   },
+  //   colors: ["#40bf80", "#339966", "#e6b800", "#cca300", "#ff6347", "#ff4d2e"],
 
-    responsive: [
-      {
-        breakpoint: 991,
-        options: {
-          chart: {
-            width: 150,
-          },
-        },
-      },
-    ],
-    tooltip: {
-      theme: "dark",
-      fillSeriesColor: false,
-    },
-  };
+  //   responsive: [
+  //     {
+  //       breakpoint: 100,
+  //       options: {
+  //         chart: {
+  //           width: 150,
+  //         },
+  //       },
+  //     },
+  //   ],
+  //   tooltip: {
+  //     theme: "dark",
+  //     fillSeriesColor: true,
+  //   },
+  // };
 
-  var chart = new ApexCharts(document.querySelector("#breakup"), breakup);
-  chart.render();
+  // var chart = new ApexCharts(document.querySelector("#breakup"), breakup);
+  // chart.render();
 
 
 
@@ -300,7 +300,7 @@ $(function () {
     series: [
       {
         name: ["Prevalence %"],
-        color: "#5D87FF",
+        color: "#1f8f30",
         data: [70, 90, 60, 74],
 
       },
@@ -347,12 +347,12 @@ $(function () {
     series: [
       {
         name: "cm",
-        color: "#5DFF6B",
+        color: "#1f8f30",
         data: [20, 22, 24, 25, 31, 39, 46, 50, 58, 63, 70],
       },
       {
         name: "kg",
-        color: "#5D87FF",
+        color: "#1f8f30",
         data: [2, 3, 5, 6, 7, 8, 10, 12, 15, 17, 15],
       },
     ],

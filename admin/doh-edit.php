@@ -27,7 +27,7 @@ $doh = $function->GetDOHInfo($doh_id);
                 ?>
                   <div class="row">
                     <div class="col-lg-1 col-md-1">
-                      <a href="doh.php?username=<?= $_SESSION['username']; ?>.php" class="btn btn-danger rounded-2"><i class="ti ti-arrow-left"></i>
+                      <a href="doh.php?username=<?= $_SESSION['username']; ?>.php" class="btn btn-primary rounded-2"><i class="ti ti-arrow-left"></i>
                       </a>
                     </div>
                     <div class="col-lg-11 col-md-11">
@@ -47,7 +47,7 @@ $doh = $function->GetDOHInfo($doh_id);
                     <hr>
                     <div class="row">
                       <div class="mb-3 col-lg-3 col-md-6">
-                        <label class="form-label fw-light">Firstname</label>
+                        <label class="form-label fw-light">Firstname <span style="color:red">*</span></label>
                         <input type="text" name="fname" class="form-control" aria-describedby="textHelp" required value="<?= ($fname) ? $fname : ''; ?>">
                       </div>
                       <div class="mb-3 col-lg-3 col-md-6">
@@ -55,7 +55,7 @@ $doh = $function->GetDOHInfo($doh_id);
                         <input type="text" name="mname" class="form-control" aria-describedby="textHelp" required value="<?= ($mname) ? $mname : ''; ?>">
                       </div>
                       <div class="mb-3 col-lg-3 col-md-6">
-                        <label class="form-label fw-light">Lastname</label>
+                        <label class="form-label fw-light">Lastname <span style="color:red">*</span></label>
                         <input type="text" name="lname" class="form-control" aria-describedby="textHelp" required value="<?= ($lname) ? $lname : ''; ?>">
                       </div>
                       <div class="mb-3 col-lg-3 col-md-6">
@@ -77,7 +77,7 @@ $doh = $function->GetDOHInfo($doh_id);
                         </select>
                       </div>
                       <div class="mb-3 col-lg-4 col-md-4">
-                        <label for="sex" class="form-label fw-light">Sex</label>
+                        <label for="sex" class="form-label fw-light">Sex <span style="color:red">*</span></label>
                         <select class="form-select" name="sex" aria-label="Default select example" required>
                           <option value="<?= ($sex) ? $sex : ''; ?>"><?= ($sex) ? $sex : ''; ?></option>
                           <option value="Male">Male</option>
@@ -85,11 +85,11 @@ $doh = $function->GetDOHInfo($doh_id);
                         </select>
                       </div>
                       <div class="mb-3 col-lg-4 col-md-4">
-                        <label class="form-label fw-light">Province</label>
+                        <label class="form-label fw-light">Province <span style="color:red">*</span></label>
                         <input type="text" name="province" class="form-control" aria-describedby="textHelp" value="<?= ($province) ? $province : ''; ?>" required readonly>
                       </div>
                       <div class="mb-3 col-lg-4 col-md-4">
-                        <label class="form-label fw-light">Region</label>
+                        <label class="form-label fw-light">Region <span style="color:red">*</span></label>
                         <input type="text" name="region" class="form-control" aria-describedby="textHelp" value="<?= ($region) ? $region : ''; ?>" required readonly>
                       </div>
 
@@ -98,21 +98,38 @@ $doh = $function->GetDOHInfo($doh_id);
                     <hr>
                     <div class="row">
                       <div class="mb-3 col-lg-6 col-md-6">
-                        <label for="email" class="form-label fw-light">Email</label>
+                        <label for="email" class="form-label fw-light">Email <span style="color:red">*</span></label>
                         <input type="email" name="email" class="form-control" id="email" aria-describedby="textHelp" required value="<?= ($email) ? $email : ''; ?>">
                       </div>
                       <div class="mb-3 col-lg-6 col-md-6">
-                        <label for="username" class="form-label fw-light">Username</label>
+                        <label for="username" class="form-label fw-light">Username <span style="color:red">*</span></label>
                         <input type="text" name="username" class="form-control" id="username" aria-describedby="textHelp" required value="<?= ($username) ? $username : ''; ?>">
                       </div>
                       <div class="mb-3 col-lg-6 col-md-6">
-                        <label for="password" class="form-label fw-light">Password</label>
-                        <input type="password" name="password" class="form-control password" id="password" aria-describedby="textHelp" required>
-                      </div>
-                      <div class="mb-3 col-lg-6 col-md-6">
-                        <label for="rptpassword" class="form-label fw-light">Confirm Password</label>
-                        <input type="password" name="rptpassword" class="form-control password" id="rptpassword" aria-describedby="textHelp" required>
-                      </div>
+                      <label for="password" class="form-label">Password <span style="color:red">*</span></label>
+                      <input type="password" name="password" class="form-control password" id="myInput" aria-describedby="textHelp" required>
+                    </div>
+                    <div class="mb-3 col-lg-6 col-md-6">
+                      <label for="rptpassword" class="form-label">Confirm Password <span style="color:red">*</span></label>
+                      <input type="password" name="rptpassword" class="form-control password" id="rptpassword" aria-describedby="textHelp" required>
+                    </div>
+                    <div class="mb-3 col-lg-6 col-md-6">
+                      <input type="checkbox" id="showPassword" onclick="togglePassword()"> Show Password
+                    </div>
+
+                    <script>
+                      function togglePassword() {
+                        var x = document.getElementById("myInput");
+                        var y = document.getElementById("rptpassword");
+                        if (x.type === "password") {
+                          x.type = "text";
+                          y.type = "text";
+                        } else {
+                          x.type = "password";
+                          y.type = "password";
+                        }
+                      }
+                    </script>
                     </div>
                     <hr>
                     <div class="row">

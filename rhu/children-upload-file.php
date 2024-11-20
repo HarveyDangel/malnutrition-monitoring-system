@@ -1,5 +1,7 @@
 <?php
 include 'header.php';
+
+$active = 6;
 ?>
 
 <main>
@@ -7,7 +9,7 @@ include 'header.php';
     <div class="card-body">
       <div class="row">
         <div class="col-lg-1 col-md-1">
-          <a href="children.php" class="btn btn-danger rounded-2"><i class="ti ti-arrow-left"></i>
+          <a href="children.php" class="btn btn-primary rounded-2"><i class="ti ti-arrow-left"></i>
           </a>
         </div>
         <div class="col-lg-11 col-md-11">
@@ -29,37 +31,39 @@ include 'header.php';
             <input type="number" class="form-control" name="year" aria-describedby="textHelp" required>
           </div>
         </div>
-        <!-- <div class="row">
-          <div class="mb-3 col-lg-3 col-md-6">
-            <label class="form-label">Region</label>
-            <input type="number" class="form-control bg-primary-subtle" name="region" aria-describedby="textHelp" value="08" readonly>
+        <hr>
+        <h5 class="fw-semibold bg-dark-light p-1 rounded-2 text-white">Address</h5>
+        <div class="row">
+          <div class="mb-3 col-md-6">
+            <label class="form-label">Region *</label>
+            <select name="region" class="form-control form-control-md" id="region" disabled></select>
+            <input type="hidden" class="form-control form-control-md" name="region_text" id="region-text" required>
           </div>
-          <div class="mb-3 col-lg-3 col-md-6">
-            <label class="form-label">Province</label>
-            <input type="text" class="form-control bg-primary-subtle" name="province" aria-describedby="textHelp" value="Biliran" readonly>
+          <div class="mb-3 col-md-6">
+            <label class="form-label">Province *</label>
+            <select name="province" class="form-control form-control-md" id="province" disabled></select>
+            <input type="hidden" class="form-control form-control-md" name="province_text" id="province-text" required>
           </div>
-          <!-- <div class="mb-3 col-lg-3 col-md-6">
-            <label class="form-label">Municipality</label>
-            <select class="form-select" aria-label="Default select example" name="municipality" required>
-              <option value="Almeria">Almeria</option>
-              <option value="Biliran">Biliran</option>
-              <option value="Cabucgayan">Cabucgayan</option>
-              <option value="Caibiran">Caibiran</option>
-              <option value="Culaba">Culaba</option>
-              <option value="Kawayan">Kawayan</option>
-              <option value="Maripipi">Maripipi</option>
-              <option value="Naval">Naval</option>
-            </select>
+          <div class="mb-3 col-md-6">
+            <label class="form-label">City/Municipality *</label>
+            <select name="municipality" class="form-control form-control-md" id="city"></select>
+            <input type="hidden" class="form-control form-control-md" name="city_text" id="city-text" required>
           </div>
-          <div class="mb-3 col-lg-3 col-md-6">
-            <label class="form-label">Municipality</label>
-            <input type="text" class="form-control bg-primary-subtle" name="municipality" aria-describedby="textHelp" value="<?= $_SESSION['municipality']; ?>" required readonly>
+          <div class="mb-3 col-md-6">
+            <label class="form-label">Barangay *</label>
+            <select name="barangay" class="form-control form-control-md" id="barangay"></select>
+            <input type="hidden" class="form-control form-control-md" name="barangay_text" id="barangay-text" required>
           </div>
-          <div class="mb-3 col-lg-3 col-md-6">
-            <label class="form-label">Barangay</label>
-            <input type="text" class="form-control" name="barangay" aria-describedby="textHelp" required>
-          </div>
-        </div> -->
+          <!-- <div class="mb-3 col-md-6">
+            <label class="form-label">Purok *</label>
+            <input type="text" class="form-control" name="purok" aria-describedby="textHelp" required>
+          </div> -->
+          <div class="row" hidden>
+                    <input type="text" class="form-control" name="rhu_id" aria-describedby="textHelp" required readonly
+                        value="<?= $_SESSION['rhu_id']; ?>">
+                </div>
+        </div>
+        <hr>
         <h5 class="fw-semibold">Supported File <span class="fw-normal">(.csv)</span></h5>
         <hr>
         <div class="row">

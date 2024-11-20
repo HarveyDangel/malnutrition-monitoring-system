@@ -30,7 +30,7 @@ include 'header.php';
         <div class="card-body p-3">
           <div class="row">
             <div class="col-3 ps-2 pt-3 align-items-center justify-content-center me-3">
-              <i class="ti ti-user bg-success text-white rounded-circle p-3" style="font-size: 40px;"></i>
+              <i class="ti ti-user bg-primary text-white rounded-circle p-3" style="font-size: 40px;"></i>
             </div>
             <div class="col p-1 ms-2">
               <div>
@@ -63,7 +63,7 @@ include 'header.php';
         <div class="card-body p-3">
           <div class="row">
             <div class="col-3 ps-2 pt-3 align-items-center justify-content-center me-3">
-              <i class="ti ti-user bg-success text-white rounded-circle p-3" style="font-size: 40px;"></i>
+              <i class="ti ti-user bg-primary text-white rounded-circle p-3" style="font-size: 40px;"></i>
             </div>
             <div class="col p-1 ms-2">
               <div>
@@ -96,7 +96,7 @@ include 'header.php';
         <div class="card-body p-3">
           <div class="row">
             <div class="col-3 ps-2 pt-3 align-items-center justify-content-center me-3">
-              <i class="ti ti-user bg-success text-white rounded-circle p-3" style="font-size: 40px;"></i>
+              <i class="ti ti-user bg-primary text-white rounded-circle p-3" style="font-size: 40px;"></i>
             </div>
             <div class="col p-1 ms-2">
               <div>
@@ -116,7 +116,7 @@ include 'header.php';
   <!-- End of Row 1 -->
   <div class="row">
     <!-- Bar graph -->
-    <div class="col-lg-6 d-flex">
+    <div class="col-lg-3 col-md-5 d-flex">
       <div class="card w-100 rounded-2 shadow">
         <div class="card-body rounded-2">
           <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
@@ -124,15 +124,15 @@ include 'header.php';
               <h5 class="card-title fw-semibold">Action</h5>
             </div>
           </div>
-          <div class="flex d-flex flex-column w-50">
-            <div class="mb-2 btn btn-secondary">
-              <a href="doh-add.php" class="badge btn rounded-3 fw-semibold mx-0"> Add DOH Account</a>
+          <div class="flex d-flex flex-column w-100">
+            <div class="mb-2">
+              <a href="doh-add.php" class="badge btn btn-primary fw-semibold p-3 rounded-2 w-100"> Add DOH Account</a>
             </div>
-            <div class="mb-2 btn btn-secondary">
-              <a href="pho-add.php" class="badge btn rounded-3 fw-semibold mx-0"> Add PHO Account</a>
+            <div class="mb-2">
+              <a href="pho-add.php" class="badge btn btn-primary fw-semibold mx-0 p-3 rounded-2 w-100"> Add PHO Account</a>
             </div>
-            <div class="mb-2 btn btn-secondary">
-              <a href="rhu-add.php" class="badge btn rounded-3 fw-semibold mx-0"> Add RHU Account</a>
+            <div class="mb-2">
+              <a href="rhu-add.php" class="badge btn btn-primary fw-semibold mx-0 p-3 rounded-2 w-100"> Add RHU Account</a>
             </div>
           </div>
         </div>
@@ -141,62 +141,62 @@ include 'header.php';
     <!-- End Bar graph -->
 
     <!-- Ranking per Municipal by the number of cases-->
-    <div class="col-lg-6 d-flex align-items-right">
+    <div class="col-lg-9 col-md-7 d-flex align-items-right">
       <div class="card w-100">
         <div class="card-body">
           <div>
             <div class="d-sm-flex d-block align-items-center justify-content-between mb-8">
               <div class="mb-2 mb-sm-0">
-                <h5 class="card-title fw-semibold">Recent Action</h5>
+                <h5 class="card-title fw-semibold">Recent Actions</h5>
               </div>
             </div>
-            <ul class="timeline-widget mb-0 position-relative mb-n5">
-              <li class="timeline-item d-flex position-relative overflow-hidden">
-                <div class="timeline-time text-dark flex-shrink-0 text-end">time</div>
-                <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                  <span class="timeline-badge border-2 border border-danger flex-shrink-0 my-8"></span>
-                  <span class="timeline-badge-border d-block flex-shrink-0"></span>
-                </div>
-                <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">User</div>
-                <div class="timeline-desc fs-3 text-dark mt-n1 fw-normal">Action</div>
-              </li>
-              <li class="timeline-item d-flex position-relative overflow-hidden">
-                <div class="timeline-time text-dark flex-shrink-0 text-end">time</div>
-                <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                  <span class="timeline-badge border-2 border border-danger flex-shrink-0 my-8"></span>
-                  <span class="timeline-badge-border d-block flex-shrink-0"></span>
-                </div>
-                <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">User</div>
-                <div class="timeline-desc fs-3 text-dark mt-n1 fw-normal">Action</div>
-              </li>
-              <li class="timeline-item d-flex position-relative overflow-hidden">
-                <div class="timeline-time text-dark flex-shrink-0 text-end">time</div>
-                <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                  <span class="timeline-badge border-2 border border-warning flex-shrink-0 my-8"></span>
-                  <span class="timeline-badge-border d-block flex-shrink-0"></span>
-                </div>
-                <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">User</div>
-                <div class="timeline-desc fs-3 text-dark mt-n1 fw-normal">Action</div>
-              </li>
-              <li class="timeline-item d-flex position-relative overflow-hidden">
-                <div class="timeline-time text-dark flex-shrink-0 text-end">time</div>
-                <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                  <span class="timeline-badge border-2 border border-warning flex-shrink-0 my-8"></span>
-                  <span class="timeline-badge-border d-block flex-shrink-0"></span>
-                </div>
-                <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">User</div>
-                <div class="timeline-desc fs-3 text-dark mt-n1 fw-normal">Action</div>
-              </li>
-              <li class="timeline-item d-flex position-relative overflow-hidden">
-                <div class="timeline-time text-dark flex-shrink-0 text-end">time</div>
-                <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                  <span class="timeline-badge border-2 border border-success flex-shrink-0 my-8"></span>
-                  <span class="timeline-badge-border d-block flex-shrink-0"></span>
-                </div>
-                <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">User</div>
-                <div class="timeline-desc fs-3 text-dark mt-n1 fw-normal">Action</div>
-              </li>
-            </ul>
+            <div class="table-responsive">
+                <table id="myTable" class="table text-nowrap mb-0 align-middle">
+                  <thead class="text-dark">
+                    <tr>
+                      <th class="border-bottom-0">
+                        <h6 class="fw-semibold mb-0">Date & Time</h6>
+                      </th>
+                      <th class="border-bottom-0">
+                        <h6 class="fw-semibold mb-0">Username</h6>
+                      </th>
+                      <th class="border-bottom-0">
+                        <h6 class="fw-semibold mb-0">Log Description</h6>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                    $logs = $function->GetAllAuditLog();
+                    if ($logs) {
+                      foreach ($logs as $log) :
+                        $timestamp = $log['date'];
+                        $uid = $log['username'];
+                        $description = $log['description'];
+                    ?>
+                        <tr>
+                          <td class="border-bottom-0">
+                            <h6 class="fw-semibold mb-0"><?= $timestamp; ?></h6>
+                          </td>
+                          <td class="border-bottom-0">
+                            <span class="fw-normal"> <?= $uid;?></span>
+                          </td>
+                          <td class="border-bottom-0">
+                            <p class="mb-0 fw-normal"><?= $description?></p>
+                          </td>
+                        </tr>
+
+                    <?php
+
+                      endforeach;
+                    }
+
+                    ?>
+                  </tbody>
+                </table>
+                <script>
+                  $(document).ready
+                </script>
           </div>
         </div>
       </div>

@@ -8,15 +8,13 @@ include 'header.php';
       <div class="card-body">
         <h3 class="fw-semibold mb-4">RHU's</h3>
         <hr>
-        <a href="rhu-add.php" aria-expanded="false">
-          <button class="badge btn btn-primary rounded-1 fw-semibold p-2 mb-3">
+        <a href="rhu-add?id=<?= $_SESSION['admin_id']; ?>" class="badge btn btn-primary rounded-1 fw-semibold p-2" aria-expanded="false">
             <span>
-              <i class="ti ti-plus"></i>
+              <i class="fa fa-plus"></i>
             </span>
             <span class="hide-menu">Add</span>
-          </button>
         </a>
-
+        <br>
         <?php
         $msg = Session::get("msg");
         if (isset($msg)) {
@@ -90,13 +88,13 @@ include 'header.php';
                             <form method="post" action="navigate.php">
                               <a href="rhu-view.php?rhu_id=<?= $rhu_id; ?>" class="badge btn btn-primary rounded-3 fw-semibold">
                                 <span>
-                                  <i class="ti ti-eye"></i>
+                                  <i class="fa fa-eye"></i>
                                 </span>
                                 <span class="hide-menu">View</span>
                               </a> &nbsp;
-                              <a class=" badge btn btn-primary rounded-3 fw-semibold" href="rhu-edit.php?rhu_id=<?= $rhu_id; ?>">Edit</a> &nbsp;
+                              <a class=" badge btn btn-primary rounded-3 fw-semibold" href="rhu-edit.php?rhu_id=<?= $rhu_id; ?>"><i class="fa fa-edit"></i> Edit</a> &nbsp;
                               <input type="hidden" name="rhu_id" value="<?= $rhu_id; ?>">
-                              <button class="badge btn btn-danger rounded-3 fw-semibold" type="submit" name="btn-delete-rhu">Delete</button>
+                              <button class="badge btn btn-primary rounded-3 fw-semibold" type="submit" name="btn-delete-rhu"><i class="ti ti-user-off"></i> Deactivate</button>
                             </form>
                           </td>
                         </tr>

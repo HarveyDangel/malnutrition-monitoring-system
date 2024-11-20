@@ -5,16 +5,16 @@ include '../function.php';
 $function = new Functions();
 
 if (!isset($_SESSION['rhu_id'])) {
-  header("Location: login.php");
+  header("Location: login");
 }
 if ($_SESSION['role'] === 'pho') {
-  header("Location: ../pho/index.php");
+  header("Location: ../pho/index");
 }
 if ($_SESSION['role'] === 'doh') {
-  header("Location: ../doh/index.php");
+  header("Location: ../doh/index");
 }
 if ($_SESSION['role'] === 'admin') {
-  header("Location: ../admin/index.php");
+  header("Location: ../admin/index");
 }
 ?>
 
@@ -25,34 +25,66 @@ if ($_SESSION['role'] === 'admin') {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Malnutrition Monitoring System</title>
+  <!-- ========================================================================================= -->
   <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
+  <!-- ========================================================================================== -->
   <link rel="stylesheet" href="../assets/css/styles.min.css" />
-
+  <!-- =========================================================================================== -->
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
-
+  <!-- =========================================================================================== -->
+  <!-- <link rel="stylesheet/text" href="../assets/css/font-awesome.min.css" /> -->
+  <!-- =========================================================================================== -->
   <script src="https://kit.fontawesome.com/e625b8f2b8.js" crossorigin="anonymous"></script>
+  <!-- =============================================================================================== -->
   <script src="calculateAge.js"></script>
+  <!-- ================================================================================================ -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin="" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <!-- =================================================================================================== -->
+  <link rel="stylesheet" href="../leaflet/leaflet.css" />
+  <script src="../leaflet/leaflet.js"></script>
+  <!-- ====================================================================================================== -->
   <style>
     #map {
-      height: 570px;
-      z-index: 0;
+      height: 500px;
+      z-index: 1;
     }
 
     #inputMap {
-      height: 300px;
-      width: 450px;
+      height: 400px;
+      min-width: 300px;
+      max-width: 630px;
       z-index: 0;
+      /* height: 200px; 
+      min-width: 100px;
+      max-width: 200px;
+      z-index: 0;*/
+    }
+
+    .text-purple {
+      color: purple;
+    }
+
+    .text-green {
+      color: green;
+    }
+
+    .text-yellow {
+      color: yellow;
+    }
+
+    .text-red {
+      color: red;
+    }
+
+    .text-default {
+      color: inherit;
+      /* Fallback color */
     }
   </style>
 </head>
 
 <body class="bg-light-gray">
+
   <!--  Body Wrapper -->
   <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
     data-sidebar-position="fixed" data-header-position="fixed">
@@ -62,8 +94,8 @@ if ($_SESSION['role'] === 'admin') {
       <div>
         <br>
         <div class="brand-logo flex d-flex align-items-center justify-content-between">
-          <div href="index.php" class="text-nowrap logo-img text-center w-100">
-            <img src="../assets/images/logos/PHO logo.png" width="75" alt="PHO logo" class="text-center"/>
+          <div class="text-nowrap logo-img text-center w-100">
+            <img src="../assets/images/logos/PHO logo.png" width="75" alt="PHO logo" class="text-center" />
           </div>
           <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
             <i class="ti ti-x fs-8"></i>
@@ -77,9 +109,9 @@ if ($_SESSION['role'] === 'admin') {
         <nav class="sidebar-nav scroll-sidebar">
           <ul id="sidebarnav">
             <hr>
-            <h6 class="text-center my-1 fw-semibold">Home</h6>
+            <!-- <h6 class="text-center my-1 fw-semibold">Home</h6> -->
             <li class="sidebar-item">
-              <a class="sidebar-link" href="index?id=<?= $_SESSION['rhu_id']; ?>" aria-expanded="false">
+              <a class="sidebar-link <?= ($active == 1) ? 'active' : ''; ?>" href="index?id=<?= $_SESSION['rhu_id']; ?>" aria-expanded="false">
                 <span>
                   <i class="ti ti-layout-dashboard"></i>
                 </span>
@@ -87,34 +119,15 @@ if ($_SESSION['role'] === 'admin') {
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="children?id=<?= $_SESSION['rhu_id']; ?>" aria-expanded="false">
+              <a class="sidebar-link <?= ($active == 2 || $active == 3 || $active == 4 || $active == 5 || $active == 6) ? 'active' : ''; ?>" href="children?id=<?= $_SESSION['rhu_id']; ?>" aria-expanded="false">
                 <span>
                   <i class="ti ti-list"></i>
                 </span>
                 <span class="hide-menu">Children</span>
               </a>
             </li>
-            <hr>
-            <h6 class="text-center my-1 fw-semibold">Report</h6>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="graphs?id=<?= $_SESSION['rhu_id']; ?>" aria-expanded="false">
-                <span>
-                  <i class="ti ti-graph"></i>
-                </span>
-                <span class="hide-menu">Graph</span>
-              </a>
-            </li>
-            <!-- <li class="sidebar-item">
-              <a class="sidebar-link" href="statistic.php?id=<?= $_SESSION['rhu_id']; ?>" aria-expanded="false">
-                <span>
-                  <i class="ti ti-percentage"></i>
-                </span>
-                <span class="hide-menu">Statistic</span>
-              </a>
-            </li> -->
-
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="map?id<?= $_SESSION['rhu_id']; ?>" aria-expanded="false">
+              <a class="sidebar-link" href="map?id=<?= $_SESSION['rhu_id']; ?>" aria-expanded="false">
                 <span>
                   <i class="ti ti-map"></i>
                 </span>
@@ -122,7 +135,7 @@ if ($_SESSION['role'] === 'admin') {
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="report?id<?= $_SESSION['rhu_id']; ?>" aria-expanded="false">
+              <a class="sidebar-link" href="report?id=<?= $_SESSION['rhu_id']; ?>" aria-expanded="false">
                 <span>
                   <i class="ti ti-file-report"></i>
                 </span>
@@ -131,12 +144,12 @@ if ($_SESSION['role'] === 'admin') {
             </li>
             <hr>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="../logout.php" aria-expanded="false">
-                <span>
-                  <i class="ti ti-logout"></i>
-                </span>
-                <span class="hide-menu">Logout</span>
-              </a>
+              <form action="navigate.php" method="POST">
+                <button class="sidebar-link btn w-100" name="btn-log-out" aria-expanded="false"><span>
+                    <i class="ti ti-logout"></i>
+                  </span> Logout
+                </button>
+              </form>
             </li>
           </ul>
         </nav>

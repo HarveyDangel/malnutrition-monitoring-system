@@ -2,7 +2,7 @@
 include "navbar.php";
 ?>
 <main class="w-100">
-    <section>
+    <!-- <section>
     <div class="row mx-auto py-1 px-5 bg-light-info justify-content-around shadow-sm">
         <div class="col-md-6 mt-2 mb-1 text-md-center">
             <a href="#" style="color: black; text-decoration: none;">
@@ -17,7 +17,7 @@ include "navbar.php";
             </a>
         </div>
     </div>
-    </section>
+    </section> -->
     <section id="home" class=" px-4">
     <!-- style="background-color: #325d99;" -->
         <div class="container mt-5">

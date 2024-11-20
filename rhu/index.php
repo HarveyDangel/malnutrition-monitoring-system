@@ -1,10 +1,14 @@
 <?php
 include 'header.php';
-$address = $function->GetAllBarangay();
-$children = $function->GetAllChildrenByMunicipality($_SESSION['municipality']);
-$population = count($children);
-$barangay = $function->getBarangayByMunicipality($_SESSION['municipality']);
-$numBarangay = $function->CountBarangayByMunicipal($_SESSION['municipality']);
+
+$active = 1;
+
+// $children = $function->GetAllChildrenByMunicipality($_SESSION['municipality']);
+
+// $childCountByBarangay = $function->ChildCountByMunicipality($_SESSION['municipality']);
+
+// $barangay = $function->getBarangayByMunicipality($_SESSION['municipality']);
+
 ?>
 <main>
   <?php
@@ -17,17 +21,17 @@ $numBarangay = $function->CountBarangayByMunicipal($_SESSION['municipality']);
   <!--  Row 1 -->
   <container class="row">
     <!-- Municipality Card -->
-    <div class="col-md-4">
+    <div class="col-lg-4 col-md-6">
       <div class="card overflow-hidden">
         <div class="card-body p-3">
-        <div class="row">
+          <div class="row">
             <div class="col-3 ps-2 pt-3 align-items-center justify-content-center me-3">
               <i class="ti ti-building bg-primary text-white rounded-circle p-3" style="font-size: 40px;"></i>
             </div>
             <div class="col p-1 ms-2">
               <div>
-                <h3 class="card-title fw-semibold " style="font-size: 22px;">
-                  Municipality</h3>
+                <h4 class="card-title fw-semibold " style="font-size: 22px;">
+                  Municipality</h4>
               </div>
               <div>
                 <h3 class="fw-normal"><?= $_SESSION['municipality']; ?></h3>
@@ -41,20 +45,20 @@ $numBarangay = $function->CountBarangayByMunicipal($_SESSION['municipality']);
     <!-- End Municipality Card -->
 
     <!--Barangay card-->
-    <div class="col-md-4">
+    <div class="col-lg-4 col-md-6">
       <div class="card overflow-hidden">
         <div class="card-body p-3">
-        <div class="row">
+          <div class="row">
             <div class="col-3 ps-2 pt-3 align-items-center justify-content-center me-3">
               <i class="ti ti-home bg-primary text-white rounded-circle p-3" style="font-size: 40px;"></i>
             </div>
             <div class="col p-1 ms-2">
               <div>
-                <h3 class="card-title fw-semibold " style="font-size: 22px;">
-                  Barangay</h3>
+                <h4 class="card-title fw-semibold " style="font-size: 22px;">
+                  Barangay</h4>
               </div>
               <div>
-                <h3 class="fw-normal"><?= $numBarangay; ?></h3>
+                <h3 class="fw-normal"><?= $function->totalCountWithCondition("address", "municipality", $_SESSION['municipality']); ?></h3>
               </div>
             </div>
           </div>
@@ -62,7 +66,7 @@ $numBarangay = $function->CountBarangayByMunicipal($_SESSION['municipality']);
       </div>
     </div>
     <!-- End Barangay card-->
-    <div class="col-md-4">
+    <div class="col-lg-4">
       <!-- Population Card -->
       <div class="card overflow-hidden">
         <div class="card-body p-3">
@@ -72,11 +76,11 @@ $numBarangay = $function->CountBarangayByMunicipal($_SESSION['municipality']);
             </div>
             <div class="col p-1 ms-2">
               <div>
-                <h3 class="card-title fw-semibold " style="font-size: 22px;">
-                  Population</h3>
+                <h4 class="card-title fw-semibold " style="font-size: 22px;">
+                  Recorded Data</h4>
               </div>
               <div>
-                <h3 class="fw-normal"><?= $population; ?></h3>
+                <h3 class="fw-normal"><?= $function->ChildCountByMunicipality($_SESSION['municipality']); ?></h3>
               </div>
             </div>
           </div>
@@ -88,7 +92,7 @@ $numBarangay = $function->CountBarangayByMunicipal($_SESSION['municipality']);
 
 
   <!-- Yearly total number of cases Chart-->
-  <div class="card">
+  <!-- <div class="card">
     <div class="card-body">
       <div class="row alig n-items-start">
         <div class="col-8">
@@ -111,196 +115,176 @@ $numBarangay = $function->CountBarangayByMunicipal($_SESSION['municipality']);
         </div>
       </div>
     </div>
-    <div id="malnourish"></div> 
-  </div>
+    <div id="malnourish"></div>
+  </div> -->
   <!-- End Yearly total number of cases Chart -->
 
   <!-- Bar graph -->
-  <div class="row">
-    <div class="col-lg-8 d-flex align-items-strech">
+  <!-- <div class="col-lg-8 d-flex align-items-strech">
       <div class="card w-100 rounded-2 shadow">
         <div class="card-body rounded-2">
           <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
             <div class="mb-2 mb-sm-0">
-              <div>
-                <select class="form-select card-title fw-semibold">
-
-                  <option value="Caucab">Caucab</option>
-                  <option value="Iyosan">Iyosan</option>
-                  <option value="Jamorawon">Jamorawon</option>
-                  <option value="Lo-ok">Lo-ok</option>
-                  <option value="Matanga">Matanga</option>
-                  <option value="Pili">Pili</option>
-                  <option value="Poblacion">Poblacion</option>
-                  <option value="Pulang Bato">Pulang Bato</option>
-                  <option value="Salangi">Salangi</option>
-                  <option value="Sampao">Sampao</option>
-                  <option value="Tabunan">Tabunan</option>
-                  <option value="Talahid">Talahid</option>
-                  <option value="Tamarindo">Tamarindo</option>
-                </select>
-              </div>
-            </div>
-            <div>
-              <select class="form-select">
-                <option value="2024">2024</option>
-                <option value="2023">2023</option>
-                <option value="2022">2022</option>
-                <option value="2021">2021</option>
-                <option value="2020">2020</option>
-              </select>
+              <h1>Total</h1>
             </div>
           </div>
           <div id="municipalChart"></div>
         </div>
       </div>
-    </div>
-    <!-- End Bar graph 
-    <div class="col-lg-4">
-      <div class="row">
-        <div class="col-lg-12">
-          <!-- Total Case Donut Chart 
-          <div class="card overflow-hidden">
-            <div class="card-body p-4">
-              <h5 class="card-title mb-9 fw-semibold">Total Case</h5>
-              <div class="row align-items-center">
-                <div class="col-8">
-                  <h4 class="fw-semibold mb-3">1,448</h4>
-                  <!--<div class="d-flex align-items-center mb-3">
-                          <span
-                            class="me-1 rounded-circle bg-light-success round-20 d-flex align-items-center justify-content-center">
-                            <i class="ti ti-arrow-up-left text-success"></i>
-                          </span>
-                          <p class="text-dark me-1 fs-3 mb-0">+9%</p>
-                          <p class="fs-3 mb-0">last year</p>
-                        </div>
-                  <div class="align-items-center">
-
-                    <div class="me-4">
-                      <span class="round-8 rounded-circle me-2 d-inline-block" style="background-color:#9FC2A1"></span>
-                      <span class="fs-2">Normal</span>
-                    </div>
-
-                    <div class="me-4">
-                      <span class="round-8 rounded-circle me-2 d-inline-block" style="background-color:#5DFF6B"></span>
-                      <span class="fs-2">Underweight</span>
-                    </div>
-
-                    <div class="me-4">
-                      <span class="round-8 rounded-circle me-2 d-inline-block" style="background-color:#229C2D"></span>
-                      <span class="fs-2">Severly Underweight</span>
-                    </div>
-
-                    <div class="me-4">
-                      <span class="round-8 bg-cyan rounded-circle me-2 d-inline-block" style="background-color:#49F3FF"></span>
-                      <span class="fs-2">Stunted</span>
-                    </div>
-
-                    <div class="me-4">
-                      <span class="round-8 bg-primary rounded-circle me-2 d-inline-block"></span>
-                      <span class="fs-2">Severely Stunted</span>
-                    </div>
-                  </div>
-                  <div class="me-4">
-                    <span class="round-8 rounded-circle me-2 d-inline-block" style="background-color:#ECE91D"></span>
-                    <span class="fs-2">Wasted</span>
-                  </div>
-                  <div class="me-4">
-                    <span class="round-8 rounded-circle me-2 d-inline-block" style="background-color:#DAA514"></span>
-                    <span class="fs-2">Severely Wasted</span>
-                  </div>
-                  <div class="me-4">
-                    <span class="round-8 rounded-circle me-2 d-inline-block" style="background-color:#C43434"></span>
-                    <span class="fs-2">Overweight</span>
-                  </div>
-                  <div class="me-4">
-                    <span class="round-8 rounded-circle me-2 d-inline-block" style="background-color:#CA34A1"></span>
-                    <span class="fs-2">Obesity</span>
-                  </div>
-                </div>
-                <div class="col-2">
-                  <div class="d-flex justify-content-center">
-                    <div id="breakup"></div>
-                  </div>
-                </div>
-              </div>
+    </div> -->
+  <div class="row">
+    <div class="d-flex align-items-strech col-lg-6">
+      <div class="card w-100 rounded-2 shadow">
+        <div class="card-body rounded-2">
+          <div class="d-sm-flex d-block align-items-center">
+            <div class="">
+              <h3 class="fw-semibold">Malnutrition Comparison</h3>
             </div>
           </div>
-        </div>
-        <div class="col-lg-12">
-          <!-- Monthly Earnings
+          <hr>
+          <div id="malnuBreakup"></div>
+          <!--  style="max-width:max-content; min-width: 400px;" -->
         </div>
       </div>
     </div>
-    <!-- Ranking per Municipal by the number of cases-->
-  <!--<div class="col-lg-5 d-flex align-items-right">
-      <div class="card w-100">
-        <div class="card-body">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <div class="d-flex align-items-strech col-lg-6">
+      <div class="card w-100 rounded-2 shadow">
+        <div class="card-body rounded-2">
           <div>
-            <div class="d-sm-flex d-block align-items-center justify-content-between mb-8">
-              <div class="mb-2 mb-sm-0">
-                <h5 class="card-title fw-semibold">Ranking by Case</h5>
-              </div>
-              <div>
-                <select class="form-select">
-                  <option value="1">January 2023</option>
-                  <option value="2">April 2023</option>
-                  <option value="3">July 2023</option>
-                  <option value="4">October 2023</option>
-                  <option value="1">January 2024</option>
-                </select>
-              </div>
-            </div>
-            <ul class="timeline-widget mb-0 position-relative mb-n5">
-              <li class="timeline-item d-flex position-relative overflow-hidden">
-                <div class="timeline-time text-dark flex-shrink-0 text-end">1</div>
-                <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                  <span class="timeline-badge border-2 border border-danger flex-shrink-0 my-8"></span>
-                  <span class="timeline-badge-border d-block flex-shrink-0"></span>
-                </div>
-                <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">Caibiran</div>
-              </li>
-              <li class="timeline-item d-flex position-relative overflow-hidden">
-                <div class="timeline-time text-dark flex-shrink-0 text-end">2</div>
-                <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                  <span class="timeline-badge border-2 border border-danger flex-shrink-0 my-8"></span>
-                  <span class="timeline-badge-border d-block flex-shrink-0"></span>
-                </div>
-                <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">Cabucgayan<a href="javascript:void(0)" class="text-primary d-block fw-normal"></a>
-                </div>
-              </li>
-              <li class="timeline-item d-flex position-relative overflow-hidden">
-                <div class="timeline-time text-dark flex-shrink-0 text-end">3</div>
-                <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                  <span class="timeline-badge border-2 border border-warning flex-shrink-0 my-8"></span>
-                  <span class="timeline-badge-border d-block flex-shrink-0"></span>
-                </div>
-                <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">Biliran</div>
-              </li>
-              <li class="timeline-item d-flex position-relative overflow-hidden">
-                <div class="timeline-time text-dark flex-shrink-0 text-end">4</div>
-                <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                  <span class="timeline-badge border-2 border border-warning flex-shrink-0 my-8"></span>
-                  <span class="timeline-badge-border d-block flex-shrink-0"></span>
-                </div>
-                <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">Naval<a href="javascript:void(0)" class="text-primary d-block fw-normal"></a>
-                </div>
-              </li>
-              <li class="timeline-item d-flex position-relative overflow-hidden">
-                <div class="timeline-time text-dark flex-shrink-0 text-end">5</div>
-                <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                  <span class="timeline-badge border-2 border border-success flex-shrink-0 my-8"></span>
-                  <span class="timeline-badge-border d-block flex-shrink-0"></span>
-                </div>
-                <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">Almeria</div>
-              </li>
-            </ul>
+            <h3 class="fw-semibold">Malnutrition Ranking</h3>
           </div>
+          <hr>
+          <canvas id="rankingChart" min-width="400" height="200"></canvas>
         </div>
       </div>
     </div>
-  </div> -->
-  <!-- End Ranking per Municipal by the number of cases-->
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+  <script src="..\assets\libs\apexcharts\dist\apexcharts.min.js"></script>
+  <script>
+    var breakup = {
+      series: [
+        <?= $function->CountChildByNutriStatusByMunicipality("nutritional_status_WFA", "Underweight", $_SESSION['municipality']); ?>,
+        <?= $function->CountChildByNutriStatusByMunicipality("nutritional_status_WFA", "Severely Underweight", $_SESSION['municipality']); ?>,
+        <?= $function->CountChildByNutriStatusByMunicipality("nutritional_status_HFA", "Stunted", $_SESSION['municipality']); ?>,
+        <?= $function->CountChildByNutriStatusByMunicipality("nutritional_status_HFA", "Severely Stunted", $_SESSION['municipality']); ?>,
+        <?= $function->CountChildByNutriStatusByMunicipality("nutritional_status_WFH", "Wasted", $_SESSION['municipality']); ?>,
+        <?= $function->CountChildByNutriStatusByMunicipality("nutritional_status_WFH", "Severely Wasted", $_SESSION['municipality']); ?>
+      ], // Replace with your actual data
+
+      labels: ["Underweight", "Severely Underweight", "Stunted", "Severely Stunted", "Wasted", "Severely Wasted"],
+      chart: {
+        width: 400,
+        type: 'donut',
+        fontFamily: "'Plus Jakarta Sans', sans-serif",
+        foreColor: "#1a1a00",
+        toolbar: {
+          show: true
+        },
+      },
+      plotOptions: {
+        pie: {
+          startAngle: 0,
+          endAngle: 360,
+          donut: {
+            size: '50%',
+          },
+        },
+      },
+      stroke: {
+        show: true,
+      },
+      dataLabels: {
+        enabled: true,
+      },
+      legend: {
+        show: true,
+      },
+      colors: [/*"#40bf80", "#339966", */"#e6b800", "#cca300","#e69e30","#e67e22", "#ff6347", "#ff4d2e"],
+      responsive: [{
+        breakpoint: 100,
+        options: {
+          chart: {
+            width: 150,
+          },
+        },
+      }, ],
+      tooltip: {
+        theme: "dark",
+        fillSeriesColor: true,
+      },
+    };
+
+    var chart = new ApexCharts(document.querySelector("#malnuBreakup"), breakup);
+    chart.render();
+  </script>
+
+
+
+  <script>
+    const brgyCountData = <?= json_encode($function->RankChildCountByBarangay($_SESSION['municipality'])); ?>;
+    // Fetch barangay data from PHP
+
+    const brgyData = <?= json_encode($function->RankChildCountByBarangay($_SESSION['municipality'])); ?>;
+    //console.log (brgyData);
+
+    const rankings = brgyData.map(item => item.child_count);
+    const barangays = brgyData.map(item => item.barangay);
+
+    const data = {
+      labels: barangays, // Use barangay names as labels
+      datasets: [{
+        label: 'Rankings',
+        data: rankings, // Ranking values corresponding to barangays
+        backgroundColor: '#339966', // Bar color
+        borderColor: '#339966',
+        borderWidth: 1,
+        borderRadius: 10, // Soften the edges with rounded corners
+        fontFamily: "Plus Jakarta Sans', sans-serif",
+      }]
+    };
+
+    // Configuration for the chart
+    const config = {
+      type: 'bar',
+      data: data,
+      options: {
+        indexAxis: 'y', // Makes it a horizontal bar chart
+        scales: {
+          x: {
+            beginAtZero: true,
+            max: 100, // Set the maximum value to 100
+            // ticks: {
+            //   // Add "%" suffix to each tick label
+            //   callback: function(value) {
+            //     return value + '%';
+            //   }
+            // }
+          }
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function(tooltipItem) {
+                return tooltipItem.raw; //+ '%'; // Adds "%" to tooltip values
+              }
+            }
+          }
+        }
+      }
+    };
+
+    // Render the chart
+    const rankingChart = new Chart(
+      document.getElementById('rankingChart'),
+      config
+    );
+  </script>
+
 </main>
 
 
