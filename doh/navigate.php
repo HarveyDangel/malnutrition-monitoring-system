@@ -57,6 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btn-log-out'])) {
 }
 
 else{
-	header("Location: ../index.php");
+	header("Location: ../403");
 	exit();
 }	

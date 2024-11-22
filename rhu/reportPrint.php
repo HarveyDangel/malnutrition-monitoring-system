@@ -1,5 +1,5 @@
 <?php
-require_once('../dompdf/autoload.inc.php');
+require_once('../packages/dompdf/autoload.inc.php');
 
 use Dompdf\Dompdf;
 use Dompdf\Options;

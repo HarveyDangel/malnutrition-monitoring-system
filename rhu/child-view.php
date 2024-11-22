@@ -161,9 +161,9 @@ $active = 5;
                                         <th class="border-bottom-0">
                                             <h6 class="fw-semibold mb-0">Weight for Lenght/Height</h6>
                                         </th>
-                                        <!-- <th class="border-bottom-0">
+                                        <th class="border-bottom-0">
                                             <h6 class="fw-semibold mb-0">Action</h6>
-                                        </th> -->
+                                        </th>
 
                                     </tr>
                                 </thead>
@@ -172,6 +172,7 @@ $active = 5;
                                     <?php
                                     if ($childHistory) {
                                         foreach ($childHistory as $history) :
+                                            $record_id = $history['record_id'];
                                             $date_measured = $history['date_measured'];
                                             $age = $history['age_in_months'];
                                             $weight = $history['weight'];
@@ -259,16 +260,15 @@ $active = 5;
                                                     <p class="mb-0 fw-normal <?= $wfhClass; ?>"><?= $wfh; ?></p>
                                                 </td>
                                             
-                                                <!-- <td class="border-bottom-0">
+                                                <td class="border-bottom-0">
 
                                                     <form action="navigate.php" method="post">
-                                                
                                                     <input type="hidden" name="child_id" value="<?= $child_id; ?>">
                                                     <input type="hidden" name="record_id" value="<?= $record_id; ?>">
 													<button class="badge btn btn-primary rounded-5 fw-semibold" type="submit" name="btn-delete-child-history"><i class="fa fa-trash "></i> Delete</button>
 
                                                     </form>
-                                                </td> -->
+                                                </td>
                                             </tr>
                                     <?php
                                         endforeach;

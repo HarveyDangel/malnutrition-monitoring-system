@@ -58,5 +58,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btn-sign-up'])) {
 	exit();
 }
 
-header("Location: index");
+header("Location: ../403");
 exit();

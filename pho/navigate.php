@@ -1,7 +1,7 @@
 <?php
 include '../function.php';
 include_once '../session.php';
-require_once ('../dompdf/autoload.inc.php');
+require_once ('../packages/dompdf/autoload.inc.php');
 use Dompdf\Dompdf;
 
 Session::init();
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btn-pho-login'])) {
         // Set success message
 		$_SESSION["username"] = $_POST["username"];	
         Session::set("msg", "<div style='background-color: #9fdf9f; color:black; border: solid #9fdf9f 1px; border-radius: 5px; padding: 10px;'><center><i class='fa fa-circle-check me-2'></i>Log in Successfully! </center> </div><br>");
-		header("Location: index?ig=". $_SESSION['pho_id']);
+		header("Location: index?id=". $_SESSION['pho_id']);
 		exit();
     } else if ($flag == 2) {
         // Set success message
@@ -100,6 +100,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btn-log-out'])) {
 }
 
 else{
-	header("Location: ../index.php");
+	header("Location: ../403");
 	exit();
 }	

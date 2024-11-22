@@ -1,7 +1,7 @@
 <?php
 include '../function.php';
 include_once '../session.php';
-//include '../vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/IOFactory.php';]
+
 include 'classification-model/wfa.php';
 include 'classification-model/hfa.php';
 include 'classification-model/wfh.php';
@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btn-delete-child-histo
 	} else {
 		Session::set("msg", "<div style='background-color: #ff6347; color:white; border: solid #ff6347  color:white;1px; border-radius: 5px; padding: 10px;'><center><i class='fa-solid fa-circle-exclamation'></i> &nbsp Invalid Request! </center> </div><br>");
 	}
-	header("Location: children?id=" . $_SESSION['rhu_id']);
+	header("Location: child-view?child_id=" . $child_id);
 	exit();
 }
 
@@ -178,6 +178,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btn-log-out'])) {
 }
 
 else {
-	header("Location: ../index");
+	header("Location: ../403");
 	exit();
 }

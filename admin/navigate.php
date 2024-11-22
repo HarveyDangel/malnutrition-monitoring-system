@@ -454,6 +454,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btn-edit-admin'])) {
 } 
 
 else {
-	header("Location: ../index");
+	header("Location: ../403");
 	exit();
 }

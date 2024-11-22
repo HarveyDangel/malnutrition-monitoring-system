@@ -45,10 +45,6 @@ if (!isset($_SESSION['token'])) {
                   <div class="mb-3">
                     <input type="text" class="form-control bg-light-primary" id="token" name="token" value="<?= $_GET['token'] ? htmlspecialchars($_GET['token']) : ''; ?>"required hidden>
                   </div>
-                  <!-- <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="text" class="form-control bg-light-primary" id="email" name="email" placeholder="example@email.com" value="<?php echo isset($_GET['email']) ? htmlspecialchars($_GET['email']) : ''; ?>" disabled required>
-                  </div> -->
                   <div class="mb-3">
                       <label for="password" class="form-label">Password <span style="color:red">*</span></label>
                       <input type="password" name="password" class="form-control password" id="myInput" aria-describedby="textHelp" value="<?php echo isset($_POST['password']) ? htmlspecialchars($_POST['password']) : ''; ?>" required>

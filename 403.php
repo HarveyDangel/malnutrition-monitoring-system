@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 Not Found</title>
+    <title>403 Forbidden</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,12 +11,15 @@
             padding: 50px;
         }
         h1 {
-            font-size: 50px;
-            color: #333;
+            font-size: 60px;
+            color: #339966;
+        }
+        h3 {
+            color:#555
         }
         p {
             font-size: 20px;
-            color: #666;
+            color: #555;
         }
         a {
             color: #007BFF;
@@ -28,8 +31,8 @@
     </style>
 </head>
 <body>
-    <h1>404 - Page Not Found</h1>
-    <p>Sorry, the page you are looking for does not exist.</p>
-    <p><a href="../index">Go back to Home</a></p>
+    <h1>403 Forbidden</h1>
+    <h3>You don't have permission to access this resource.</h3>
+    <p><a href="index">Go back to Home</a></p>
 </body>
 </html>

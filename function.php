@@ -4,9 +4,9 @@ include 'conn.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'PHPMailer/src/Exception.php';
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
+require 'packages/PHPMailer/src/Exception.php';
+require 'packages/PHPMailer/src/PHPMailer.php';
+require 'packages/PHPMailer/src/SMTP.php';
 
 
 class Functions
@@ -928,7 +928,7 @@ class Functions
 	{
 		try {
 			//$sql = 'UPDATE tbl_child_history SET status = :status WHERE record_id = :record_id';
-			$sql = 'UPDATE `tbl_child_history` SET `status` = `:status` WHERE `tbl_child_history`.`record_id` = :record_id';
+			$sql = "UPDATE `tbl_child_history` SET `status` =:status WHERE `record_id` = :record_id";
 			$stmt = $this->db->conn->prepare($sql);
 			$r = $stmt->execute([
 				':status' => 'deleted',
@@ -1391,7 +1391,7 @@ class Functions
 
 	public function resetPassword($data, $token)
 	{
-		$sql = 'SELECT reset_id FROM tbl_password_reset WHERE token =:token';
+		$sql = 'SELECT * FROM tbl_password_reset WHERE token =:token';
 		$stmt = $this->db->conn->prepare($sql);
 		$stmt->execute([
 			':token' => $token,

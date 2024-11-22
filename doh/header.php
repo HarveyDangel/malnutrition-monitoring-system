@@ -36,11 +36,9 @@ if ($_SESSION['role'] === 'admin'){
   <!-- ===================================================================================================== -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <!-- ===================================================================================================== -->
-  <link rel="stylesheet" href="../leaflet/leaflet.css" />
-  <script src="../leaflet/leaflet.js"></script>
+  <link rel="stylesheet" href="../vendor/leaflet/leaflet.css" />
+  <script src="../vendor/leaflet/leaflet.js"></script>
   <!-- ====================================================================================================== -->
-
-
   <style>
     #map {
       height: 500px;

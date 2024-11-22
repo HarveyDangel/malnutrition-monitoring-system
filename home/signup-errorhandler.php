@@ -10,28 +10,6 @@ class ErrorHandler extends Functions
 		$this->db = new conn();
 	}
 
-    
-    // public function emptyInputAddRhu($fname, $lname, $birthdate, $sex, $province, $municipality, $email, $username, $password, $rptpassword)
-    // {
-    //     if(empty($fname) || empty($lname) || empty($birthdate) || empty($sex) || empty($province) || empty($municipality) || empty($email) || empty($username) || empty($password) || empty($rptpassword) )
-    //         {
-    //         $result = true;
-    //     } else {
-    //         $result = false;
-    //     }
-    //     return $result;
-    // }
-    
-    // public function emptyInputAddDoh($fname, $lname, $email, $username, $password, $rptpassword)
-    // {
-    //     if (empty($fname) || empty($lname) || empty($email) || empty($username) || empty($password) || empty($rptpassword)) {
-    //         $result = true;
-    //     } else {
-    //         $result = false;
-    //     }
-    //     return $result;
-    // }
-
     public function invalidUsername($username)
     {
 
