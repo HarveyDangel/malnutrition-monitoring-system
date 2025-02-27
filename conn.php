@@ -1,7 +1,7 @@
 <?php
 
 	class conn{
-		private $hostdb = "localhost:3307";
+		private $hostdb = "localhost:3306";
 		private $userdb = "root";
 		private $passdb = "";
 		private $namedb = "malnutrition_monitoring_db";

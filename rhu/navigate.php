@@ -2,6 +2,7 @@
 include '../function.php';
 include_once '../session.php';
 
+//classification model
 include 'classification-model/wfa.php';
 include 'classification-model/hfa.php';
 include 'classification-model/wfh.php';

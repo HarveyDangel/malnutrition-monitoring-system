@@ -6,6 +6,8 @@ $children = $function->GetAllChildrenByMunicipality($_SESSION['municipality']);
 $barangays = $function->getBarangayByMunicipality($_SESSION['municipality']);
 ?>
 
+
+<!-- main content of the page -->
 <main class="">
     <!-- Hidden Municipality Input (Preset) -->
 

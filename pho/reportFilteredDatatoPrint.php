@@ -27,10 +27,29 @@ $filteredData = array_filter($children, function ($row) use ($filterCriteria) {
     );
 });
 
-
+$total = 0;
 
 ?>
 <style>
+    .grid-container{
+        display: grid;
+        grid-template-columns: auto auto auto auto;      
+    }
+
+    .grid-container > div{
+        /* padding: 5px; */
+    }
+
+    .item1{
+        margin-top: 25px;
+        text-align: end;
+        
+    }
+    .item2{
+        grid-column: 2 / span 2;
+        padding-right: 25px;
+    }
+
     .text-center {
         text-align: center !important
     }
@@ -62,12 +81,10 @@ $filteredData = array_filter($children, function ($row) use ($filterCriteria) {
 <div class="col-lg-12 d-flex align-items-stretch pt-0 mt-0">
     <div class="card w-100">
         <div class="card-body">
-            <div class="text-center">
-                <h4>Republic of the Philippines</h4>
-                <h4>Region VIII Eastern Visayas</h4>
-                <h4>Province of Biliran</h4>
-                <h3>BILIRAN PROVINCIAL HEALTH OFFICE</h3>
-                <h3>Naval, Biliran</h3>
+            <div class="">
+                <div>
+                    <img src="http://localhost/malnutrition-monitoring-system/assets/images/headers/PHO-header.png" alt="" width="100%">
+                </div>
             </div>
             <br>
             <h4>Children List Report</h4>
@@ -115,6 +132,7 @@ $filteredData = array_filter($children, function ($row) use ($filterCriteria) {
                     </thead>
                     <tbody>
                         <?php foreach ($filteredData as $row):
+                            $total ++;
                             // Determine the class for nutritional status WFA
                             $wfaClass = '';
                             switch ($row['nutritional_status_WFA']) {
@@ -175,7 +193,9 @@ $filteredData = array_filter($children, function ($row) use ($filterCriteria) {
                                 <td class="border-bottom border-primary-subtle">
                                     <h5 class="fw-semibold mb-0"><?= $row['child_id']; ?></h5>
                                 </td>
-                                <td class="border-bottom border-primary-subtle"><span class="fw-normal"><?= $row['purok']; ?></span></td>
+                                <td class="border-bottom border-primary-subtle">
+                                    <p class="fw-normal"><?= $row['purok'];?></p>
+                                </td>
                                 <td class="border-bottom border-primary-subtle">
                                     <p class="mb-0 fw-normal"><?= $row['name_of_caregiver']; ?></p>
                                 </td>
@@ -211,6 +231,8 @@ $filteredData = array_filter($children, function ($row) use ($filterCriteria) {
                     </tbody>
                 </table>
             </div>
+            <br>
+            <p>Total Children : <?= $total;?></p>
             <br>
             <p>PREPARED BY: <?= $_SESSION['fname'];?>  <?= $_SESSION['mname'];?> <?= $_SESSION['lname'];?> <?= $_SESSION['suffix'];?></p>
             <p>Date: <?php echo date("Y/m/d")?></p>

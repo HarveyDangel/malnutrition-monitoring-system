@@ -1127,11 +1127,13 @@ class Functions
 
 
 	public function RankChildCountByBarangay($municipality)
-	{
-		$sql = 'SELECT barangay, COUNT(*) AS child_count FROM tbl_children WHERE municipality = :municipality AND status = :status GROUP BY barangay ORDER BY child_count DESC';
+	{	
+		$Cyear = date("Y");
+		$sql = 'SELECT barangay, COUNT(*) AS child_count FROM tbl_children WHERE municipality = :municipality AND `year` = :year AND status = :status GROUP BY barangay ORDER BY child_count DESC';
 		$stmt = $this->db->conn->prepare($sql);
 		$stmt->execute([
 			':municipality' => $municipality,
+			':year' => $Cyear,
 			':status' => 'activated',
 		]);
 		$data = $stmt->fetchAll();
@@ -1141,9 +1143,13 @@ class Functions
 
 	public function RankChildCountByMunicipality()
 	{
-		$sql = 'SELECT municipality, COUNT(*) AS child_count FROM tbl_children WHERE status = :status GROUP BY municipality ORDER BY child_count DESC';
+		$Cyear = date("Y");
+		$sql = 'SELECT municipality, COUNT(*) AS child_count FROM tbl_children WHERE status = :status AND `year` = :year GROUP BY municipality ORDER BY child_count DESC';
 		$stmt = $this->db->conn->prepare($sql);
-		$stmt->execute([':status' => 'activated']);
+		$stmt->execute([
+			':status' => 'activated',
+			':year' => $Cyear,
+		]);
 		$data = $stmt->fetchAll();
 		$t = $data;
 		return $t;
@@ -1151,11 +1157,13 @@ class Functions
 
 	public function CountChildByNutriStatusByMunicipality($nutStatus, $value, $municipality)
 	{
-		$sql = 'SELECT COUNT(child_id) AS child_count FROM tbl_children WHERE ' . $nutStatus . ' = :value AND municipality = :municipality AND status = :status';
+		$Cyear = date("Y");
+		$sql = 'SELECT COUNT(child_id) AS child_count FROM tbl_children WHERE ' . $nutStatus . ' = :value AND municipality = :municipality AND `year` = :year AND status = :status';
 		$stmt = $this->db->conn->prepare($sql);
 		$stmt->execute([
 			':municipality' => $municipality,
 			':value' => $value,
+			':year' => $Cyear,
 			':status' => 'activated',
 		]);
 		$data = $stmt->fetch(PDO::FETCH_OBJ);
@@ -1165,10 +1173,12 @@ class Functions
 
 	public function CountChildByNutriStatus($nutstatus, $value)
 	{
-		$sql = 'SELECT COUNT(child_id) AS child_count FROM tbl_children WHERE ' . $nutstatus . ' = :value AND status = :status';
+		$Cyear = date("Y");
+		$sql = 'SELECT COUNT(child_id) AS child_count FROM tbl_children WHERE ' . $nutstatus . ' = :value AND `year` = :year AND status = :status';
 		$stmt = $this->db->conn->prepare($sql);
 		$stmt->execute([
 			':value' => $value,
+			':year' => $Cyear,
 			':status' => 'activated',
 		]);
 		$data = $stmt->fetch(PDO::FETCH_OBJ);
@@ -1178,12 +1188,14 @@ class Functions
 
 	public function CountChildByNutriStatusByBarangay($nutstatus, $value, $value2, $muni)
 	{
-		$sql = 'SELECT barangay COUNT(child_id) AS child_count FROM tbl_children WHERE ' . $nutstatus . ' = :value OR' . $nutstatus . ' = :value2 AND municipality = :muni AND status = :status';
+		$Cyear = date("Y");
+		$sql = 'SELECT barangay COUNT(child_id) AS child_count FROM tbl_children WHERE ' . $nutstatus . ' = :value OR' . $nutstatus . ' = :value2 AND municipality = :muni AND `year` = :year AND status = :status';
 		$stmt = $this->db->conn->prepare($sql);
 		$stmt->execute([
 			':value' => $value,
 			':value2' => $value2,
 			':muni' => $muni,
+			':year' => $Cyear,
 			':status' => 'activated',
 		]);
 		$data = $stmt->fetch(PDO::FETCH_OBJ);
@@ -1193,11 +1205,13 @@ class Functions
 
 	public function CountChildByNutriStatusByMuni($nutstatus, $value, $muni)
 	{
-		$sql = 'SELECT COUNT(child_id) AS child_count FROM tbl_children WHERE ' . $nutstatus . ' = :value AND municipality = :muni AND status = :status';
+		$Cyear = date("Y");
+		$sql = 'SELECT COUNT(child_id) AS child_count FROM tbl_children WHERE ' . $nutstatus . ' = :value AND municipality = :muni AND `year` = :year AND status = :status';
 		$stmt = $this->db->conn->prepare($sql);
 		$stmt->execute([
 			':value' => $value,
 			':muni' => $muni,
+			':year' => $Cyear,
 			':status' => 'activated',
 		]);
 		$data = $stmt->fetch(PDO::FETCH_OBJ);
@@ -1207,10 +1221,12 @@ class Functions
 
 	public function ChildCountByMunicipality($muni)
 	{
-		$sql = 'SELECT COUNT(child_id) AS total FROM tbl_children WHERE municipality = :municipality AND status = :status';
+		$Cyear = date("Y");
+		$sql = 'SELECT COUNT(child_id) AS total FROM tbl_children WHERE municipality = :municipality AND `year` = :year AND status = :status';
 		$stmt = $this->db->conn->prepare($sql);
 		$stmt->execute([
 			':municipality' => $muni,
+			':year' => $Cyear,
 			':status' => 'activated'
 		]);
 		$data = $stmt->fetch(PDO::FETCH_OBJ);
@@ -1220,9 +1236,13 @@ class Functions
 
 	public function totalChildCount()
 	{
-		$sql = 'SELECT COUNT(child_id) AS total FROM tbl_children WHERE status = :status';
+		$Cyear = date("Y");
+		$sql = 'SELECT COUNT(child_id) AS total FROM tbl_children WHERE status = :status AND `year` = :year';
 		$stmt = $this->db->conn->prepare($sql);
-		$stmt->execute([':status' => 'activated']);
+		$stmt->execute([
+			':status' => 'activated',
+			':year' => $Cyear,
+		]);
 		$data = $stmt->fetch(PDO::FETCH_OBJ);
 		$t = $data->total;
 		return $t;

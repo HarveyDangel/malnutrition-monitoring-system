@@ -9,6 +9,7 @@ $active = 2;
 			<h5 class="card-title fw-semibold mb-4"><?= $_SESSION['municipality']; ?> Children List</h5>
 			<div class="flex d-flex flex-row justify-content-between">
 				<div class="flex d-flex flex-row">
+					<!-- Add individual record -->
 					<div class="me-2">
 						<a href="child-add?id=<?= $_SESSION['rhu_id']; ?>" aria-expanded="false">
 							<button class="btn btn-primary rounded-2 fw-semibold p-2">
@@ -19,6 +20,8 @@ $active = 2;
 							</button>
 						</a>
 					</div>
+
+					<!-- Upload CSV -->
 					<div class="">
 						<a href="children-upload-file" aria-expanded="false">
 							<button class="btn btn-primary rounded-2 fw-semibold p-2">
@@ -36,6 +39,7 @@ $active = 2;
 		<div class="col-lg-12 d-flex align-items-stretch pt-0">
 			<div class="card w-100">
 				<div class="card-body">
+					<!-- Flash Message -->
 					<?php
 					$msg = Session::get("msg");
 					if (isset($msg)) {
@@ -43,6 +47,7 @@ $active = 2;
 						Session::set("msg", NULL);
 					}
 					?>
+					<!-- End Flash Message -->
 					<div class="table-responsive">
 						<table id="myTable" class="table text-nowrap align-middle">
 							<thead class="text-dark">
@@ -69,6 +74,7 @@ $active = 2;
 							</thead>
 							<tbody>
 								<?php
+								// Loop retreive data from database
 								$i = 0;
 								$children = $function->GetAllChildrenByMunicipality($_SESSION['municipality']);
 								if ($children) {
@@ -89,6 +95,7 @@ $active = 2;
 										$year = $child['year'];
 										$i++;
 								?>
+										<!--  record to be display in page -->
 										<tr>
 											<td class="border-bottom border-primary-subtle">
 												<h6 class="fw-semibold mb-0"><?= $child_id; ?></h6>
@@ -109,27 +116,35 @@ $active = 2;
 											<td class="border-bottom border-primary-subtle">
 
 												<form method="post" action="navigate.php">
+
+													<!-- view child record -->
 													<a href="child-view.php?child_id=<?= $child_id; ?>" class="badge btn btn-primary rounded-3 fw-semibold">
 														<span>
 															<i class="fa fa-eye"></i>
 														</span>
 														<span class="hide-menu">View</span>
 													</a> &nbsp;
+													<!-- end view -->
 
+													<!--  edit child record -->
 													<a class=" badge btn btn-primary rounded-3 fw-semibold" href="child-edit.php?child_id=<?= $child_id; ?>"><i class="fa fa-edit"></i> Edit</a> &nbsp;
 
 													<input type="hidden" name="child_id" value="<?= $child_id; ?>">
+													<!-- End edit child -->
+
+													<!-- delete child record -->
 													<button class="badge btn btn-primary rounded-3 fw-semibold" type="submit" name="btn-delete-child"><i class="fa fa-trash "></i> Delete</button>
+													<!-- End delete child -->
 												</form>
 											</td>
 										</tr>
+
 								<?php
 
 									endforeach;
 								}
 
 								?>
-
 							</tbody>
 						</table>
 					</div>
