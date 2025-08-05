@@ -67,3 +67,32 @@ With **interactive mapping** powered by Leaflet.js, the system highlights areas 
 1. **Clone the repository**
    ```bash
    git clone https://github.com/your-username/malnutrition-monitoring-system.git
+
+2. **Navigate to project folder**
+   ```bash
+   cd malnutrition-monitoring-system
+
+3. **Import the database**
+
+- Open phpMyAdmin
+- Create a new database (e.g., mms_db)
+- Import the SQL file located in /database/mms_db.sql
+
+4. **Configure database connection**
+- Edit config.php with your DB credentials.
+  
+5. **Run the application**
+- Start your local server (XAMPP, WAMP, etc.)
+- Access via http://localhost/malnutrition-monitoring-system
+
+## 🚀 Usage
+1. Login using your credentials.
+2. Navigate to the Dashboard to view statistics.
+3. Open the Map to see malnutrition data by location.
+4. Generate reports from the Reports page.
+
+## 🤝 Contributing
+- Fork the repository.
+- Create a new branch (feature/your-feature).
+- Commit your changes.
+- Push to your branch and create a Pull Request.
