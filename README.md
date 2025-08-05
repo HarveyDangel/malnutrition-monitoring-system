@@ -15,7 +15,7 @@ A **web-based platform** designed to map and monitor malnutrition cases in **Bil
 
 ---
 
-## 📖 About
+## About
 
 The **Malnutrition Monitoring System** was developed to address the growing need for **real-time health data visualization** in Biliran Province.  
 It allows **Department of Health (DOH)**, **Provincial Health Office (PHO)**, and **Rural Health Units (RHU)** to record, track, and analyze malnutrition cases in children.  
@@ -24,7 +24,7 @@ With **interactive mapping** powered by Leaflet.js, the system highlights areas 
 
 ---
 
-## ✨ Features
+## Features
 
 - 🔐 **Multi-user Authentication** (Admin, PHO, RHU, DOH)
 - 📍 **Interactive Heatmap** for malnutrition cases
@@ -36,7 +36,7 @@ With **interactive mapping** powered by Leaflet.js, the system highlights areas 
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 | Category   | Technology |
 |------------|------------|
@@ -49,7 +49,7 @@ With **interactive mapping** powered by Leaflet.js, the system highlights areas 
 
 ---
 
-## 👥 System Roles
+## System Roles
 
 | Role  | Permissions |
 |-------|-------------|
@@ -60,7 +60,7 @@ With **interactive mapping** powered by Leaflet.js, the system highlights areas 
 
 ---
 
-## 📦 Installation
+## Installation
 
 1. **Clone the repository**
    ```bash
@@ -83,13 +83,13 @@ With **interactive mapping** powered by Leaflet.js, the system highlights areas 
 - Start your local server (XAMPP, WAMP, etc.)
 - Access via http://localhost/malnutrition-monitoring-system
 
-## 🚀 Usage
+## Usage
 1. Login using your credentials.
 2. Navigate to the Dashboard to view statistics.
 3. Open the Map to see malnutrition data by location.
 4. Generate reports from the Reports page.
 
-## 🤝 Contributing
+## Contributing
 - Fork the repository.
 - Create a new branch (feature/your-feature).
 - Commit your changes.
