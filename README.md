@@ -12,8 +12,6 @@ A **web-based platform** designed to map and monitor malnutrition cases in **Bil
 - [Usage](#usage)
 - [Screenshots](#screenshots)
 - [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
 
 ---
 
@@ -56,7 +54,7 @@ With **interactive mapping** powered by Leaflet.js, the system highlights areas 
 | Role  | Permissions |
 |-------|-------------|
 | **Admin** | Full access, manage all accounts & data |
-| **PHO** | Manage municipal RHU accounts, view all province data |
+| **PHO** | View all province data |
 | **RHU** | Manage barangay-level data |
 | **DOH** | View reports and analytics |
 
