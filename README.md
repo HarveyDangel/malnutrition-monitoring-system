@@ -32,7 +32,6 @@ With **interactive mapping** powered by Leaflet.js, the system highlights areas 
 - 📊 **Reports & Analytics**
 - 📂 **Data Management** (Add, Update, Delete child records)
 - ☁️ **Cloud-deployed** for accessibility
-- 🔄 **REST API Integration** for scalable data handling
 
 ---
 
@@ -44,7 +43,6 @@ With **interactive mapping** powered by Leaflet.js, the system highlights areas 
 | Backend    | PHP |
 | Database   | MySQL |
 | Mapping    | Leaflet.js |
-| API        | REST API |
 | Deployment | Cloud Hosting |
 
 ---
