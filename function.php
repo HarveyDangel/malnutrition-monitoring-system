@@ -772,6 +772,7 @@ class Functions
 		$data = $stmt->fetchAll();
 		return $data;
 	}
+
 	//Read All Children
 	public function GetAllChildren()
 	{
@@ -780,6 +781,17 @@ class Functions
 		$stmt->execute([':status' => 'activated']);
 		$data = $stmt->fetchAll();
 		return $data;
+	}
+
+	//Get Child by ID
+	// This function retrieves a child record by its ID.
+	public function GetChildById($child_id)
+	{
+		$sql = 'SELECT * FROM tbl_children WHERE child_id=:child_id';
+		$stmt = $this->db->conn->prepare($sql);
+		$stmt->execute([':child_id' => $child_id]);
+		$data = $stmt->fetch(PDO::FETCH_OBJ);
+		return $data ?: null; // Return null if no data found
 	}
 
 	//Read Only Child
@@ -825,8 +837,8 @@ class Functions
 			':nutritional_status_WFA' => $wfa,
 			':nutritional_status_HFA' => $hfa,
 			':nutritional_status_WFH' => $wfh,
-			':barangay' => $data['brgy'],
-			':municipality' => $data['muni'],
+			':barangay' => $data['barangay_text'],
+			':municipality' => $data['city_text'],
 			':province' => $data['province_text'],
 			':region' => $data['region_text'],
 			':year' => $data['year'],
@@ -835,9 +847,10 @@ class Functions
 			':rhu_id' => $data['rhu_id'],
 			':child_id' => $child_id,
 		]);
-
+		error_log("Rows affected in tbl_children: " . $stmt->rowCount());
+		
 		if ($r) {
-
+			
 			// Insert into child_history
 			$sqlHistory = "INSERT INTO tbl_child_history (child_id, date_measured, age_in_months, weight, height, wfa, hfa, wfh) VALUES (:child_id, :date_measured, :age_by_months, :weight, :height, :wfa, :hfa, :wfh)";
 			$stmtHistory = $this->db->conn->prepare($sqlHistory);
