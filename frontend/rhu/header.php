@@ -1,7 +1,7 @@
 <?php
-include_once '../session.php';
+include_once '../../core/session.php';
 Session::init();
-include '../function.php';
+include '../../core/function.php';
 $function = new Functions();
 
 if (!isset($_SESSION['rhu_id'])) {

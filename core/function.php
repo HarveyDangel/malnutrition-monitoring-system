@@ -1,13 +1,16 @@
 <?php
 include 'conn.php';
 
-use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
 
-require 'packages/PHPMailer/src/Exception.php';
-require 'packages/PHPMailer/src/PHPMailer.php';
-require 'packages/PHPMailer/src/SMTP.php';
+// require '../packages/PHPMailer/src/PHPMailer.php';
+// require '../packages/PHPMailer/src/PHPMailer.php';
+// require '../packages/PHPMailer/src/SMTP.php';
 
+require_once __DIR__ . '/../packages/PHPMailer/src/PHPMailer.php';
+require_once __DIR__ . '/../packages/PHPMailer/src/SMTP.php';
+require_once __DIR__ . '/../packages/PHPMailer/src/Exception.php';
 
 class Functions
 {
@@ -17,8 +20,43 @@ class Functions
 		$this->db = new conn();
 	}
 
-	//Sign up Admin
+	// public function MultiLogin($data, $roleTableMap)
+	// {
 
+	// 	// Map role to table
+	// 	$roleTableMap = [
+	// 		'admin' => 'tbl_admin',
+	// 		'doh' => 'tbl_doh',
+	// 		'pho' => 'tbl_pho',
+	// 		'rhu' => 'tbl_rhu'
+	// 	];
+	// 	// Query the correct table
+	// 	$sql = "SELECT * FROM {$roleTableMap[$role]} WHERE username = :username LIMIT 1";
+	// 	$stmt = $this->db->conn->prepare($sql);
+	// 	$stmt->execute([':username' => $username]);
+	// 	$user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+	// 	if (!$user || !password_verify($password, $user['password'])) {
+	// 		http_response_code(401);
+	// 		echo json_encode(["error" => "Invalid username or password"]);
+	// 		exit;
+	// 	}
+
+	// 	// Generate token
+	// 	$token = bin2hex(random_bytes(32)); // 64-character random string
+
+	// 	// Store token in common table
+	// 	$sqlToken = "INSERT INTO tbl_api_tokens (username, role, token) VALUES (:username, :role, :token)";
+	// 	$stmtToken = $this->db->conn->prepare($sqlToken);
+	// 	$stmtToken->execute([
+	// 		':username' => $username,
+	// 		':role' => $role,
+	// 		':token' => $token
+	// 	]);
+	// }
+
+
+	//Sign up Admin
 	public function SignUpAdmin($data)
 	{
 		$sql = "INSERT INTO tbl_admins (email, username, password) VALUES ( :email, :username, :password);";
@@ -64,8 +102,8 @@ class Functions
 			$data = $stmt->fetch(PDO::FETCH_OBJ);
 			$hashedPassword = $data->password;
 			if (password_verify($password, $hashedPassword)) {
-				$_SESSION['admin_id'] =  $data->admin_id;
-				$_SESSION['username'] =  $data->username;
+				$_SESSION['admin_id'] = $data->admin_id;
+				$_SESSION['username'] = $data->username;
 				$_SESSION['role'] = $data->role;
 
 				$logSql = "INSERT INTO tbl_account_log (username, description) VALUES (:username, :description)";
@@ -147,7 +185,7 @@ class Functions
 			$data = $stmt->fetch(PDO::FETCH_OBJ);
 			$hashedPassword = $data->password;
 			if (password_verify($password, $hashedPassword)) {
-				$_SESSION['doh_id'] =  $data->doh_id;
+				$_SESSION['doh_id'] = $data->doh_id;
 				$_SESSION['username'] = $data->username;
 				$_SESSION['role'] = $data->role;
 				$_SESSION['region'] = $data->region;
@@ -160,7 +198,7 @@ class Functions
 					':description' => "Logged in"
 				]);
 
-				$result =  1;
+				$result = 1;
 				return $result;
 			} else {
 
@@ -195,8 +233,8 @@ class Functions
 			$data = $stmt->fetch(PDO::FETCH_OBJ);
 			$hashedPassword = $data->password;
 			if (password_verify($password, $hashedPassword)) {
-				$_SESSION['pho_id'] =  $data->pho_id;
-				$_SESSION['username'] =  $data->username;
+				$_SESSION['pho_id'] = $data->pho_id;
+				$_SESSION['username'] = $data->username;
 				$_SESSION['role'] = $data->role;
 				$_SESSION['fname'] = $data->fname;
 				$_SESSION['mname'] = $data->mname;
@@ -246,7 +284,7 @@ class Functions
 			$data = $stmt->fetch(PDO::FETCH_OBJ);
 			$hashedPassword = $data->password;
 			if (password_verify($password, $hashedPassword)) {
-				$_SESSION['rhu_id'] =  $data->rhu_id;
+				$_SESSION['rhu_id'] = $data->rhu_id;
 				$_SESSION['username'] = $data->username;
 				$_SESSION['role'] = $data->role;
 				$_SESSION['municipality'] = $data->municipality;
@@ -848,9 +886,9 @@ class Functions
 			':child_id' => $child_id,
 		]);
 		error_log("Rows affected in tbl_children: " . $stmt->rowCount());
-		
+
 		if ($r) {
-			
+
 			// Insert into child_history
 			$sqlHistory = "INSERT INTO tbl_child_history (child_id, date_measured, age_in_months, weight, height, wfa, hfa, wfh) VALUES (:child_id, :date_measured, :age_by_months, :weight, :height, :wfa, :hfa, :wfh)";
 			$stmtHistory = $this->db->conn->prepare($sqlHistory);
@@ -998,16 +1036,16 @@ class Functions
 
 		// Define abbreviation mappings for nutritional statuses
 		$abbreviationMap = [
-			'N'   => 'Normal',
-			'OW'  => 'Overweight',
-			'UW'  => 'Underweight',
+			'N' => 'Normal',
+			'OW' => 'Overweight',
+			'UW' => 'Underweight',
 			'SUW' => 'Severely Underweight',
-			'T'   => 'Tall',
-			'St'  => 'Stunted',
+			'T' => 'Tall',
+			'St' => 'Stunted',
 			'SSt' => 'Severely Stunted',
-			'Ob'  => 'Obese',
-			'MW'  => 'Wasted',
-			'SW'  => 'Severely Wasted'
+			'Ob' => 'Obese',
+			'MW' => 'Wasted',
+			'SW' => 'Severely Wasted'
 		];
 
 		// Prepare SQL statement
@@ -1140,7 +1178,7 @@ class Functions
 
 
 	public function RankChildCountByBarangay($municipality)
-	{	
+	{
 		$Cyear = date("Y");
 		$sql = 'SELECT barangay, COUNT(*) AS child_count FROM tbl_children WHERE municipality = :municipality AND `year` = :year AND status = :status GROUP BY barangay ORDER BY child_count DESC';
 		$stmt = $this->db->conn->prepare($sql);
@@ -1386,12 +1424,12 @@ class Functions
 			$mail = new PHPMailer(true);
 
 			$mail->isSMTP();                                    // Set mailer to use SMTP
-			$mail->Host       = 'smtp.gmail.com';               // Specify main and backup SMTP servers
-			$mail->SMTPAuth   = true;                           // Enable SMTP authentication
-			$mail->Username   = 'mmsgsm07@gmail.com';         	// Your Gmail address
-			$mail->Password   = 'czco tmqg ckfu ruxl';          // Your Gmail App Password (NOT your Gmail password)
+			$mail->Host = 'smtp.gmail.com';               // Specify main and backup SMTP servers
+			$mail->SMTPAuth = true;                           // Enable SMTP authentication
+			$mail->Username = 'mmsgsm07@gmail.com';         	// Your Gmail address
+			$mail->Password = 'czco tmqg ckfu ruxl';          // Your Gmail App Password (NOT your Gmail password)
 			$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Enable TLS encryption
-			$mail->Port       = 587;                            // TCP port to connect to
+			$mail->Port = 587;                            // TCP port to connect to
 
 
 			// Recipients
@@ -1404,7 +1442,7 @@ class Functions
 			// Content
 			$mail->isHTML(true);                                // Set email format to HTML
 			$mail->Subject = 'Password Reset Request';
-			$mail->Body    = 'Please do not share this link to others. Click the link below to reset your password: ' . $reset_link;
+			$mail->Body = 'Please do not share this link to others. Click the link below to reset your password: ' . $reset_link;
 			$mail->AltBody = 'This is the plain text version of the email content.';
 
 			// Send email
@@ -1430,8 +1468,8 @@ class Functions
 			':token' => $token,
 		]);
 		$getinfo = $stmt->fetch(PDO::FETCH_OBJ);
-		if($getinfo) {
-			
+		if ($getinfo) {
+
 			$email = $getinfo->email;
 
 			$password = $data['password'];

@@ -1,7 +1,7 @@
 <?php
-include_once '../session.php';
+include_once '../../core/session.php';
 Session::init();
-include_once '../function.php';
+include_once '../../core/function.php';
 $function = new Functions();
 
 if (!isset($_SESSION['username']) && !isset($_SESSION['role'])) {

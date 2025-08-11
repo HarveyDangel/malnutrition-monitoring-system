@@ -1,5 +1,5 @@
 <?php
-include_once '../session.php';
+include_once '../../core/session.php';
 Session::init();
 if (isset($_SESSION['username'])) {
   if ($_SESSION['role'] === 'admin') {

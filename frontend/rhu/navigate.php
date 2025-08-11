@@ -1,6 +1,6 @@
 <?php
-include '../function.php';
-include_once '../session.php';
+include '../../core/function.php';
+include_once '../../core/session.php';
 
 //classification model
 include 'classification-model/wfa.php';
