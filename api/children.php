@@ -1,11 +1,11 @@
 <?php
 header('Content-Type: application/json');
 
-require_once '../function.php'; // Include necessary functions
-require_once '../session.php'; // Only if you want to check logged-in user
-require_once '../rhu/classification-model/wfa.php'; // Include classification models
-require_once '../rhu/classification-model/hfa.php'; // Include classification models
-require_once '../rhu/classification-model/wfh.php'; // Include classification models
+require_once '../core/function.php'; // Include necessary functions
+require_once '../core/session.php'; // Only if you want to check logged-in user
+require_once '../frontend/rhu/classification-model/wfa.php'; // Include classification models
+require_once '../frontend/rhu/classification-model/hfa.php'; // Include classification models
+require_once '../frontend/rhu/classification-model/wfh.php'; // Include classification models
 
 $function = new Functions();
 

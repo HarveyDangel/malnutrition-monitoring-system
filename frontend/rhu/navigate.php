@@ -164,7 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btn-log-out'])) {
 	if ($flag == 1) {
 		// Set success message
 		Session::set("msg", "<div style='background-color: #9fdf9f; color:black; border: solid #ff6347  color:white;1px; border-radius: 5px; padding: 10px;'><center><i class='fa-solid fa-circle-check'></i> &nbsp Log out in successfully! </center> </div><br>");
-		header("Location: ../logout.php");
+		header("Location: ../../logout.php");
 		exit();
 
 	} else {

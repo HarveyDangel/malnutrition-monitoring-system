@@ -1,6 +1,6 @@
 <?php
-include_once 'session.php';
-include 'function.php';
+include_once 'core/session.php';
+include 'core/function.php';
 $function = new Functions;
 
 if (isset($_SESSION['username'])) {
