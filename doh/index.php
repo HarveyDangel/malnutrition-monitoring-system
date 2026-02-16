@@ -12,8 +12,9 @@ include 'header.php';
   ?>
   <!--  Row 1 -->
   <container class="row mt-3">
+
     <div class="col-lg-3 col-md-6">
-      <!-- Municipality Card -->
+      <!-- Region Card -->
       <div class="card overflow-hidden">
         <div class="card-body p-3">
           <div class="row">
@@ -33,10 +34,10 @@ include 'header.php';
         </div>
       </div>
     </div>
-    <!-- End Municipality Card -->
+    <!-- End Region Card -->
 
     <div class="col-lg-3 col-md-6">
-      <!-- Barangay Card -->
+      <!-- Province Card -->
       <div class="card overflow-hidden">
         <div class="card-body p-3">
           <div class="row">
@@ -56,10 +57,10 @@ include 'header.php';
         </div>
       </div>
     </div>
-    <!-- End Barangay card-->
+    <!-- End Province card-->
 
     <div class="col-lg-3 col-md-6">
-      <!-- Estimated Population Card -->
+      <!-- Barangay Card -->
       <div class="card overflow-hidden">
         <div class="card-body p-3">
           <div class="row">
@@ -82,7 +83,7 @@ include 'header.php';
     <!-- End Barangay card-->
 
     <div class="col-lg-3 col-md-6">
-      <!--Staff card-->
+      <!-- Recorded Data card-->
       <div class="card overflow-hidden">
         <div class="card-body p-3">
           <div class="row">
@@ -102,7 +103,7 @@ include 'header.php';
         </div>
       </div>
     </div>
-    <!-- End of Staff card -->
+    <!-- End of Recorded Data card -->
   </container>
   <!-- End of Row 1 -->
   <div class="row">

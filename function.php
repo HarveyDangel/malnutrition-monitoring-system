@@ -1091,11 +1091,11 @@ class Functions
 
 	public function GetNumOfMunicipality()
 	{
-		$sql = 'SELECT * FROM tbl_address GROUP BY municipality';
+		$sql = 'SELECT COUNT(DISTINCT municipality) AS total FROM tbl_address';
 		$stmt = $this->db->conn->prepare($sql);
 		$stmt->execute();
-		$data = $stmt->rowCount();
-		return $data;
+		$data = $stmt->fetch(PDO::FETCH_OBJ);
+		return $data->total;
 	}
 	public function GetNumOfBarangay()
 	{
