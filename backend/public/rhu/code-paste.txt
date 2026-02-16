@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Barangay by Municipality</title>
+</head>
+<body>
+    <form id="locationForm">
+        <div class="col-md-4">
+            <label for="muni" class="form-label">City/Municipality <span style="color:red">*</span></label>
+            <select id="muni" name="muni" class="form-select">
+                <option value="<?= ($municipality) ? $municipality : ''; ?>" selected disabled><?= ($municipality) ? $municipality : ''; ?></option>
+                <?php foreach ($municipalities as $municipalityOption): ?>
+                    <option value="<?= $municipalityOption['municipality']; ?>">
+                        <?= $municipalityOption['municipality']; ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="brgy" class="form-label">Barangay <span style="color:red">*</span></label>
+            <select id="brgy" name="brgy" class="form-select">
+                <option value="<?= ($barangay) ? $barangay : ''; ?>" selected disabled><?= ($barangay) ? $barangay : ''; ?></option>
+                <!-- Barangays will be populated based on selected municipality -->
+            </select>
+        </div>
+    </form>
+
+    <script>
+        const barangayData = <?= json_encode($function->GetAllBarangayByMunicipality()); ?>;
+        const muniSelect = document.getElementById('muni');
+        const barangaySelect = document.getElementById('brgy');
+
+        muniSelect.addEventListener('change', function() {
+            const selectedMunicipality = this.value;
+            updateBarangayDropdown(selectedMunicipality);
+        });
+
+        function updateBarangayDropdown(selectedMunicipality) {
+            // Clear previous options
+            barangaySelect.innerHTML = '<option value="" selected disabled>Choose Barangay</option>';
+            if (selectedMunicipality) {
+                // Filter barangays based on the selected municipality
+                const filteredBarangays = barangayData.filter(barangay => barangay.municipality === selectedMunicipality);
+                // Populate the Barangay dropdown
+                filteredBarangays.forEach(barangay => {
+                    const option = document.createElement('option');
+                    option.value = barangay.barangay;
+                    option.text = barangay.barangay;
+                    barangaySelect.appendChild(option);
+                });
+            }
+        }
+
+        // Function to set preset values
+        function setPresetValues() {
+            const presetMunicipality = "<?= ($municipality) ? $municipality : ''; ?>"; // PHP preset value for municipality
+            const presetBarangay = "<?= ($barangay) ? $barangay : ''; ?>"; // PHP preset value for barangay
+
+            // Set the municipality dropdown to the preset value
+            if (presetMunicipality) {
+                muniSelect.value = presetMunicipality;
+                // Update the Barangay dropdown based on the preset municipality
+                updateBarangayDropdown(presetMunicipality);
+
+                // Set the barangay dropdown to the preset value after updating the options
+                setTimeout(() => {
+                    barangaySelect.value = presetBarangay;
+                }, 100); // Delay to ensure options are populated
+            }
+        }
+
+        // Call the function to set preset values on page load
+        setPresetValues();
+    </script>
+</body>
+</html>
+
+
+
+
+// Simulate the GET request by setting $_GET variables manually
+$_GET['nutritional_status_WFA'] = $filterCriteria['nutritional_status_WFA'];
+$_GET['nutritional_status_HFA'] = $filterCriteria['nutritional_status_HFA'];
+$_GET['nutritional_status_WFH'] = $filterCriteria['nutritional_status_WFH'];
+$_GET['sex'] = $filterCriteria['sex'];
+$_GET['age_group'] = $filterCriteria['age_group'];
+$_GET['barangay'] = $filterCriteria['barangay'];
+$_GET['belong_to_ip'] = $filterCriteria['belong_to_ip'];
+
+// Now include the report.php file
+ob_start();
+include 'report.php';  // No need to add the query string here, as $_GET has been populated
+$html = ob_get_clean();
+
+// Load the HTML content for PDF generation
+$dompdf->loadHtml($html);
+$dompdf->setPaper('A4', 'landscape');
+$dompdf->render();
+
+// Output the generated PDF to Browser
+$dompdf->stream("Report.pdf", array("Attachment" => 1)); // Attachment 0 to view in browser
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malnutrition Comparison</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="d-flex align-items-strech col-lg-6">
+  <div class="card w-100 rounded-2 shadow">
+    <div class="card-body rounded-2">
+      <div class="d-sm-flex d-block align-items-center">
+        <div class="">
+          <h3 class="fw-semibold">Malnutrition Comparison</h3>
+        </div>
+      </div>
+      <hr>
+      <div>
+        <label for="filter">Filter by:</label>
+        <select id="filter" name="filter" onchange="updateChart()">
+          <option value="WFA">Weight for Age</option>
+          <option value="HFA">Height for Age</option>
+          <option value="WFH">Weight for Length/Height</option>
+        </select>
+      </div>
+      <div id="malnuBreakup" style="max-width:max-content; min-width: 400px;"></div>
+    </div>
+  </div>
+</div>
+<script>
+  const filter = document.getElementById('filter');
+
+  const dataMap = {
+    WFA: {
+      labels: ["Underweight", "Severely Underweight"],
+      data: [
+        <?= $function->CountChildByNutriStatusByMunicipality("nutritional_status_WFA", "Underweight", $_SESSION['municipality']); ?>,
+        <?= $function->CountChildByNutriStatusByMunicipality("nutritional_status_WFA", "Severely Underweight", $_SESSION['municipality']); ?>
+      ]
+    },
+    HFA: {
+      labels: ["Stunted", "Severely Stunted"],
+      data: [
+        <?= $function->CountChildByNutriStatusByMunicipality("nutritional_status_HFA", "Stunted", $_SESSION['municipality']); ?>,
+        <?= $function->CountChildByNutriStatusByMunicipality("nutritional_status_HFA", "Severely Stunted", $_SESSION['municipality']); ?>
+      ]
+    },
+    WFH: {
+      labels: ["Wasted", "Severely Wasted"],
+      data: [
+        <?= $function->CountChildByNutriStatusByMunicipality("nutritional_status_WFH", "Wasted", $_SESSION['municipality']); ?>,
+        <?= $function->CountChildByNutriStatusByMunicipality("nutritional_status_WFH", "Severely Wasted", $_SESSION['municipality']); ?>
+      ]
+    }
+  };
+
+  function updateChart() {
+    const selectedFilter = filter.value;
+    const data = dataMap[selectedFilter].data;
+    const labels = dataMap[selectedFilter].labels;
+
+    chart.data.labels = labels;
+    chart.data.datasets[0].data = data;
+    chart.update();
+  }
+
+  const ctx = document.getElementById('malnuBreakup').getContext('2d');
+  const chart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: dataMap.WFA.labels,
+      datasets: [{
+        label: 'Malnutrition Count',
+        data: dataMap.WFA.data,
+        backgroundColor: [
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+        ],
+        borderColor: [
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(255, 99, 132, 1)',
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: true,
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Malnutrition Comparison'
+        }
+      }
+    }
+  });
+
+  window.onload = updateChart;
+</script>
+</body>
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Address Form</title>
+</head>
+<body>
+    <form>
+        <div class="mb-3 col-lg-6 col-md-6">
+            <label for="muni" class="form-label">Municipality <span style="color:red">*</span></label>
+            <select class="form-select" name="muni" id="muni" aria-label="Default select example" required>
+                <option disabled>Choose Municipality</option>
+                <option value="Almeria" <?= ($municipality) == 'Almeria' ? 'selected' : ''; ?>>Almeria</option>
+                <option value="Biliran" <?= ($municipality) == 'Biliran' ? 'selected' : ''; ?>>Biliran</option>
+                <option value="Cabucgayan" <?= ($municipality) == 'Cabucgayan' ? 'selected' : ''; ?>>Cabucgayan</option>
+                <option value="Caibiran" <?= ($municipality) == 'Caibiran' ? 'selected' : ''; ?>>Caibiran</option>
+                <option value="Culaba" <?= ($municipality) == 'Culaba' ? 'selected' : ''; ?>>Culaba</option>
+                <option value="Kawayan" <?= ($municipality) == 'Kawayan' ? 'selected' : ''; ?>>Kawayan</option>
+                <option value="Maripipi" <?= ($municipality) == 'Maripipi' ? 'selected' : ''; ?>>Maripipi</option>
+                <option value="Naval" <?= ($municipality) == 'Naval' ? 'selected' : ''; ?>>Naval</option>
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <label for="brgy" class="form-label">Barangay <span style="color:red">*</span></label>
+            <select id="brgy" name="brgy" class="form-select">
+                <option value="<?= ($barangay) ? $barangay : ''; ?>" selected><?= ($barangay) ? $barangay : ''; ?></option>
+            </select>
+        </div>
+    </form>
+
+    <script>
+        const barangayData = <?= json_encode($function->GetAllBarangayByMunicipality()); ?>;
+        const municipalitySelect = document.getElementById('muni');
+        const barangaySelect = document.getElementById('brgy');
+
+        // Populate barangay based on selected municipality
+        function populateBarangay(selectedMunicipality) {
+            barangaySelect.innerHTML = '<option value="" selected disabled>Choose Barangay</option>';
+            if (selectedMunicipality) {
+                const filteredBarangays = barangayData.filter(barangay => barangay.municipality === selectedMunicipality);
+                filteredBarangays.forEach(barangay => {
+                    const option = document.createElement('option');
+                    option.value = barangay.barangay;
+                    option.text = barangay.barangay;
+                    barangaySelect.add(option);
+                });
+            }
+        }
+
+        // Event listener for municipality change
+        municipalitySelect.addEventListener('change', function() {
+            const selectedMunicipality = this.value;
+            populateBarangay(selectedMunicipality);
+        });
+
+        // Function to set preset values on page load
+        function setPresetValues() {
+            const presetMunicipality = "<?= ($municipality) ? $municipality : ''; ?>"; // PHP preset value for municipality
+            const presetBarangay = "<?= ($barangay) ? $barangay : ''; ?>"; // PHP preset value for barangay
+
+            if (presetMunicipality) {
+                municipalitySelect.value = presetMunicipality;
+                populateBarangay(presetMunicipality);
+
+                // Set the barangay dropdown to the preset value after updating the options
+                setTimeout(() => {
+                    barangaySelect.value = presetBarangay;
+                }, 100); // Slight delay to ensure options are populated
+            }
+        }
+
+        // Call the function to set preset values on page load
+        window.onload = setPresetValues;
+    </script>
+</body>
+</html>
+

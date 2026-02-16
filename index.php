@@ -1,3 +1,3 @@
 <?php
-header("Location: frontend/home/");
+header("Location: frontend/home/index.php");
 ?>
