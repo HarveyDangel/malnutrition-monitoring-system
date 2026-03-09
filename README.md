@@ -1,9 +1,8 @@
 ## Geo-Spatial Mapping and Monitoring System of Malnutrition Trends
-### 📊 Malnutrition Monitoring System (MMSGSM)
 
 A **web-based platform** designed to map and monitor malnutrition cases in **Biliran Island**, providing local health authorities with accurate, real-time data to guide decision-making and improve health outcomes.
 
-## 📌 Table of Contents
+## Table of Contents
 - [About](#about)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
@@ -26,12 +25,12 @@ With **interactive mapping** powered by Leaflet.js, the system highlights areas 
 
 ## Features
 
-- 🔐 **Multi-user Authentication** (Admin, PHO, RHU, DOH)
-- 📍 **Interactive Heatmap** for malnutrition cases
-- 📑 **Children List & History** (WFA, HFA, WFH tracking)
-- 📊 **Reports & Analytics**
-- 📂 **Data Management** (Add, Update, Delete child records)
-- ☁️ **Cloud-deployed** for accessibility
+- **Multi-user Authentication** (Admin, PHO, RHU, DOH)
+- **Interactive Heatmap** for malnutrition cases
+- **Children List & History** (WFA, HFA, WFH tracking)
+- **Reports & Analytics**
+- **Data Management** (Add, Update, Delete child records)
+- **Cloud-deployed** for accessibility
 
 ---
 
