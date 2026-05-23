@@ -3,11 +3,15 @@ include 'conn.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use Dotenv\Dotenv;
 
 require 'packages/PHPMailer/src/Exception.php';
 require 'packages/PHPMailer/src/PHPMailer.php';
 require 'packages/PHPMailer/src/SMTP.php';
+require_once 'vendor/autoload.php';
 
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
 class Functions
 {
@@ -1373,12 +1377,12 @@ class Functions
 			$mail = new PHPMailer(true);
 
 			$mail->isSMTP();                                    // Set mailer to use SMTP
-			$mail->Host       = 'smtp.gmail.com';               // Specify main and backup SMTP servers
+			$mail->Host       = $_ENV['SMTP_HOST'];             // Specify main and backup SMTP servers
 			$mail->SMTPAuth   = true;                           // Enable SMTP authentication
-			$mail->Username   = 'mmsgsm07@gmail.com';         	// Your Gmail address
-			$mail->Password   = 'czco tmqg ckfu ruxl';          // Your Gmail App Password (NOT your Gmail password)
+			$mail->Username   = $_ENV['SMTP_USER'];        // Your SMTP username
+			$mail->Password   = $_ENV['SMTP_PASS'];        // Your SMTP password
 			$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Enable TLS encryption
-			$mail->Port       = 587;                            // TCP port to connect to
+			$mail->Port       = $_ENV['SMTP_PORT'];             // TCP port to connect to
 
 
 			// Recipients
@@ -1408,7 +1412,7 @@ class Functions
 			return 0;
 		}
 	}
-
+	//RESET PASSWORD
 	public function resetPassword($data, $token)
 	{
 		$sql = 'SELECT * FROM tbl_password_reset WHERE token =:token';
